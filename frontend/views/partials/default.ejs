@@ -1,0 +1,13 @@
+<ul id="<%= name %>" class="ul">
+  <li class="depth-1-list">
+    <%- include('../components/button', { title: '기본 정보' , name: 'default' , icon: 'fa-angle-down' , inHtml: 'depth'
+            }); %>
+  </li>
+  <ul id="default" class="depth depth-2">
+    <%- include('defaults/default-client') %>
+    <%- include('defaults/default-product') %>
+    <%- include('defaults/default-commodity') %>
+    <%- include('defaults/default-tank') %>
+    <%- include('defaults/default-user') %>
+  </ul>
+</ul>

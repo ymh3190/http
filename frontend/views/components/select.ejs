@@ -1,0 +1,16 @@
+<div class="wrapper-select">
+  <span>
+    <%= title %>
+  </span>
+  <select id="<%= name %>" name="<%= name %>" class="<%= inHtml %>">
+    <% if (url==='/commodity' && name==='item_id' ) { %>
+    <% } else { %>
+    <option value=""></option>
+    <% values.forEach((value)=>{ %>
+    <option value="<%= value %>">
+      <%= value %>
+    </option>
+    <% }) %>
+    <% } %>
+  </select>
+</div>

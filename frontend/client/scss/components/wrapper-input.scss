@@ -1,0 +1,11 @@
+.wrapper-input {
+  align-items: center;
+
+  & > span {
+    margin-right: 1vw;
+  }
+
+  & > input {
+    height: $wrapperInputHeight;
+  }
+}

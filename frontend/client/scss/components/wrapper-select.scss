@@ -1,0 +1,13 @@
+.wrapper-select {
+  display: grid;
+  grid-template-columns: 4fr 6fr;
+  align-items: center;
+
+  & > span {
+    margin-right: 1vw;
+  }
+
+  & > select {
+    height: $wrapperSelectHeight;
+  }
+}

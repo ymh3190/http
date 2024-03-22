@@ -1,0 +1,77 @@
+// screen
+$mobile: 400px;
+$tablet: 850px;
+$laptop: 1200px;
+$desktop: 1500px;
+
+// root
+$rootLeft: 30px;
+$rootRight: 40px;
+
+// header-partial
+$headerHeight: 7vh;
+
+// nav-partial
+$navTop: calc($headerHeight + 0.5vh);
+$navWidth: 10vw;
+$navHeight: calc(100vh - $navTop);
+$navBgColor: #bfd9ed;
+$navDepthLon: 10px;
+$navLinkHeight: 4vh;
+$navListPadding: 8px;
+$navDepthFontSize: 18px;
+
+// footer-partial
+$footerHeight: 3vh;
+
+// page
+$pageTop: calc($headerHeight + 0.5vh);
+$pageBgColor: #c7c7c7;
+$whiteColor: white;
+
+// scroll-bar
+$scrollBarWidth: 16px;
+
+$posPadding: 16px; // 페이지, 컨텐츠, 파셜 영역
+$posBetween: 5px;
+$posBorderRadius: 5px;
+
+$selectMargin: 5vw;
+
+$btnPadding: 16px;
+$btnPaddingLat: 16px; // 버튼 위 아래
+$btnPaddingLon: 32px; // 버튼 양 옆
+
+$btnBorderRadius: 5px;
+
+$pageTopBgColor: $whiteColor;
+$pageTopHeight: calc((100vh - $headerHeight) * 0.1);
+$pageBottomHeight: calc((100vh - $headerHeight * 3) * 0.9);
+
+$listHeadHeight: calc($pageBottomHeight * 0.05);
+$listBodyHeight: calc($pageBottomHeight * 0.95);
+
+// components
+$wrapperInputHeight: 3vh;
+$wrapperSelectHeight: 3vh;
+$wrapperTextareaHeight: 6vh;
+
+.hidden {
+  display: none !important;
+}
+
+.flex {
+  display: flex;
+}
+
+.block {
+  display: block !important;
+}
+
+.padding-none {
+  padding: 0;
+}
+
+.nav-click {
+  background-color: #e3f0da;
+}

@@ -1,0 +1,11 @@
+<ul id="<%= name %>" class="ul">
+  <li class="depth-1-list">
+    <%- include('../components/button', { title: '제품 관리' , name: 'product' , icon: 'fa-angle-down' , inHtml: 'depth'
+            }); %>
+  </li>
+  <ul id="product" class="depth depth-2">
+    <%- include('products/product-register') %>
+    <%- include('products/product-release') %>
+    <%- include('products/product-stock') %>
+  </ul>
+</ul>

@@ -1,0 +1,8 @@
+<% if (url==='/products/release' ) { %>
+<%- include('../../components/list', { title: '제품 출고' , depth: 'depth-2' , link: '/products/release' ,
+        isClick: 'nav-click' }); %>
+
+<% } else { %>
+<%- include('../../components/list', { title: '제품 출고' , depth: 'depth-2' , link: '/products/release' ,
+                isClick: '' }); %>
+<% } %>

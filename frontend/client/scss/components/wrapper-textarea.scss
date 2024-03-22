@@ -1,0 +1,11 @@
+.wrapper-textarea {
+  align-items: center;
+
+  & > span {
+    margin-right: 1vw;
+  }
+
+  & > textarea {
+    height: $wrapperTextareaHeight;
+  }
+}

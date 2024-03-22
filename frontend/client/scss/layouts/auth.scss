@@ -1,0 +1,78 @@
+#signin.page,
+#signup.page {
+  padding: $posPadding;
+  background-color: $pageBgColor;
+  border-radius: $posBorderRadius;
+  margin-left: 35vw;
+  width: 30vw;
+}
+
+#signin.page > .content,
+#signup.page > .content {
+  display: flex;
+  height: 100%;
+}
+
+#signin.page > .content > .left,
+#signin.page > .content > .right,
+#signup.page > .content > .left,
+#signup.page > .content > .right {
+  padding: $posPadding;
+  border-radius: $posBorderRadius;
+  background-color: $pageTopBgColor;
+  margin-bottom: $posBetween;
+}
+
+#signin.page > .content > .left,
+#signup.page > .content > .left {
+  width: 30%;
+  margin-right: $posBetween;
+
+  & > .title {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+  }
+}
+
+#signin.page > .content > .right,
+#signup.page > .content > .right {
+  width: 70%;
+
+  .wrapper-input {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+  }
+}
+
+#signin.page > .content > .right > .contents,
+#signup.page > .content > .right > .contents {
+  height: 100%;
+}
+
+#signin.page > .content > .right > .contents > form,
+#signup.page > .content > .right > .contents > form {
+  & > .top > .wrapper-input:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  & > .bottom {
+    display: flex;
+    align-items: center;
+    height: 5vh;
+  }
+
+  & > .bottom > .link {
+    width: 80%;
+  }
+
+  & > .bottom > .button {
+    width: 20%;
+
+    & > button > span {
+      font-weight: 600;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<% if (url==='/commodities/forwarding' ) { %>
+<%- include('../../components/list', { title: '원자재 출고' , depth: 'depth-2' , link: '/commodities/forwarding' ,
+        isClick: 'nav-click' }); %>
+
+<% } else { %>
+<%- include('../../components/list', { title: '원자재 출고' , depth: 'depth-2' , link: '/commodities/forwarding' ,
+                isClick: '' }); %>
+<% } %>

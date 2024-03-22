@@ -1,0 +1,16 @@
+<div class="wrapper-row">
+  <div class="<%= inHtml %>" data-id="<%= btoa(row.id) %>">
+    <% if (page==='client') { %>
+    <%- include('../elements/td', { columns: [row.type] }) %>
+    <%- include('../elements/td', { columns: [row.company] }) %>
+    <%- include('../elements/td', { columns: [row.manager_name] }) %>
+    <%- include('../elements/td', { columns: [row.manager_tel] }) %>
+
+    <% } else if (page==='commodity') { %>
+    <%- include('../elements/td', { columns: [row.type, row.item_id] }) %>
+    <%- include('../elements/td', { columns: [row.name] }) %>
+    <%- include('../elements/td', { columns: [row.unit] }) %>
+    <%- include('../elements/td', { columns: [row.price] }) %>
+    <% } %>
+  </div>
+</div>

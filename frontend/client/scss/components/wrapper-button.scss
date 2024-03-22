@@ -1,0 +1,8 @@
+.wrapper-button span {
+  padding-top: $btnPaddingLat;
+  padding-bottom: $btnPaddingLat;
+  padding-left: $btnPaddingLon;
+  padding-right: $btnPaddingLon;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: $btnBorderRadius;
+}

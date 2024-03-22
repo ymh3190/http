@@ -1,0 +1,56 @@
+#nav.partial {
+  width: $navWidth;
+  top: $navTop;
+  height: 100%;
+}
+
+#nav.partial > nav {
+  height: $navHeight;
+  overflow-y: auto;
+  margin-right: $posBetween;
+  background-color: $navBgColor;
+  border-radius: $posBorderRadius;
+}
+
+#nav.partial > nav ul .depth-1-list {
+  padding-top: $posPadding;
+  padding-right: $navListPadding;
+  padding-bottom: $navListPadding;
+  padding-left: $navListPadding;
+
+  button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #91abdb;
+
+    span {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      font-weight: 600;
+      font-size: $navDepthFontSize;
+      padding: $navDepthLon;
+      border: 0 !important;
+    }
+  }
+}
+
+#nav.partial > nav ul .depth-2-list {
+  padding-right: $navListPadding;
+  padding-bottom: $navListPadding;
+  padding-left: $navListPadding;
+
+  a {
+    display: inline-block;
+    width: 100%;
+    height: $navLinkHeight;
+
+    span {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: $navDepthLon * 2;
+    }
+  }
+}

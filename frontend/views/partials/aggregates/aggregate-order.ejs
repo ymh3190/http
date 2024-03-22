@@ -1,0 +1,8 @@
+<% if (url==='/aggregates/order' ) { %>
+<%- include('../../components/list', { title: '발주 현황' , depth: 'depth-2' , link: '/aggregates/order' ,
+        isClick: 'nav-click' }); %>
+
+<% } else { %>
+<%- include('../../components/list', { title: '발주 현황' , depth: 'depth-2' , link: '/aggregates/order' ,
+                isClick: '' }); %>
+<% } %>
