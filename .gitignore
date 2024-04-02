@@ -1,0 +1,10 @@
+node_modules/
+public/
+build/
+images/
+videos/
+
+.env
+.DS_Store
+db-sub.js
+dom-sub.js

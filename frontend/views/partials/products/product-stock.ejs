@@ -1,0 +1,8 @@
+<% if (url==='/products/stock' ) { %>
+<%- include('../../components/list', { title: '제품 재고' , depth: 'depth-2' , link: '/products/stock' ,
+        isClick: 'nav-click' }); %>
+
+<% } else { %>
+<%- include('../../components/list', { title: '제품 재고' , depth: 'depth-2' , link: '/products/stock' ,
+                isClick: '' }); %>
+<% } %>

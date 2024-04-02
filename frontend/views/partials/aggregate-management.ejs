@@ -1,0 +1,13 @@
+<ul id="<%= name %>" class="ul">
+  <li class="depth-1-list">
+    <%- include('../components/button', { title: '집계 관리' , name: 'aggregate' , icon: 'fa-angle-down' ,
+            inHtml: 'depth' }); %>
+  </li>
+  <ul id="aggregate" class="depth depth-2">
+    <%- include('aggregates/aggregate-process') %>
+    <%- include('aggregates/aggregate-operation') %>
+    <%- include('aggregates/aggregate-order') %>
+    <%- include('aggregates/aggregate-boiler') %>
+    <%- include('aggregates/aggregate-machine') %>
+  </ul>
+</ul>

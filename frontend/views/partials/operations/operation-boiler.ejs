@@ -1,0 +1,8 @@
+<% if (url==='/operations/boiler' ) { %>
+<%- include('../../components/list', { title: '보일러 점검' , depth: 'depth-2' , link: '/operations/boiler' ,
+        isClick: 'nav-click' }); %>
+
+<% } else { %>
+<%- include('../../components/list', {title: '보일러 점검' , depth: 'depth-2' , link: '/operations/boiler' ,
+                isClick: '' }); %>
+<% } %>

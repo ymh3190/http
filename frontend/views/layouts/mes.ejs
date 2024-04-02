@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/favicon/site.webmanifest">
+  <link rel="stylesheet" href="/public/css/styles.css">
+  <script src="https://kit.fontawesome.com/92eb8681b8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="root">
+    <%- include('../partials/header') %>
+    <%- include('../partials/nav') %>
+    <main>
+      <% if (url==='/' ) { %>
+      <%- include('../pages/index') %>
+
+      <% } else if (url==='/images' ) { %>
+      <%- include('../pages/image') %>
+
+      <% } else if (url==='/videos' ) { %>
+      <%- include('../pages/video'); %>
+
+      <% } else if (url==='/clients' ) { %>
+      <%- include('../pages/client') %>
+
+      <% } else if (url==='/products' ) { %>
+      <%- include('../pages/product') %>
+
+      <% } else if (url==='/commodities' ) { %>
+      <%- include('../pages/commodity') %>
+
+      <% } else if (url==='/tanks' ) { %>
+      <%- include('../pages/tank') %>
+
+      <% } else if (url==='/users' ) { %>
+      <%- include('../pages/user') %>
+
+      <% } %>
+    </main>
+    <%- include('../partials/footer') %>
+  </div>
+  <%- include('../scripts/user') %>
+  <script src="/public/js/base.js"></script>
+
+  <% if (url==='/clients' ) { %>
+  <script src="/public/js/client.js"></script>
+
+  <% } else if (url==='/commodities' ) { %>
+  <script src="/public/js/commodity.js"></script>
+  <% } %>
+</body>
+
+</html>

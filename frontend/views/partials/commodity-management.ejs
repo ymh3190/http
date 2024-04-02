@@ -1,0 +1,12 @@
+<ul id="<%= name %>" class="ul">
+  <li class="depth-1-list">
+    <%- include('../components/button', { title: '원자재 관리', name: 'commodity', icon: 'fa-angle-down',
+                                          inHtml: 'depth' }); %>
+  </li>
+  <ul id="commodity" class="depth depth-2">
+    <%- include('commodities/commodity-order-plan') %>
+    <%- include('commodities/commodity-warehousing') %>
+    <%- include('commodities/commodity-forwarding') %>
+    <%- include('commodities/commodity-stock') %>
+  </ul>
+</ul>

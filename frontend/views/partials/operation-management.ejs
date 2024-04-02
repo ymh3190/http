@@ -1,0 +1,13 @@
+<ul id="<%= name %>" class="ul">
+  <li class="depth-1-list">
+    <%- include('../components/button', { title: '생산 관리' , name: 'operation' , icon: 'fa-angle-down' ,
+            inHtml: 'depth' }); %>
+  </li>
+  <ul id="operation" class="depth depth-2">
+    <%- include('operations/operation-work-order') %>
+    <%- include('operations/operation-pre-processing') %>
+    <%- include('operations/operation-distillation') %>
+    <%- include('operations/operation-boiler') %>
+    <%- include('operations/operation-end') %>
+  </ul>
+</ul>

@@ -1,0 +1,59 @@
+<section id="tank" class="page">
+  <div class="content">
+    <div class="top">
+      <div class="header">
+        <div class="left">
+          <div class="wrapper-form">
+            <form id="search" class="tank">
+              <%- include('../components/select', { title: '탱크 구분' , name: 'item' , value: '원료' , inHtml: 'header' }); %>
+            </form>
+          </div>
+        </div>
+        <div class="right">
+          <%- include('../components/button', { title: '조회' , name: 'search' , icon: '' , inHtml: 'header' }); %>
+          <%- include('../components/button', { title: '출력' , name: 'print' , icon: '' , inHtml: 'header' }); %>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="contents">
+        <div class="left">
+          <div class="list">
+            <div class="head">
+              <div class="th">
+                <span>구분</span>
+              </div>
+              <div class="th">
+                <span>탱크 명</span>
+              </div>
+              <div class="th">
+                <span>최대 용량</span>
+              </div>
+              <div class="th">
+                <span>원료 / 제품</span>
+              </div>
+            </div>
+            <div class="body">
+              <div id="tank" class="list"></div>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="detail">
+            <div class="top">
+              <form id="saveUpdate" class="tank">
+                <%- include('../components/input', { title: '제품 명' , name: '' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '주소' , name: 'address' , inHtml: 'detail' }); %>
+              </form>
+            </div>
+            <div class="bottom">
+              <%- include('../components/button', { title: '신규' , name: 'create' , icon: '' ,inHtml: 'detail' }); %>
+              <%- include('../components/button', { title: '저장' , name: 'save' ,icon: '' , inHtml: 'detail' }); %>
+              <%- include('../components/button', { title: '삭제' , name: 'delete' ,icon: '' , inHtml: 'detail' }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

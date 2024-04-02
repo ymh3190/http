@@ -1,0 +1,12 @@
+<section id="video" class="page">
+  <div class="content">
+    <div class="contents">
+      <% videos.forEach((video)=> { %>
+      <div class="container">
+        <video src=" <%= video.path %>" controls></video>
+      </div>
+      <% }); %>
+      <%- include('../components/button', { title: '', name: 'add', icon: 'fa-plus', inHtml: 'contents' }); %>
+    </div>
+  </div>
+</section>

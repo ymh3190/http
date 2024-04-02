@@ -1,0 +1,34 @@
+<div id="header" class="partial">
+  <header>
+    <div class="start">
+      <div>
+        <a href="/" id="home" class="header">
+          <img src="/static/logo/logo.png" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="center">
+      <nav>
+        <ul>
+          <%- include('../components/list', { title: '기본 정보' , depth: 'header' , link: '/clients' ,
+                        isClick: '' }); %>
+          <%- include('../components/list', { title: '원자재 관리' , depth: 'header' ,
+                            link: '/commodities/order-plan' , isClick: '' }); %>
+          <%- include('../components/list', { title: '생산 관리' , depth: 'header' ,
+                                link: '/operations/work-order' , isClick: '' }); %>
+          <%- include('../components/list', { title: '제품 관리' , depth: 'header' ,
+                                    link: '/products/register' , isClick: '' }); %>
+          <%- include('../components/list', { title: '집계 관리' , depth: 'header' ,
+                                        link: '/aggregates/process' , isClick: '' }); %>
+        </ul>
+      </nav>
+    </div>
+    <div class="end">
+      <span id="accessTime"></span>
+      <%- include('../components/button', { name: 'user' , title: user.username , icon: 'fa-user' ,
+                inHtml: 'header' }); %>
+      <%- include('../components/button', { name: 'signout' , title: '' , icon: 'fa-arrow-right-from-bracket'
+                    , inHtml: 'header' }); %>
+    </div>
+  </header>
+</div>

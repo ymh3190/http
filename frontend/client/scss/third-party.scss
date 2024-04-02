@@ -1,0 +1,25 @@
+.wrapper-third-party {
+  position: absolute;
+
+  & > .post-code {
+    position: relative;
+    bottom: 1vh;
+
+    div#wrap {
+      display: none;
+      border: 1px solid;
+      width: 25vw;
+      height: 25vh;
+      margin: 5px 0;
+      position: relative;
+
+      img#btnFoldWrap {
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        top: -1px;
+        z-index: 1;
+      }
+    }
+  }
+}

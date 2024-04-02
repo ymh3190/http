@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap");
+
+@import "./variable.scss";
+@import "./reset.scss";
+
+@import "./layouts/auth.scss";
+@import "./layouts/mes.scss";
+@import "./layouts/base.scss";
+
+@import "./partials/header.scss";
+@import "./partials/nav.scss";
+@import "./partials/footer.scss";
+
+// components
+@import "./components/wrapper-button.scss";
+@import "./components/wrapper-input.scss";
+@import "./components/wrapper-select.scss";
+@import "./components/wrapper-textarea.scss";
+
+// pages
+@import "./pages/signin.scss";
+@import "./pages/signup.scss";
+
+// third-party
+@import "./third-party.scss";
+
+@import "./screen.scss";
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+.root {
+  padding-left: $rootLeft;
+  padding-right: $rootRight;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+i,
+button {
+  cursor: pointer;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+.partial {
+  position: fixed;
+  background-color: white;
+  z-index: 1;
+}

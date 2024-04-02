@@ -1,0 +1,11 @@
+<div class="wrapper-input">
+  <span>
+    <%= title %>
+  </span>
+  <% if (name==='password' || name==='rePassword' ) { %>
+  <input id="<%= name %>" type="password" name="<%= name %>" class="<%= inHtml %>">
+
+  <% } else { %>
+  <input id="<%= name %>" type="text" name="<%= name %>" class="<%= inHtml %>">
+  <% } %>
+</div>

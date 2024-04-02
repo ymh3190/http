@@ -1,0 +1,12 @@
+<div class="td">
+  <% if (columns[1]) { %>
+  <span data-id="<%= btoa(columns[1]) %>">
+    <%= columns[0] %>
+  </span>
+
+  <% } else { %>
+  <span>
+    <%= columns[0] %>
+  </span>
+  <% } %>
+</div>
