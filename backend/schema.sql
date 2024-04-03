@@ -27,6 +27,16 @@ create table token(
     foreign key (user_id) references user(id) on delete cascade
 );
 
+create table genre(
+    id              char(32) primary key,
+    name            varchar(5) not null,
+    video_id        char(32),
+    image_id        char(32),
+    created_at      datetime not null default current_timestamp,
+    foreign key (video_id) references video(id),
+    foreign key (image_id) references image(id)
+);
+
 create table image(
     id              char(32) primary key,
     path            varchar(52) not null,
@@ -36,7 +46,6 @@ create table image(
 create table video(
     id              char(32) primary key,
     path            char(51) not null,
-    genre           varchar(100),
     created_at      datetime not null default current_timestamp
 );
 
