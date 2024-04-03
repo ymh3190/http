@@ -23,15 +23,30 @@ class RootController {
     res.status(200).render("auth", { pageTitle: "회원 가입" });
   }
 
-  getImage(req, res) {
-    let imageRes;
+  async getImage(req, res) {
+    let response;
     let images;
     try {
+      response = await FetchAPI.get("/images", {
+        cookie: req.headers.cookie,
+      });
+      const data = await response.json();
+      images = data.images;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
-    res.status(200).render("base", { pageTitle: "Images" });
+    const data = { pageTitle: "images", images };
+    const cookies = response.headers.raw()["set-cookie"];
+    if (!cookies) {
+      return res.status(200).render("tube", data);
+    }
+
+    const access_token = cookies.find((el) => el.startsWith("access_token"));
+    const refresh_token = cookies.find((el) => el.startsWith("refresh_token"));
+    res.cookie(access_token);
+    res.cookie(refresh_token);
+    res.status(200).render("tube", data);
   }
 
   async getVideo(req, res) {
@@ -50,14 +65,14 @@ class RootController {
     const data = { pageTitle: "Videos", videos };
     const cookies = response.headers.raw()["set-cookie"];
     if (!cookies) {
-      return res.status(200).render("base", data);
+      return res.status(200).render("tube", data);
     }
 
     const access_token = cookies.find((el) => el.startsWith("access_token"));
     const refresh_token = cookies.find((el) => el.startsWith("refresh_token"));
     res.cookie(access_token);
     res.cookie(refresh_token);
-    res.status(200).render("base", data);
+    res.status(200).render("tube", data);
   }
 
   async getClient(req, res) {
@@ -78,14 +93,14 @@ class RootController {
     const data = { pageTitle: "거래처 정보", clients, types };
     const cookies = clientRes.headers.raw()["set-cookie"];
     if (!cookies) {
-      return res.status(200).render("base", data);
+      return res.status(200).render("mes", data);
     }
 
     const access_token = cookies.find((el) => el.startsWith("access_token"));
     const refresh_token = cookies.find((el) => el.startsWith("refresh_token"));
     res.cookie(access_token);
     res.cookie(refresh_token);
-    res.status(200).render("base", data);
+    res.status(200).render("mes", data);
   }
 
   async getCommodity(req, res) {
@@ -112,14 +127,14 @@ class RootController {
     const data = { pageTitle: "원자재 정보", commodities, types, items };
     const cookies = commodityRes.headers.raw()["set-cookie"];
     if (!cookies) {
-      return res.status(200).render("base", data);
+      return res.status(200).render("mes", data);
     }
 
     const access_token = cookies.find((el) => el.startsWith("access_token"));
     const refresh_token = cookies.find((el) => el.startsWith("refresh_token"));
     res.cookie(access_token);
     res.cookie(refresh_token);
-    res.status(200).render("base", data);
+    res.status(200).render("mes", data);
   }
 
   async getProduct(req, res) {
@@ -139,98 +154,98 @@ class RootController {
     const data = { pageTitle: "제품 정보", products };
     const cookies = productRes.headers.raw()["set-cookie"];
     if (!cookies) {
-      return res.status(200).render("base", data);
+      return res.status(200).render("mes", data);
     }
 
     const access_token = cookies.find((el) => el.startsWith("access_token"));
     const refresh_token = cookies.find((el) => el.startsWith("refresh_token"));
     res.cookie(access_token);
     res.cookie(refresh_token);
-    res.status(200).render("base", data);
+    res.status(200).render("mes", data);
   }
 
   getTank(req, res) {
-    res.status(200).render("base", { pageTitle: "탱크 정보" });
+    res.status(200).render("mes", { pageTitle: "탱크 정보" });
   }
 
   getUsers(req, res) {
-    res.status(200).render("base", { pageTitle: "사용자 정보" });
+    res.status(200).render("mes", { pageTitle: "사용자 정보" });
   }
 
   getCommodityOrderPlan(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getCommodityWarehousing(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getCommodityForwarding(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getCommodityStock(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getOperation(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getOperationWorkOrder(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getOperationPreprocessing(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getOperationDistillation(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getOperationBoiler(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getOperationEnd(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getProductRegister(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getProductRelease(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getProductStock(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getAggregate(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getAggregateProcess(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getAggregateOperation(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getAggregateOrder(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getAggregateBoiler(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 
   getAggregateMachine(req, res) {
-    res.status(200).render("base", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "SW" });
   }
 }
 
@@ -298,6 +313,60 @@ class UserController {
     res.status(200).json({ user: data.user });
   }
 }
+
+class ImageController {
+  async create(req, res) {
+    const response = await FetchAPI.post("/images", req.body, {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    res.status(201).json({ image: data.image });
+  }
+
+  async select(req, res) {
+    const { limit } = req.query;
+
+    if (limit) {
+      const query = `?limit=${limit[0]}&limit=${limit[1]}`;
+      const response = await FetchAPI.get("/images" + query, {
+        cookie: req.headers.cookie,
+      });
+      const data = await response.json();
+      res.status(200).json({ images: data.images });
+    }
+  }
+
+  async selectById(req, res) {
+    const { id } = req.params;
+
+    const response = await FetchAPI.get(`/images/${id}`, {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    res.status(200).json({ image: data.image });
+  }
+
+  async update(req, res) {
+    const { id } = req.params;
+
+    const response = await FetchAPI.patch(`/images/${id}`, req.body, {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    res.status(200).json({ image: data.image });
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const response = await FetchAPI.delete(`/images/${id}`, {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    res.status(200).json({ message: data.message });
+  }
+}
+
 class VideoController {
   async create(req, res) {
     const response = await FetchAPI.post("/videos", req.body, {
@@ -543,6 +612,7 @@ export const tankController = new TankController();
 export const commodityController = new CommodityController();
 export const productController = new ProductController();
 export const clientController = new ClientController();
+export const imageController = new ImageController();
 export const videoController = new VideoController();
 export const userController = new UserController();
 export const authController = new AuthController();

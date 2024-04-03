@@ -5,15 +5,15 @@
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="commodity">
-              <%- include('../components/select', { title: '구분' , name: 'type', values: types , inHtml: 'header' }); %>
-              <%- include('../components/select', { title: '종류' , name: 'item_id' , values: [] , inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '원자재 명' , name: 'name', inHtml: 'header' }); %>
+              <%- include('../components/select', { title: '구분' , id: 'type', values: types , inHtml: 'header' }); %>
+              <%- include('../components/select', { title: '종류' , id: 'item_id' , values: [] , inHtml: 'header' }); %>
+              <%- include('../components/input', { title: '원자재 명' , id: 'name', inHtml: 'header' }); %>
             </form>
           </div>
         </div>
         <div class="right">
-          <%- include('../components/button', { title: '조회' , name: 'search' , icon: '' , inHtml: 'header' }); %>
-          <%- include('../components/button', { title: '출력' , name: 'print' , icon: '' , inHtml: 'header' }); %>
+          <%- include('../components/button', { title: '조회' , id: 'search' , icon: '' , inHtml: 'header' }); %>
+          <%- include('../components/button', { title: '출력' , id: 'print' , icon: '' , inHtml: 'header' }); %>
         </div>
       </div>
     </div>
@@ -54,20 +54,20 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="commodity">
-                <%- include('../components/input', { title: '원자재 명' , name: 'name' , inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '구분' , name: 'type' , values: types , inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '종류' , name: 'item_id' , values:[] , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '포장 단위' , name: 'unit' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '가격' , name: 'price' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '사양' , name: 'specification' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '수량' , name: 'stock' , inHtml: 'detail' }); %>
-                <!-- <%- include('../components/button', { title: '' , name: 'submit' , inHtml: 'hidden' }); %> -->
+                <%- include('../components/input', { title: '원자재 명' , id: 'name' , inHtml: 'detail' }); %>
+                <%- include('../components/select', { title: '구분' , id: 'type' , values: types , inHtml: 'detail' }); %>
+                <%- include('../components/select', { title: '종류' , id: 'item_id' , values:[] , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '포장 단위' , id: 'unit' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '가격' , id: 'price' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '사양' , id: 'specification' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '수량' , id: 'stock' , inHtml: 'detail' }); %>
+                <!-- <%- include('../components/button', { title: '' , id: 'submit' , inHtml: 'hidden' }); %> -->
               </form>
             </div>
             <div class="bottom">
-              <%- include('../components/button', { title: '신규' , name: 'create' , icon: '' ,inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '저장' , name: 'save' , icon: '' , inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '삭제' , name: 'delete', icon: '' , inHtml: 'detail' }); %>
+              <%- include('../components/button', { title: '신규' , id: 'create' , icon: '' ,inHtml: 'detail' }); %>
+              <%- include('../components/button', { title: '저장' , id: 'save' , icon: '' , inHtml: 'detail' }); %>
+              <%- include('../components/button', { title: '삭제' , id: 'delete', icon: '' , inHtml: 'detail' }); %>
             </div>
           </div>
         </div>

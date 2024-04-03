@@ -18,16 +18,7 @@
     <%- include('../partials/header') %>
     <%- include('../partials/nav') %>
     <main>
-      <% if (url==='/' ) { %>
-      <%- include('../pages/index') %>
-
-      <% } else if (url==='/images' ) { %>
-      <%- include('../pages/image') %>
-
-      <% } else if (url==='/videos' ) { %>
-      <%- include('../pages/video'); %>
-
-      <% } else if (url==='/clients' ) { %>
+      <% if (url==='/clients' ) { %>
       <%- include('../pages/client') %>
 
       <% } else if (url==='/products' ) { %>

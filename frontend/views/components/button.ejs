@@ -1,16 +1,18 @@
 <div class="wrapper-button">
-  <% if (name==='user' ) { %>
-  <button name="<%= name %>" class="<%= inHtml %>">
+  <% if (id==='user' ) { %>
+  <button id="<%= id %>" class="<%= inHtml %>">
     <i class="fa-solid <%= icon %>"></i>
     <span> <%= title %> </span>
   </button>
 
-  <% } else if (name==='submit' ) { %>
-  <button id="<%= name %>" type="submit" name="<%= name %>" class="<%= inHtml %>"></button>
+  <% } else if (id==='submit' ) { %>
+  <button id="<%= id %>" type="submit" class="<%= inHtml %>"></button>
 
   <% } else { %>
-  <button id="<%= name %>" name="<%= name %>" class="<%= inHtml %>">
+  <button id="<%= id %>" class="<%= inHtml %>">
+    <% if (title) { %>
     <span> <%= title %> </span>
+    <% } %>
     <i class="fa-solid <%= icon %>"></i>
   </button>
   <% } %>

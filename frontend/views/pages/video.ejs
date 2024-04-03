@@ -3,10 +3,12 @@
     <div class="contents">
       <% videos.forEach((video)=> { %>
       <div class="container">
-        <video src=" <%= video.path %>" controls></video>
+        <video src="<%= video.path %>"></video>
+        <%- include('../components/controls') %>
       </div>
       <% }); %>
-      <%- include('../components/button', { title: '', name: 'add', icon: 'fa-plus', inHtml: 'contents' }); %>
+      <%- include('../components/button', { title: '', id: 'add', icon: 'fa-plus', inHtml: 'contents' }); %>
+      <%- include('../templates/controls', { inHtml: 'contents' }); %>
     </div>
   </div>
 </section>

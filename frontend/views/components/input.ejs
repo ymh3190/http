@@ -2,10 +2,10 @@
   <span>
     <%= title %>
   </span>
-  <% if (name==='password' || name==='rePassword' ) { %>
-  <input id="<%= name %>" type="password" name="<%= name %>" class="<%= inHtml %>">
+  <% if (id==='password' || id==='rePassword' ) { %>
+  <input id="<%= id %>" type="password" class="<%= inHtml %>">
 
   <% } else { %>
-  <input id="<%= name %>" type="text" name="<%= name %>" class="<%= inHtml %>">
+  <input id="<%= id %>" type="text" class="<%= inHtml %>">
   <% } %>
 </div>

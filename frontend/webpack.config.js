@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     css: path.join(__dirname, jsPath, "css"),
     base: path.join(__dirname, layoutsPath, "base"),
+    tube: path.join(__dirname, layoutsPath, "tube"),
     signin: path.join(__dirname, pagesPath, "signin"),
     signup: path.join(__dirname, pagesPath, "signup"),
     client: path.join(__dirname, pagesPath, "client"),

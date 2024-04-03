@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/static/favicon/site.webmanifest">
+  <link rel="stylesheet" href="/public/css/styles.css">
+  <script src="https://kit.fontawesome.com/92eb8681b8.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="root">
+    <div id="header" class="partial">
+      <header>
+        <div class="start">
+        </div>
+        <div class="center">
+          <nav>
+            <ul>
+              <%- include('../components/list', { title: '비디오' , depth: 'header' , link: '/videos' ,
+                            isClick: '' }); %>
+              <%- include('../components/list', { title: '사진' , depth: 'header' ,
+                                link: '/images' , isClick: '' }); %>
+            </ul>
+          </nav>
+        </div>
+        <div class="end">
+        </div>
+      </header>
+    </div>
+    <main>
+      <% if (url==='/images' ) { %>
+      <%- include('../pages/image') %>
+
+      <% } else if (url==='/videos' ) { %>
+      <%- include('../pages/video'); %>
+
+      <% } %>
+    </main>
+    <%- include('../partials/footer') %>
+  </div>
+  <%- include('../scripts/user') %>
+  <script src="/public/js/tube.js"></script>
+
+  <% if (url==='/images' ) { %>
+  <script src="/public/js/image.js"></script>
+
+  <% } else if (url==='/videos' ) { %>
+  <script src="/public/js/video.js"></script>
+
+  <% } %>
+</body>
+
+</html>

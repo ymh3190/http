@@ -22,4 +22,24 @@ import { randomUUID } from "crypto";
       renameSync(oldPath, newPath);
     }
   }
+
+  const images = readdirSync("static/images").filter((image) => {
+    if (!image.includes(".DS_Store")) {
+      return image;
+    }
+  });
+
+  for (const image of images) {
+    const [file, ext] = image.split(".");
+    try {
+      await FetchAPI.get(`/images/${file}`);
+    } catch (error) {
+      const id = randomUUID().replaceAll("-", "");
+      const path = `/static/images/${id}.${ext}`;
+      await FetchAPI.post("/images", { id, path });
+      const oldPath = `static/images/${file}.${ext}`;
+      const newPath = `static/images/${id}.${ext}`;
+      renameSync(oldPath, newPath);
+    }
+  }
 })();

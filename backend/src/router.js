@@ -59,7 +59,11 @@ class ImageRouter {
     this.router
       .route("/")
       .post(imageController.create)
-      .get(imageController.select);
+      .get(
+        middleware.authenticateUser,
+        middleware.authorizePermissions("admin"),
+        imageController.select
+      );
 
     this.router
       .route("/:id(\\d|\\w{32})")

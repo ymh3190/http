@@ -8,6 +8,7 @@ import {
   authRouter,
   clientRouter,
   commodityRouter,
+  imageRouter,
   itemRouter,
   productRouter,
   rootRouter,
@@ -63,6 +64,7 @@ class Server {
     this.#app.use("/", rootRouter);
     this.#app.use("/api/v1/auth", authRouter);
     this.#app.use("/api/v1/users", userRouter);
+    this.#app.use("/api/v1/images", imageRouter);
     this.#app.use("/api/v1/videos", videoRouter);
     this.#app.use("/api/v1/clients", clientRouter);
     this.#app.use("/api/v1/products", productRouter);

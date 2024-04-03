@@ -1,4 +1,7 @@
-show full columns from table
+show full columns from table_name
+
+alter table table_name add column_name char(32) after another_column_name;
+alter table table_name add foreign key (column_name) references table_name(id);
 
 drop database test;
 
@@ -26,13 +29,14 @@ create table token(
 
 create table image(
     id              char(32) primary key,
-    path            char(51) not null,
+    path            varchar(52) not null,
     created_at      datetime not null default current_timestamp
 );
 
 create table video(
     id              char(32) primary key,
     path            char(51) not null,
+    genre           varchar(100),
     created_at      datetime not null default current_timestamp
 );
 

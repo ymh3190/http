@@ -132,8 +132,8 @@ class UserController {
 
 class ImageController {
   async create(req, res) {
-    const image = await Image.create(req.body, { new: true });
-    res.status(201).json({ image });
+    await Image.createByManualId(req.body);
+    res.status(201).end();
   }
 
   async select(req, res) {
@@ -142,13 +142,21 @@ class ImageController {
     if (limit) {
       delete req.query.limit;
       const images = await Image.select(req.query, {
-        company: "desc",
+        created_at: "desc",
+        id: "asc",
         limit,
       });
       return res.status(200).json({ images });
     }
 
-    const images = await Image.select(req.query, { company: "desc" });
+    const images = await Image.select(
+      {},
+      {
+        created_at: "desc",
+        id: "asc",
+        limit: [0, 5],
+      }
+    );
     res.status(200).json({ images });
   }
 
@@ -188,10 +196,12 @@ class VideoController {
   async select(req, res) {
     const { limit } = req.query;
     if (limit) {
-      const videos = await Video.select(
-        {},
-        { created_at: "desc", id: "asc", limit }
-      );
+      delete req.query.limit;
+      const videos = await Video.select(req.query, {
+        created_at: "desc",
+        id: "asc",
+        limit,
+      });
       return res.status(200).json({ videos });
     }
     const videos = await Video.select(

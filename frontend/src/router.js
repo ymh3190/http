@@ -3,6 +3,7 @@ import {
   authController,
   clientController,
   commodityController,
+  imageController,
   itemController,
   productController,
   rootController,
@@ -257,6 +258,23 @@ class UserRouter {
   }
 }
 
+class ImageRouter {
+  constructor() {
+    this.router = express.Router();
+
+    this.router
+      .route("/")
+      .post(imageController.create)
+      .get(imageController.select);
+
+    this.router
+      .route("/:id(\\d|\\w{32})")
+      .get(imageController.selectById)
+      .patch(imageController.update)
+      .delete(imageController.delete);
+  }
+}
+
 class VideoRouter {
   constructor() {
     this.router = express.Router();
@@ -384,6 +402,7 @@ export const { router: tankRouter } = new TankRouter();
 export const { router: commodityRouter } = new CommodityRouter();
 export const { router: productRouter } = new ProductRouter();
 export const { router: clientRouter } = new ClientRouter();
+export const { router: imageRouter } = new ImageRouter();
 export const { router: videoRouter } = new VideoRouter();
 export const { router: userRouter } = new UserRouter();
 export const { router: authRouter } = new AuthRouter();
