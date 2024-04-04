@@ -1,5 +1,6 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
+import { v1 as uuidv1 } from "uuid";
 
 class Util {
   attachCookiesToResponse({ res, user, refresh_token }) {
@@ -23,8 +24,15 @@ class Util {
     });
   }
 
+  // deprecated
+  // createId() {
+  //   const id = crypto.randomUUID().replaceAll("-", "");
+  //   return id;
+  // }
+
   createId() {
-    const id = crypto.randomUUID().replaceAll("-", "");
+    const layouts = uuidv1().split("-");
+    const id = "0x" + layouts[2] + layouts[1] + layouts[0] + layouts[4];
     return id;
   }
 

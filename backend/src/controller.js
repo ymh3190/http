@@ -29,7 +29,7 @@ class AuthController {
     const hash = await bcrypt.hash(password, 10);
     const role = (await User.select({})).length === 0 ? "admin" : "user";
 
-    await User.create({ username, password: hash, role });
+    await User.create({ username, password: hash, role }, { new: true });
     res.status(201).json({ message: "Signup success" });
   }
 
@@ -245,6 +245,7 @@ class ClientController {
       throw new CustomError.BadRequestError("Provide company");
     }
     req.body.creator_id = req.user.user_id;
+    console.log(req.body);
     const client = await Client.create(req.body, { new: true });
     res.status(201).json({ client });
   }

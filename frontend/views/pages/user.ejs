@@ -5,8 +5,8 @@
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="user">
-              <%- include('../components/input', { title: '부서 명' , id: '' , inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '이름' , id: 'name' , inHtml: 'header' }); %>
+              <%- include('../components/input', { title: '부서 명' , name: '' , inHtml: 'header' }); %>
+              <%- include('../components/input', { title: '이름' , name: 'name' , inHtml: 'header' }); %>
               <%- include('../components/checkbox', { title: '퇴사자 제외' , id: '' , inHtml: 'header' }); %>
             </form>
           </div>
@@ -44,8 +44,8 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="user">
-                <%- include('../components/input', { title: '제품 명' , id: '' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '주소' , id: 'address' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '제품 명' , name: '' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '주소' , name: 'address' , inHtml: 'detail' }); %>
               </form>
             </div>
             <div class="bottom">

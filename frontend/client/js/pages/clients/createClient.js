@@ -17,8 +17,8 @@ const [values, setValues] = useState({
   "type-detail": "",
   "tel-detail": "",
   "fax-detail": "",
-  "tax_id-detail": "",
-  "corp_id-detail": "",
+  "tax_no-detail": "",
+  "corp_no-detail": "",
   "manager_name-detail": "",
   "manager_tel-detail": "",
   "ceo_name-detail": "",
@@ -42,8 +42,8 @@ class Create {
         type: "",
         tel: "",
         fax: "",
-        tax_id: "",
-        corp_id: "",
+        tax_no: "",
+        corp_no: "",
         manager_name: "",
         manager_tel: "",
         ceo_name: "",
@@ -77,8 +77,8 @@ class Create {
         type: "",
         tel: "",
         fax: "",
-        tax_id: "",
-        corp_id: "",
+        tax_no: "",
+        corp_no: "",
         manager_name: "",
         manager_tel: "",
         ceo_name: "",
@@ -113,8 +113,8 @@ inputDOMs["address-detail"].addEventListener("change", handleChange);
 selectDOMs["type-detail"].addEventListener("change", handleChange);
 inputDOMs["tel-detail"].addEventListener("change", handleChange);
 inputDOMs["fax-detail"].addEventListener("change", handleChange);
-inputDOMs["tax_id-detail"].addEventListener("change", handleChange);
-inputDOMs["corp_id-detail"].addEventListener("change", handleChange);
+inputDOMs["tax_no-detail"].addEventListener("change", handleChange);
+inputDOMs["corp_no-detail"].addEventListener("change", handleChange);
 inputDOMs["manager_name-detail"].addEventListener("change", handleChange);
 inputDOMs["manager_tel-detail"].addEventListener("change", handleChange);
 inputDOMs["ceo_name-detail"].addEventListener("change", handleChange);

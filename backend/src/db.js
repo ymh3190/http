@@ -102,20 +102,21 @@ class MySQLAPI {
     let sql = `INSERT INTO ${this.table}(`;
     const keys = Object.keys(filter);
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat(keys[i], ", ");
         continue;
       }
       sql = sql.concat(keys[i], ") VALUES(");
     }
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat("?, ");
         continue;
       }
       sql = sql.concat("?)");
     }
     const values = Object.values(filter);
+    console.log(sql, values);
     await MySQLAPI.pool.execute(sql, values);
   }
 
@@ -132,14 +133,14 @@ class MySQLAPI {
     let sql = `INSERT INTO ${this.table}(`.concat("id, ");
     const keys = Object.keys(filter);
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat(keys[i], ", ");
         continue;
       }
       sql = sql.concat(keys[i], ") VALUES(").concat("?, ");
     }
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat("?, ");
         continue;
       }
@@ -199,7 +200,7 @@ class MySQLAPI {
 
     let sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE`;
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         if (keys[i] === "created_at") {
           const [start, end] = values[i];
           sql += ` ${keys[i]} BETWEEN '${start}' AND '${end}' AND`;
@@ -286,7 +287,7 @@ class MySQLAPI {
 
     let sql = `SELECT * FROM ${this.table} WHERE`;
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat(" ", keys[i], " = ? AND");
         continue;
       }
@@ -314,7 +315,7 @@ class MySQLAPI {
 
     let sql = `DELETE FROM ${this.table} WHERE`;
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat(" ", keys[i], " = ? AND");
         continue;
       }
@@ -347,7 +348,7 @@ class MySQLAPI {
 
     let sql = `UPDATE ${this.table} SET`;
     for (let i = 0; i < keys.length; i++) {
-      if (i !== keys.length - 1) {
+      if (i < keys.length - 1) {
         sql = sql.concat(" ", keys[i], " = ?,");
         continue;
       }

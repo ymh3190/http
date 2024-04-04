@@ -2,8 +2,8 @@
   <span>
     <%= title %>
   </span>
-  <select id="<%= id %>" class="<%= inHtml %>">
-    <% if (url==='/commodity' && id==='item_id' ) { %>
+  <select name="<%= name %>" class="<%= inHtml %>">
+    <% if (url==='/commodity' && name==='item_id' ) { %>
     <% } else { %>
     <option value=""></option>
     <% values.forEach((value)=>{ %>

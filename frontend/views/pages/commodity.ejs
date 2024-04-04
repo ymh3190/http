@@ -5,9 +5,9 @@
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="commodity">
-              <%- include('../components/select', { title: '구분' , id: 'type', values: types , inHtml: 'header' }); %>
-              <%- include('../components/select', { title: '종류' , id: 'item_id' , values: [] , inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '원자재 명' , id: 'name', inHtml: 'header' }); %>
+              <%- include('../components/select', { title: '구분' , name: 'type', values: types , inHtml: 'header' }); %>
+              <%- include('../components/select', { title: '종류' , name: 'item_id' , values: [] , inHtml: 'header' }); %>
+              <%- include('../components/input', { title: '원자재 명' , name: 'name', inHtml: 'header' }); %>
             </form>
           </div>
         </div>
@@ -54,13 +54,13 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="commodity">
-                <%- include('../components/input', { title: '원자재 명' , id: 'name' , inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '구분' , id: 'type' , values: types , inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '종류' , id: 'item_id' , values:[] , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '포장 단위' , id: 'unit' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '가격' , id: 'price' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '사양' , id: 'specification' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '수량' , id: 'stock' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '원자재 명' , name: 'name' , inHtml: 'detail' }); %>
+                <%- include('../components/select', { title: '구분' , name: 'type' , values: types , inHtml: 'detail' }); %>
+                <%- include('../components/select', { title: '종류' , name: 'item_id' , values:[] , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '포장 단위' , name: 'unit' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '가격' , name: 'price' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '사양' , name: 'specification' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '수량' , name: 'stock' , inHtml: 'detail' }); %>
                 <!-- <%- include('../components/button', { title: '' , id: 'submit' , inHtml: 'hidden' }); %> -->
               </form>
             </div>

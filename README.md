@@ -5,8 +5,22 @@
 ### MySQL ORM
 
 - create, select, update, delete
-  - 데이터베이스(입력)에 대한 일반화
-  - https://github.com/ymh3190/http/blob/main/backend/src/db.js
+
+      데이터베이스(입력)에 대한 일반화
+      https://github.com/ymh3190/http/blob/main/backend/src/db.js
+
+- UUID char(32) vs binary(16)
+
+      1. crypto.randomUUID() 사용할 경우
+        - char(32) 타입으로 binary(16)에 비해 큰 저장 공간을 차지(하이픈(-) 제외)
+        - INSERT 성능 이슈(MySQL RDBMS: B+Tree)
+        - 레퍼런스: https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql#uuidv4
+
+        - 해결 방안
+          UUIDv1 time_high <-> time_low
+
+      2. UUID_TO_BIN 내장함수를 사용할 경우
+          - INSERT 후 해당 id를 선택해 오는 문제
 
 ### Linux
 

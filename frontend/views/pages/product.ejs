@@ -5,8 +5,8 @@
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="product">
-              <%- include('../components/select', { title: '종류' , id: 'item' , values: [] , inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '제품명' , id: 'temp' , inHtml: 'header' }); %>
+              <%- include('../components/select', { title: '종류' , name: 'item' , values: [] , inHtml: 'header' }); %>
+              <%- include('../components/input', { title: '제품명' , name: 'temp' , inHtml: 'header' }); %>
             </form>
           </div>
         </div>
@@ -43,7 +43,7 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="product">
-                <%- include('../components/input', { title: '제품 명' , id: '' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { title: '제품 명' , name: '' , inHtml: 'detail' }); %>
               </form>
             </div>
             <div class="bottom">

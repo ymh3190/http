@@ -21,7 +21,7 @@ class Util {
   }
 
   parseToken(token) {
-    const decoded = Buffer.from(token.match(/\.(\w+)\./g).join(""), "base64");
+    const decoded = Buffer.from(token.match(/\.\w+\./g).join(""), "base64");
     const payload = JSON.parse(decoded.toString("utf-8"));
     return payload;
   }

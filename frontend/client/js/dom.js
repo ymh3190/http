@@ -1,27 +1,27 @@
 // input
 export const inputDOMs = {};
 document.querySelectorAll("input").forEach((inputDOM) => {
-  const { id, classList } = inputDOM;
-  if (id) {
-    inputDOMs[`${id}-${classList[0]}`] = inputDOM;
+  const { name, classList } = inputDOM;
+  if (name) {
+    inputDOMs[`${name}-${classList[0]}`] = inputDOM;
   }
 });
 
 // select
 export const selectDOMs = {};
 document.querySelectorAll("select").forEach((selectDOM) => {
-  const { id, classList } = selectDOM;
-  if (id) {
-    selectDOMs[`${id}-${classList[0]}`] = selectDOM;
+  const { name, classList } = selectDOM;
+  if (name) {
+    selectDOMs[`${name}-${classList[0]}`] = selectDOM;
   }
 });
 
 // textarea
 export const textareaDOMs = {};
 document.querySelectorAll("textarea").forEach((textareaDOM) => {
-  const { id, classList } = textareaDOM;
-  if (id) {
-    textareaDOMs[`${id}-${classList[0]}`] = textareaDOM;
+  const { name, classList } = textareaDOM;
+  if (name) {
+    textareaDOMs[`${name}-${classList[0]}`] = textareaDOM;
   }
 });
 
