@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-// import { v1 as uuidv1 } from "uuid";
+import { v1 as uuidv1 } from "uuid";
 
 class Util {
   attachCookiesToResponse({ res, user, refresh_token }) {
@@ -24,16 +24,16 @@ class Util {
     });
   }
 
-  createId() {
-    const id = crypto.randomUUID().replaceAll("-", "");
-    return id;
-  }
-
   // createId() {
-  //   const layouts = uuidv1().split("-");
-  //   const id = "0x" + layouts[2] + layouts[1] + layouts[0] + layouts[4];
+  //   const id = crypto.randomUUID().replaceAll("-", "");
   //   return id;
   // }
+
+  createId() {
+    const layouts = uuidv1().split("-");
+    const id = layouts[2] + layouts[1] + layouts[0] + layouts[3] + layouts[4];
+    return id;
+  }
 
   createToken() {
     const hex = crypto.randomBytes(20).toString("hex");
