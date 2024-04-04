@@ -41,7 +41,7 @@ class MySQLAPI {
         name += this.name[i];
         continue;
       }
-      if (i !== 0) {
+      if (i > 0) {
         name += `_${this.name[i].toLowerCase()}`;
         continue;
       }
@@ -68,7 +68,7 @@ class MySQLAPI {
     const format = "%Y-%m-%d %H:%i:%s";
     for (let i = 0; i < dateTimes.length; i++) {
       const date = `DATE_FORMAT(${dateTimes[i]}, '${format}')`;
-      if (i !== dateTimes.length - 1) {
+      if (i < dateTimes.length - 1) {
         query = query.concat(date, ` AS ${dateTimes[i]}, `);
         continue;
       }
@@ -394,7 +394,7 @@ class MySQLAPI {
    * @param {Object} param1
    * @param {string} param1.sql
    * @param {[] | null} param1.values
-   * @returns {[]}
+   * @returns
    */
   static async find(args, { sql, values }) {
     for (let i = 0; i < args.length; i++) {
@@ -407,7 +407,7 @@ class MySQLAPI {
         sql = sql.replace(/\,$/, "").concat(" LIMIT");
       }
 
-      if (i !== args.length - 1) {
+      if (i < args.length - 1) {
         if (key === "limit") {
           const [start, length] = value;
           sql = sql.concat(" ", `${start}, ${length},`);

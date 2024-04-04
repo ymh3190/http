@@ -29,7 +29,7 @@ class AuthController {
     const hash = await bcrypt.hash(password, 10);
     const role = (await User.select({})).length === 0 ? "admin" : "user";
 
-    await User.create({ username, password: hash, role }, { new: true });
+    await User.create({ username, password: hash, role });
     res.status(201).json({ message: "Signup success" });
   }
 
@@ -151,11 +151,7 @@ class ImageController {
 
     const images = await Image.select(
       {},
-      {
-        created_at: "desc",
-        id: "asc",
-        limit: [0, 5],
-      }
+      { created_at: "desc", id: "asc", limit: [0, 5] }
     );
     res.status(200).json({ images });
   }
