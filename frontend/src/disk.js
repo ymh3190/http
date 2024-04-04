@@ -1,6 +1,6 @@
 import { readdirSync, renameSync } from "fs";
 import FetchAPI from "./fetch-api";
-import { v1 as uuidv1 } from "uuid";
+import { randomUUID } from "crypto";
 
 (async () => {
   const videos = readdirSync("static/videos").filter((video) => {
@@ -14,8 +14,7 @@ import { v1 as uuidv1 } from "uuid";
     try {
       await FetchAPI.get(`/videos/${file}`);
     } catch (error) {
-      const layouts = uuidv1().split("-");
-      const id = layouts[2] + layouts[1] + layouts[0] + layouts[4];
+      const id = randomUUID().replaceAll("-", "");
       const path = `/static/videos/${id}.${ext}`;
       await FetchAPI.post("/videos", { id, path });
       const oldPath = `static/videos/${file}.${ext}`;

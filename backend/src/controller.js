@@ -165,7 +165,7 @@ class ImageController {
 
     const image = await Image.selectById(id);
     if (!image) {
-      throw new CustomError.NotFoundError("Client not found");
+      throw new CustomError.NotFoundError("Image not found");
     }
     res.status(200).json({ image });
   }

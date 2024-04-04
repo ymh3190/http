@@ -4,11 +4,11 @@
       <% videos.forEach((video)=> { %>
       <div class="container">
         <video src="<%= video.path %>"></video>
-        <%- include('../components/controls') %>
+        <%- include('../components/controls', { video }); %>
       </div>
       <% }); %>
       <%- include('../components/button', { title: '', id: 'add', icon: 'fa-plus', inHtml: 'contents' }); %>
-      <%- include('../templates/controls', { inHtml: 'contents' }); %>
+      <%- include('../templates/controls', { video: '', inHtml: 'contents' }); %>
     </div>
   </div>
 </section>

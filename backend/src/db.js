@@ -116,7 +116,6 @@ class MySQLAPI {
       sql = sql.concat("?)");
     }
     const values = Object.values(filter);
-    console.log(sql, values);
     await MySQLAPI.pool.execute(sql, values);
   }
 

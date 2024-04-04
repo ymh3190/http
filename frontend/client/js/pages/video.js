@@ -1,2 +1,3 @@
-import "./addVideo";
-import "./play";
+import "./videos/addVideo";
+import "./videos/play";
+import "./videos/addGenre";
