@@ -9,6 +9,7 @@ import {
   Item,
   Video,
   Image,
+  Genre,
 } from "./db";
 import * as CustomError from "./error";
 import util from "./util";
@@ -149,10 +150,7 @@ class ImageController {
       return res.status(200).json({ images });
     }
 
-    const images = await Image.select(
-      {},
-      { created_at: "desc", id: "asc", limit: [0, 5] }
-    );
+    const images = await Image.select({}, { created_at: "desc", id: "asc" });
     res.status(200).json({ images });
   }
 
@@ -192,18 +190,18 @@ class VideoController {
   async select(req, res) {
     const { limit } = req.query;
     if (limit) {
-      delete req.query.limit;
-      const videos = await Video.select(req.query, {
-        created_at: "desc",
-        id: "asc",
-        limit,
-      });
+      const videos = await Video.select(
+        {},
+        {
+          created_at: "desc",
+          id: "asc",
+          limit,
+        }
+      );
       return res.status(200).json({ videos });
     }
-    const videos = await Video.select(
-      {},
-      { created_at: "desc", id: "asc", limit: [0, 5] }
-    );
+
+    const videos = await Video.select({}, { created_at: "desc", id: "asc" });
     res.status(200).json({ videos });
   }
 
@@ -234,6 +232,44 @@ class VideoController {
   }
 }
 
+class GenreController {
+  async create(req, res) {
+    const genre = await Genre.create(req.body, { new: true });
+    res.status(201).json({ genre });
+  }
+
+  async select(req, res) {
+    const genres = await Genre.select(req.query);
+    res.status(200).json({ genres });
+  }
+
+  async selectById(req, res) {
+    const { id } = req.params;
+
+    const genre = await Genre.selectById(id);
+    if (!genre) {
+      throw new CustomError.NotFoundError("Genre not found");
+    }
+    res.status(200).json({ genre });
+  }
+
+  async update(req, res) {
+    const { id } = req.params;
+
+    const genre = await Genre.selectByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    res.status(200).json({ genre });
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    await Genre.selectByIdAndDelete(id);
+    res.status(200).json({ message: "Delete success" });
+  }
+}
+
 class ClientController {
   async create(req, res) {
     const { company } = req.body;
@@ -258,7 +294,7 @@ class ClientController {
       return res.status(200).json({ clients });
     }
 
-    const clients = await Client.select(req.query, { company: "desc" });
+    const clients = await Client.select({}, { company: "desc" });
     res.status(200).json({ clients });
   }
 
@@ -459,6 +495,7 @@ export const tankController = new TankController();
 export const commodityController = new CommodityController();
 export const productController = new ProductController();
 export const clientController = new ClientController();
+export const genreController = new GenreController();
 export const videoController = new VideoController();
 export const imageController = new ImageController();
 export const userController = new UserController();

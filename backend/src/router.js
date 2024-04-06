@@ -9,6 +9,7 @@ import {
   itemController,
   imageController,
   videoController,
+  genreController,
 } from "./controller";
 import middleware from "./middleware";
 
@@ -91,6 +92,21 @@ class VideoRouter {
       .get(videoController.selectById)
       .patch(videoController.update)
       .delete(videoController.delete);
+  }
+}
+
+class GenreRouter {
+  constructor() {
+    this.router = express.Router();
+
+    this.router
+      .route("/")
+      .all(
+        middleware.authenticateUser,
+        middleware.authorizePermissions("admin")
+      )
+      .post(genreController.create)
+      .get(genreController.select);
   }
 }
 
@@ -224,6 +240,7 @@ export const { router: tankRouter } = new TankRouter();
 export const { router: commodityRouter } = new CommodityRouter();
 export const { router: productRouter } = new ProductRouter();
 export const { router: clientRouter } = new ClientRouter();
+export const { router: genreRouter } = new GenreRouter();
 export const { router: videoRouter } = new VideoRouter();
 export const { router: imageRouter } = new ImageRouter();
 export const { router: userRouter } = new UserRouter();

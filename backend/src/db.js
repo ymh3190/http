@@ -11,7 +11,6 @@ if (
 
 import * as CustomError from "./error";
 import util from "./util";
-import perf from "./perf";
 
 class MySQLAPI {
   static pool = mysql.createPool({
@@ -298,6 +297,8 @@ class MySQLAPI {
     return result;
   }
 
+  static async selectJoin(on, filter) {}
+
   /**
    *
    * @param {{}} filter
@@ -440,6 +441,7 @@ export class User extends MySQLAPI {}
 export class Token extends MySQLAPI {}
 export class Image extends MySQLAPI {}
 export class Video extends MySQLAPI {}
+export class Genre extends MySQLAPI {}
 export class Client extends MySQLAPI {}
 export class Product extends MySQLAPI {}
 export class Commodity extends MySQLAPI {}

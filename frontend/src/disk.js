@@ -1,6 +1,5 @@
 import { readdirSync, renameSync } from "fs";
 import FetchAPI from "./fetch-api";
-// import { randomUUID } from "crypto";
 import { v1 as uuidv1 } from "uuid";
 
 (async () => {
@@ -21,7 +20,6 @@ import { v1 as uuidv1 } from "uuid";
     try {
       await FetchAPI.get(`/videos/${file}`);
     } catch (error) {
-      // const id = randomUUID().replaceAll("-", "");
       const id = createId();
       const path = `/static/videos/${id}.${ext}`;
       await FetchAPI.post("/videos", { id, path });
@@ -42,7 +40,6 @@ import { v1 as uuidv1 } from "uuid";
     try {
       await FetchAPI.get(`/images/${file}`);
     } catch (error) {
-      // const id = randomUUID().replaceAll("-", "");
       const id = createId();
       const path = `/static/images/${id}.${ext}`;
       await FetchAPI.post("/images", { id, path });

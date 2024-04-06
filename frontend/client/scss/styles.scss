@@ -18,6 +18,8 @@
 @import "./components/wrapper-select.scss";
 @import "./components/wrapper-textarea.scss";
 
+@import "./popup.scss";
+
 // pages
 @import "./pages/signin.scss";
 @import "./pages/signup.scss";
@@ -29,11 +31,11 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-}
 
-.root {
-  padding-left: $rootLeft;
-  padding-right: $rootRight;
+  & > .root {
+    padding-left: $rootLeft;
+    padding-right: $rootRight;
+  }
 }
 
 a {
@@ -55,4 +57,9 @@ button {
   position: fixed;
   background-color: white;
   z-index: 1;
+}
+
+.fullscreen {
+  width: 100% !important;
+  height: 100% !important;
 }

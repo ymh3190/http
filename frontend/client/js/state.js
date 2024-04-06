@@ -14,12 +14,6 @@ const useState = (args) => {
     for (const [key, value] of Object.entries(args)) {
       keys[key.match(/\w+/)] = key.match(/\w+$/).join("");
       values[key.match(/\w+/)] = value;
-
-      // if (inputDOMs[key]) {
-      //   Object.values(inputDOMs[key]).forEach(
-      //     (inputDOM) => (inputDOM.value = value)
-      //   );
-      // }
     }
 
     /**

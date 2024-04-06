@@ -2,55 +2,57 @@
   width: $navWidth;
   top: $navTop;
   height: 100%;
-}
-
-#nav.partial > nav {
-  height: $navHeight;
-  overflow-y: auto;
-  margin-right: $posBetween;
   background-color: $navBgColor;
+  margin-right: $posBetween;
   border-radius: $posBorderRadius;
-}
 
-#nav.partial > nav ul .depth-1-list {
-  padding-top: $posPadding;
-  padding-right: $navListPadding;
-  padding-bottom: $navListPadding;
-  padding-left: $navListPadding;
+  & > nav {
+    // height: $navHeight;
+    overflow-y: auto;
 
-  button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    background-color: #91abdb;
+    & ul {
+      & .depth-1-list {
+        padding-top: $posPadding;
+        padding-right: $navListPadding;
+        padding-bottom: $navListPadding;
+        padding-left: $navListPadding;
 
-    span {
-      display: flex;
-      align-items: center;
-      text-align: left;
-      font-weight: 600;
-      font-size: $navDepthFontSize;
-      padding: $navDepthLon;
-      border: 0 !important;
-    }
-  }
-}
+        button {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          background-color: #91abdb;
 
-#nav.partial > nav ul .depth-2-list {
-  padding-right: $navListPadding;
-  padding-bottom: $navListPadding;
-  padding-left: $navListPadding;
+          span {
+            display: flex;
+            align-items: center;
+            text-align: left;
+            font-weight: 600;
+            font-size: $navDepthFontSize;
+            padding: $navDepthLon;
+            border: 0 !important;
+          }
+        }
+      }
 
-  a {
-    display: inline-block;
-    width: 100%;
-    height: $navLinkHeight;
+      & .depth-2-list {
+        padding-right: $navListPadding;
+        padding-bottom: $navListPadding;
+        padding-left: $navListPadding;
 
-    span {
-      display: flex;
-      align-items: center;
-      height: 100%;
-      padding-left: $navDepthLon * 2;
+        a {
+          display: inline-block;
+          width: 100%;
+          height: $navLinkHeight;
+
+          span {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding-left: $navDepthLon * 2;
+          }
+        }
+      }
     }
   }
 }

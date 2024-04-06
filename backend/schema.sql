@@ -2,6 +2,7 @@ show full columns from table_name
 
 alter table table_name add column_name char(32) after another_column_name;
 alter table table_name add foreign key (column_name) references table_name(id);
+alter table table_name add unique (column_name, column_name2, column_name3);
 
 drop database test;
 
@@ -34,7 +35,9 @@ create table genre(
     image_id        char(32),
     created_at      datetime not null default current_timestamp,
     foreign key (video_id) references video(id),
-    foreign key (image_id) references image(id)
+    foreign key (image_id) references image(id),
+    unique key (name, video_id),
+    unique key (name, image_id)
 );
 
 create table image(

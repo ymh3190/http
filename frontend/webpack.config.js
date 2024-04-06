@@ -8,13 +8,17 @@ const pagesPath = jsPath + "/pages";
 module.exports = {
   entry: {
     css: path.join(__dirname, jsPath, "css"),
+
     base: path.join(__dirname, layoutsPath, "base"),
-    tube: path.join(__dirname, layoutsPath, "tube"),
+
+    mes: path.join(__dirname, layoutsPath, "mes"),
     signin: path.join(__dirname, pagesPath, "signin"),
     signup: path.join(__dirname, pagesPath, "signup"),
     client: path.join(__dirname, pagesPath, "client"),
     product: path.join(__dirname, pagesPath, "product"),
     commodity: path.join(__dirname, pagesPath, "commodity"),
+
+    tube: path.join(__dirname, layoutsPath, "tube"),
     video: path.join(__dirname, pagesPath, "video"),
     image: path.join(__dirname, pagesPath, "image"),
   },

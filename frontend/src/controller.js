@@ -11,7 +11,7 @@ class RootController {
       return res.status(200).render("error", { message: error.message });
     }
 
-    const data = { pageTitle: "SW" };
+    const data = { pageTitle: "HTTP" };
     res.status(200).render("base", data);
   }
 
@@ -50,20 +50,27 @@ class RootController {
   }
 
   async getVideo(req, res) {
-    let response;
-    let videos;
+    let videoRes, genreRes;
+    let videos, genres;
     try {
-      response = await FetchAPI.get("/videos", {
+      const cookie = {
         cookie: req.headers.cookie,
-      });
-      const data = await response.json();
+      };
+      [videoRes, genreRes] = await Promise.all([
+        FetchAPI.get("/videos", cookie),
+        FetchAPI.get("/genres", cookie),
+      ]);
+      let data = await videoRes.json();
       videos = data.videos;
+
+      data = await genreRes.json();
+      genres = data.genres;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
-    const data = { pageTitle: "Videos", videos };
-    const cookies = response.headers.raw()["set-cookie"];
+    const data = { pageTitle: "Videos", videos, genres };
+    const cookies = videoRes.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("tube", data);
     }
@@ -173,79 +180,79 @@ class RootController {
   }
 
   getCommodityOrderPlan(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getCommodityWarehousing(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getCommodityForwarding(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getCommodityStock(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getOperation(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getOperationWorkOrder(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getOperationPreprocessing(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getOperationDistillation(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getOperationBoiler(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getOperationEnd(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getProductRegister(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getProductRelease(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getProductStock(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getAggregate(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getAggregateProcess(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getAggregateOperation(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getAggregateOrder(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getAggregateBoiler(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 
   getAggregateMachine(req, res) {
-    res.status(200).render("mes", { pageTitle: "SW" });
+    res.status(200).render("mes", { pageTitle: "HTTP" });
   }
 }
 
@@ -385,8 +392,14 @@ class VideoController {
         cookie: req.headers.cookie,
       });
       const data = await response.json();
-      res.status(200).json({ videos: data.videos });
+      return res.status(200).json({ videos: data.videos });
     }
+
+    const response = await FetchAPI.get("/videos", {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    return res.status(200).json({ videos: data.videos });
   }
 
   async selectById(req, res) {
@@ -417,6 +430,33 @@ class VideoController {
     });
     const data = await response.json();
     res.status(200).json({ message: data.message });
+  }
+}
+
+class GenreController {
+  async create(req, res) {
+    const response = await FetchAPI.post("/genres", req.body, {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    res.status(201).json({ genre: data.genre });
+  }
+
+  async select(req, res) {
+    const { name } = req.query;
+    if (!name) {
+      const response = await FetchAPI.get("/genres", {
+        cookie: req.headers.cookie,
+      });
+      const data = await response.json();
+      return res.status(200).json({ genres: data.genres });
+    }
+
+    const response = await FetchAPI.get(`/genres?name=${name}`, {
+      cookie: req.headers.cookie,
+    });
+    const data = await response.json();
+    res.status(200).json({ genres: data.genres });
   }
 }
 
@@ -612,6 +652,7 @@ export const tankController = new TankController();
 export const commodityController = new CommodityController();
 export const productController = new ProductController();
 export const clientController = new ClientController();
+export const genreController = new GenreController();
 export const imageController = new ImageController();
 export const videoController = new VideoController();
 export const userController = new UserController();

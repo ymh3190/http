@@ -1,0 +1,17 @@
+<script type="application/json" data-js="genres">
+  [
+    <% genres.forEach((genre,i)=> { %>
+    <% if (i<genres.length-1) { %> {
+      "genre": {
+        "id": "<%= genre.id %>"
+      }
+    },
+    <% return; %>
+    <% } %> {
+      "genre": {
+        "id": "<%= genre.id %>"
+      }
+    }
+    <% }); %>
+  ]
+</script>

@@ -1,8 +1,10 @@
 window.closure = {
   user: {},
+
   client: {},
   product: {},
   commodity: {},
+  video_id: "",
   inHtml: "",
   outHtml: "",
   handlers: {},
@@ -11,11 +13,14 @@ window.closure = {
     this.client = {};
     this.product = {};
     this.commodity = {};
-    this.video = {};
+    this.video_id = "";
     this.inHtml = "";
+    this.outHtml = "";
+    this.handlers = {};
+
     if (clearOutHtml) {
       this.outHtml.remove();
+      this.outHtml = "";
     }
-    this.outHtml = "";
   },
 };

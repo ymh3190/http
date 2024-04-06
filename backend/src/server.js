@@ -11,6 +11,7 @@ import {
   authRouter,
   clientRouter,
   commodityRouter,
+  genreRouter,
   imageRouter,
   itemRouter,
   productRouter,
@@ -55,6 +56,7 @@ class Server {
     this.#app.use("/api/v1/users", userRouter);
     this.#app.use("/api/v1/images", imageRouter);
     this.#app.use("/api/v1/videos", videoRouter);
+    this.#app.use("/api/v1/genres", genreRouter);
     this.#app.use("/api/v1/clients", clientRouter);
     this.#app.use("/api/v1/products", productRouter);
     this.#app.use("/api/v1/commodities", commodityRouter);

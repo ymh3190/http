@@ -11,6 +11,20 @@ document.querySelectorAll("script").forEach((scriptDOM) => {
         scriptDOM.dataset.js = "";
         return;
       }
+      if (value === "videos") {
+        const data = JSON.parse(scriptDOM.textContent);
+        closure.videos = data;
+        scriptDOM.textContent = "";
+        scriptDOM.dataset.js = "";
+        return;
+      }
+      if (value === "genres") {
+        const data = JSON.parse(scriptDOM.textContent);
+        closure.genres = data;
+        scriptDOM.textContent = "";
+        scriptDOM.dataset.js = "";
+        return;
+      }
     });
   }
 });

@@ -1,24 +1,15 @@
 <div class="wrapper-controls">
-  <div class="controls" data-id="<%= video.id %>">
+  <div class="controls">
     <div class="top"></div>
     <div class="bottom">
-      <% if (url==='/videos') { %>
       <div class="left">
-        <%- include('../components/button', { title: '', id: 'volume', icon: 'fa-volume-high', inHtml: 'controls' }); %>
+        <%- include('../components/button', { id: 'play', title: '',  icon: 'fa-play', inHtml: 'controls' }); %>
+        <%- include('../components/button', { id: 'volume', title: '', icon: 'fa-volume-high', inHtml: 'controls' }); %>
       </div>
       <div class="right">
-        <%- include('../components/button', { title: '', id: 'plus', icon: 'fa-plus', inHtml: 'controls' }); %>
+        <%- include('../components/button', { id: 'plus', title: '',  icon: 'fa-plus', inHtml: 'controls' }); %>
+        <%- include('../components/button', { id: 'expand', title: '',  icon: 'fa-expand', inHtml: 'controls' }); %>
       </div>
-      <% } else { %>
-      <div class="left">
-        <%- include('../components/button', { title: '', id: 'play', icon: 'fa-play', inHtml: 'controls' }); %>
-        <%- include('../components/button', { title: '', id: 'volume', icon: 'fa-volume-high', inHtml: 'controls' }); %>
-      </div>
-      <div class="right">
-        <%- include('../components/button', { title: '', id: 'plus', icon: 'fa-plus', inHtml: 'controls' }); %>
-        <%- include('../components/button', { title: '', id: 'expand', icon: 'fa-expand', inHtml: 'controls' }); %>
-      </div>
-      <% } %>
     </div>
   </div>
 </div>

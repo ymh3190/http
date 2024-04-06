@@ -1,3 +1,8 @@
+#header.partial,
+#nav.partial {
+  background-color: white !important;
+}
+
 .page {
   background-color: initial;
 }
@@ -6,21 +11,33 @@
 #image.page > .content > .contents {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  column-gap: 32px;
-  row-gap: 16px;
+  gap: 2rem;
 
   .container {
     position: relative;
-
-    & > video,
-    & > img {
-      width: 100%;
-      height: 30vh;
-      object-fit: fill;
-    }
   }
 
-  .container > .wrapper-controls > .controls {
+  & > .wrapper-button {
+    display: flex;
+    justify-content: center;
+
+    & > button > i {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      min-height: 20vh;
+    }
+  }
+}
+
+#video.page > .content > .contents > .container {
+  & > video {
+    width: 100%;
+    height: 30vh;
+    object-fit: fill;
+  }
+
+  & > .wrapper-controls > .controls {
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -36,16 +53,12 @@
       }
     }
   }
+}
 
-  & > .wrapper-button {
-    display: flex;
-    justify-content: center;
-
-    & > button > i {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      min-height: 20vh;
-    }
+#image.page > .content > .contents > .container {
+  & > img {
+    width: 100%;
+    height: 30vh;
+    object-fit: fill;
   }
 }

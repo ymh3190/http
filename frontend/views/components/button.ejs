@@ -5,15 +5,14 @@
     <span> <%= title %> </span>
   </button>
 
-  <% } else if (id==='submit' ) { %>
-  <button id="<%= id %>" type="submit" class="<%= inHtml %>"></button>
-
   <% } else { %>
   <button id="<%= id %>" class="<%= inHtml %>">
     <% if (title) { %>
     <span> <%= title %> </span>
     <% } %>
+    <% if (icon) { %>
     <i class="fa-solid <%= icon %>"></i>
+    <% } %>
   </button>
   <% } %>
 </div>
