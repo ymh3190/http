@@ -43,6 +43,10 @@ a {
   color: black;
 }
 
+li {
+  list-style: none;
+}
+
 i,
 button {
   cursor: pointer;
@@ -53,7 +57,8 @@ button {
   background-color: transparent;
 }
 
-.partial {
+.wrapper-header,
+.wrapper-nav {
   position: fixed;
   background-color: white;
   z-index: 1;

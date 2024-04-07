@@ -1,25 +1,25 @@
-<section id="product" class="page">
+<section id="product" class="page mes">
   <div class="content">
     <div class="top">
       <div class="header">
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="product">
-              <%- include('../components/select', { title: '종류' , name: 'item' , values: [] , inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '제품명' , name: 'temp' , inHtml: 'header' }); %>
+              <%- include('../components/select', { id: 'item' ,inHtml: 'header', title: '종류' ,  values: [] }); %>
+              <%- include('../components/input', { id: 'temp' ,inHtml: 'header', title: '제품명' }); %>
             </form>
           </div>
         </div>
         <div class="right">
-          <%- include('../components/button', { title: '조회' , id: 'search' , icon: '' , inHtml: 'header' }); %>
-          <%- include('../components/button', { title: '출력' , id: 'print' , icon: '' , inHtml: 'header' }); %>
+          <%- include('../components/button', { id: 'search' , inHtml: 'header', title: '조회' ,  icon: ''  }); %>
+          <%- include('../components/button', { id: 'print' , inHtml: 'header', title: '출력' , icon: '' }); %>
         </div>
       </div>
     </div>
     <div class="bottom">
       <div class="contents">
         <div class="left">
-          <div class="list">
+          <div class="table">
             <div class="head">
               <div class="th">
                 <span>제품 종류</span>
@@ -35,7 +35,7 @@
               </div>
             </div>
             <div class="body">
-              <div id="product" class="list"></div>
+              <div id="list" class="product"></div>
             </div>
           </div>
         </div>
@@ -43,13 +43,13 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="product">
-                <%- include('../components/input', { title: '제품 명' , name: '' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { id: 'name', inHtml: 'detail', title: '제품 명',  }); %>
               </form>
             </div>
             <div class="bottom">
-              <%- include('../components/button', { title: '신규' , id: 'create' , icon: '', inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '저장' , id: 'save' ,icon: '' , inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '삭제' , id: 'delete' ,icon: '' , inHtml: 'detail' }); %>
+              <%- include('../components/button', { id: 'create' ,inHtml: 'detail', title: '신규' ,  icon: '',  }); %>
+              <%- include('../components/button', { id: 'save' ,inHtml: 'detail', title: '저장' , icon: '' ,  }); %>
+              <%- include('../components/button', { id: 'delete' ,inHtml: 'detail', title: '삭제' , icon: '' ,  }); %>
             </div>
           </div>
         </div>

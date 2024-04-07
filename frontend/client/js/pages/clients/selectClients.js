@@ -38,17 +38,19 @@ class Selects {
     if (response) {
       const data = await response.json();
 
-      divDOMs["row-list"].querySelectorAll(".wrapper-row").forEach((divDOM) => {
-        divDOM.remove();
-      });
+      divDOMs["list-client"]
+        .querySelectorAll(".wrapper-row")
+        .forEach((divDOM) => {
+          divDOM.remove();
+        });
 
       data.clients.forEach((client) => {
         const { id, type, company, manager_name, manager_tel } = client;
 
         const data = [id, type, company, manager_name, manager_tel];
-        const temp = tempDOMs["row-list"];
+        const temp = tempDOMs["list-client"];
         const { selectClient } = closure.handlers;
-        const outHtml = divDOMs["row-list"];
+        const outHtml = divDOMs["list-client"];
 
         clone("span", data, temp, ".list", { outHtml }, selectClient);
       });

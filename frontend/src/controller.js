@@ -5,12 +5,6 @@ import util from "./util";
 
 class RootController {
   getIndex(req, res) {
-    try {
-    } catch (error) {
-      util.detachCookiesToResponse(res);
-      return res.status(200).render("error", { message: error.message });
-    }
-
     const data = { pageTitle: "HTTP" };
     res.status(200).render("base", data);
   }
@@ -24,20 +18,27 @@ class RootController {
   }
 
   async getImage(req, res) {
-    let response;
-    let images;
+    let imageRes, genreRes;
+    let images, genres;
     try {
-      response = await FetchAPI.get("/images", {
+      const cookie = {
         cookie: req.headers.cookie,
-      });
-      const data = await response.json();
+      };
+      [imageRes, genreRes] = await Promise.all([
+        FetchAPI.get("/images", cookie),
+        FetchAPI.get("/genres", cookie),
+      ]);
+      let data = await imageRes.json();
       images = data.images;
+
+      data = await genreRes.json();
+      genres = data.genres;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
-    const data = { pageTitle: "images", images };
-    const cookies = response.headers.raw()["set-cookie"];
+    const data = { pageTitle: "Images", images, genres };
+    const cookies = imageRes.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("tube", data);
     }
@@ -69,6 +70,7 @@ class RootController {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
+
     const data = { pageTitle: "Videos", videos, genres };
     const cookies = videoRes.headers.raw()["set-cookie"];
     if (!cookies) {
@@ -384,20 +386,24 @@ class VideoController {
   }
 
   async select(req, res) {
-    const { limit } = req.query;
+    const { limit, name } = req.query;
+    const cookie = { cookie: req.headers.cookie };
 
     if (limit) {
       const query = `?limit=${limit[0]}&limit=${limit[1]}`;
-      const response = await FetchAPI.get("/videos" + query, {
-        cookie: req.headers.cookie,
-      });
+      const response = await FetchAPI.get("/videos" + query, cookie);
       const data = await response.json();
       return res.status(200).json({ videos: data.videos });
     }
 
-    const response = await FetchAPI.get("/videos", {
-      cookie: req.headers.cookie,
-    });
+    if (name) {
+      const query = `?name=${name}`;
+      const response = await FetchAPI.get("/videos" + query, cookie);
+      const data = await response.json();
+      return res.status(200).json({ videos: data.videos });
+    }
+
+    const response = await FetchAPI.get("/videos", cookie);
     const data = await response.json();
     return res.status(200).json({ videos: data.videos });
   }
@@ -444,17 +450,15 @@ class GenreController {
 
   async select(req, res) {
     const { name } = req.query;
-    if (!name) {
-      const response = await FetchAPI.get("/genres", {
-        cookie: req.headers.cookie,
-      });
+    const cookie = { cookie: req.headers.cookie };
+
+    if (name) {
+      const response = await FetchAPI.get(`/genres?name=${name}`, cookie);
       const data = await response.json();
       return res.status(200).json({ genres: data.genres });
     }
 
-    const response = await FetchAPI.get(`/genres?name=${name}`, {
-      cookie: req.headers.cookie,
-    });
+    const response = await FetchAPI.get("/genres", cookie);
     const data = await response.json();
     res.status(200).json({ genres: data.genres });
   }

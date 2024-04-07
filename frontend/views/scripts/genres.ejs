@@ -3,13 +3,13 @@
     <% genres.forEach((genre,i)=> { %>
     <% if (i<genres.length-1) { %> {
       "genre": {
-        "id": "<%= genre.id %>"
+        "id": "<%= btoa(genre.id) %>"
       }
     },
     <% return; %>
     <% } %> {
       "genre": {
-        "id": "<%= genre.id %>"
+        "id": "<%= btoa(genre.id) %>"
       }
     }
     <% }); %>

@@ -3,13 +3,13 @@
     <% videos.forEach((video,i)=> { %>
     <% if (i<videos.length-1) { %> {
       "video": {
-        "id": "<%= video.id %>"
+        "id": "<%= btoa(video.id) %>"
       }
     },
     <% return; %>
     <% } %> {
       "video": {
-        "id": "<%= video.id %>"
+        "id": "<%= btoa(video.id) %>"
       }
     }
     <% }); %>

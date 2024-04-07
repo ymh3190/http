@@ -17,16 +17,14 @@ if (Boolean(process.env.WATCH)) {
   }
 
   for (let i = 0; i < tables.length; i++) {
-    if (i !== tables.length - 1) {
-      statement += `${tables[i]}.table = ${tables[i]}.getTable();\n`;
-      statement += `${tables[i]}.dateFormat = await ${tables[i]}.formatDate();\n`;
-      statement += `${tables[i]}.enums = await ${tables[i]}.getEnums();\n`;
-      continue;
-    }
     statement += `${tables[i]}.table = ${tables[i]}.getTable();\n`;
-    statement += `${tables[i]}.dateFormat = await ${tables[i]}.formatDate();\n`;
-    statement += `${tables[i]}.enums = await ${tables[i]}.getEnums();\n`;
-    statement += `})();`;
+    statement += `${tables[i]}.columns = await ${tables[i]}.getColumns();\n`;
+    statement += `${tables[i]}.asColumns = ${tables[i]}.toAsColumn();\n`;
+    statement += `${tables[i]}.dateFormat = ${tables[i]}.formatDate();\n`;
+    statement += `${tables[i]}.enums = ${tables[i]}.getEnums();\n`;
+    if (i === tables.length - 1) {
+      statement += `})();`;
+    }
   }
   writeFileSync(process.cwd() + "/src/db-sub.js", statement);
 }

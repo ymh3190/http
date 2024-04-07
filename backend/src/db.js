@@ -50,16 +50,21 @@ class MySQLAPI {
   }
 
   static async getColumns() {
+    const columns = {};
     const sql = `SHOW COLUMNS FROM ${this.table}`;
     const [result] = await MySQLAPI.pool.execute(sql);
-    return result;
+    for (const column of result) {
+      columns[column.Field] = column.Type;
+    }
+    return columns;
   }
 
-  static async formatDate() {
+  static formatDate() {
     const dateTimes = [];
-    for (const column of await this.getColumns()) {
-      if (column.Type === "datetime") {
-        dateTimes.push(column.Field);
+
+    for (const [key, value] of Object.entries(this.columns)) {
+      if (value === "datetime") {
+        dateTimes.push(key);
       }
     }
 
@@ -76,14 +81,14 @@ class MySQLAPI {
     return query;
   }
 
-  static async getEnums() {
+  static getEnums() {
     const enums = {};
-    for (const column of await this.getColumns()) {
-      if (column.Type.startsWith("enum")) {
-        const types = column.Type.match(/('|")[a-zㄱ-힣]+/g).map((type) => {
+    for (const [key, value] of Object.entries(this.columns)) {
+      if (value.startsWith("enum")) {
+        const types = value.match(/('|")[a-zㄱ-힣]+/g).map((type) => {
           return type.replace(/('|")/, "");
         });
-        enums[column.Field] = types;
+        enums[key] = types;
       }
     }
     return enums;
@@ -297,7 +302,57 @@ class MySQLAPI {
     return result;
   }
 
-  static async selectJoin(on, filter) {}
+  static toAsColumn() {
+    const columns = Object.keys(this.columns)
+      .map((column) => `${this.table}.${column} AS ${column}`)
+      .join(", ");
+    return columns;
+  }
+
+  /**
+   *
+   * @param {string} table
+   * @param {{}} filter
+   * @returns
+   */
+  static async selectJoin(table, filter) {
+    if (!table) {
+      throw new CustomError.BadRequestError("Provide table");
+    }
+
+    let sql = `
+    SELECT ${this.asColumns} FROM ${this.table} JOIN ${table}
+    ON ${this.table}.id = ${table}.${this.table}_id
+    `;
+
+    const keys = Object.keys(filter);
+    if (!keys.length) {
+      const [result] = await MySQLAPI.pool.execute(sql);
+      return result;
+    }
+
+    sql += `WHERE `;
+    const values = Object.values(filter);
+    for (let i = 0; i < keys.length; i++) {
+      if (i < keys.length - 1) {
+        if (values[i].match(/\%/)) {
+          sql += `${table}.${keys[i]} LIKE '?' AND `;
+        }
+
+        sql += `${table}.${keys[i]} = ? AND `;
+        continue;
+      }
+
+      if (values[i].match(/\%/)) {
+        sql += `${table}.${keys[i]} LIKE ?`;
+        break;
+      }
+      sql += `${table}.${keys[i]} = ?`;
+    }
+
+    const [result] = await MySQLAPI.pool.execute(sql, values);
+    return result;
+  }
 
   /**
    *

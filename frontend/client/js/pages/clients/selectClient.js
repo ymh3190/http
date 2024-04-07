@@ -40,6 +40,6 @@ const { handleClick } = new Select();
 
 closure.handlers.selectClient = handleClick;
 
-divDOMs["row-list"].querySelectorAll(".list").forEach((listDOM) => {
+divDOMs["list-client"].querySelectorAll(".list").forEach((listDOM) => {
   listDOM.addEventListener("click", handleClick);
 });

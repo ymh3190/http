@@ -22,18 +22,53 @@ class Search {
       return;
     }
 
-    let genres, videos;
+    // let genres, videos;
+    // const videosLength = closure.videos.length;
 
-    const [genreRes, videoRes] = await Promise.all([
-      FetchAPI.get("/genres?" + encodeURI(`name=${name}`)),
-      FetchAPI.get("/videos?" + encodeURI("limit=0&limit=300")),
-    ]);
-    if (genreRes && videoRes) {
-      let data = await genreRes.json();
-      genres = data.genres;
+    // const [genreRes, videoRes] = await Promise.all([
+    //   FetchAPI.get("/genres?" + encodeURI(`name=%25${name}%25`)),
+    //   FetchAPI.get("/videos?" + encodeURI(`limit=0&limit=${videosLength}`)),
+    // ]);
+    // if (genreRes && videoRes) {
+    //   let data = await genreRes.json();
+    //   genres = data.genres;
 
-      data = await videoRes.json();
-      videos = data.videos;
+    //   data = await videoRes.json();
+    //   videos = data.videos;
+
+    //   const containerDOMs = document.querySelectorAll(".container");
+    //   containerDOMs.forEach((containerDOM) => {
+    //     containerDOM.remove();
+    //   });
+
+    //   const { playVideo, showPopup, fullscreen } = closure.handlers;
+
+    //   const contentsDOM = document.querySelector(".contents");
+    //   videos.forEach((video) => {
+    //     genres.forEach((genre) => {
+    //       if (video.id === genre.video_id) {
+    //         const containerDiv = document.createElement("div");
+    //         containerDiv.classList.add("container");
+    //         const videoEl = document.createElement("video");
+    //         videoEl.src = video.path;
+    //         videoEl.addEventListener("click", playVideo);
+    //         const clone = tempDOMs["controls-contents"].content.cloneNode(true);
+    //         clone.querySelector("#plus").addEventListener("click", showPopup);
+    //         clone
+    //           .querySelector("#expand")
+    //           .addEventListener("click", fullscreen);
+    //         containerDiv.append(videoEl, clone);
+    //         contentsDOM.insertAdjacentElement("afterbegin", containerDiv);
+    //       }
+    //     });
+    //   });
+    // }
+
+    const response = await FetchAPI.get(
+      "/videos?" + encodeURI(`name=%25${name}%25`)
+    );
+    if (response) {
+      const data = await response.json();
 
       const containerDOMs = document.querySelectorAll(".container");
       containerDOMs.forEach((containerDOM) => {
@@ -43,23 +78,17 @@ class Search {
       const { playVideo, showPopup, fullscreen } = closure.handlers;
 
       const contentsDOM = document.querySelector(".contents");
-      videos.forEach((video) => {
-        genres.forEach((genre) => {
-          if (video.id === genre.video_id) {
-            const containerDiv = document.createElement("div");
-            containerDiv.classList.add("container");
-            const videoEl = document.createElement("video");
-            videoEl.src = video.path;
-            videoEl.addEventListener("click", playVideo);
-            const clone = tempDOMs["controls-contents"].content.cloneNode(true);
-            clone.querySelector("#plus").addEventListener("click", showPopup);
-            clone
-              .querySelector("#expand")
-              .addEventListener("click", fullscreen);
-            containerDiv.append(videoEl, clone);
-            contentsDOM.insertAdjacentElement("afterbegin", containerDiv);
-          }
-        });
+      data.videos.forEach((video) => {
+        const containerDiv = document.createElement("div");
+        containerDiv.classList.add("container");
+        const videoEl = document.createElement("video");
+        videoEl.src = video.path;
+        videoEl.addEventListener("click", playVideo);
+        const clone = tempDOMs["controls-contents"].content.cloneNode(true);
+        clone.querySelector("#plus").addEventListener("click", showPopup);
+        clone.querySelector("#expand").addEventListener("click", fullscreen);
+        containerDiv.append(videoEl, clone);
+        contentsDOM.insertAdjacentElement("afterbegin", containerDiv);
       });
     }
   }
@@ -67,5 +96,5 @@ class Search {
 
 const { handleChange, handleSubmit } = new Search();
 
-formDOMs["search-partial"].addEventListener("submit", handleSubmit);
-inputDOMs["name-center"].addEventListener("change", handleChange);
+// formDOMs["search-partial"].addEventListener("submit", handleSubmit);
+// inputDOMs["name-center"].addEventListener("change", handleChange);

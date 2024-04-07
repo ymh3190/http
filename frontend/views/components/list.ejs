@@ -1,4 +1,5 @@
 <div class="wrapper-list">
+  <% if (depth) { %>
   <li class="<%= depth %>-list">
     <a href="<%= link %>" class="<%= isClick %>">
       <span>
@@ -6,4 +7,16 @@
       </span>
     </a>
   </li>
+  <% } else { %>
+  <li>
+    <a href="<%= link %>" class="<%= isClick %>">
+      <% if (icon) { %>
+      <i class="fa-solid <%= icon %>"></i>
+      <% } %>
+      <span>
+        <%= title %>
+      </span>
+    </a>
+  </li>
+  <% } %>
 </div>

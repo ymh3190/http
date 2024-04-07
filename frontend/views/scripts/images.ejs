@@ -1,0 +1,17 @@
+<script type="application/json" data-js="images">
+  [
+    <% images.forEach((image,i)=> { %>
+    <% if (i<images.length-1) { %> {
+      "image": {
+        "id": "<%= btoa(image.id) %>"
+      }
+    },
+    <% return; %>
+    <% } %> {
+      "image": {
+        "id": "<%= btoa(image.id) %>"
+      }
+    }
+    <% }); %>
+  ]
+</script>

@@ -1,4 +1,4 @@
-<div id="header" class="partial">
+<div class="wrapper-header">
   <header>
     <div class="start">
       <div>
@@ -20,8 +20,8 @@
     </div>
     <div class="end">
       <span id="accessTime"></span>
-      <%- include('../components/button', { id: 'user' , title: user.username , icon: 'fa-user' , inHtml: 'header' }); %>
-      <%- include('../components/button', { id: 'signout' , title: '' , icon: 'fa-arrow-right-from-bracket', inHtml: 'header' }); %>
+      <%- include('../components/button', { id: 'user' ,inHtml: 'header', title: user.username , icon: 'fa-user'  }); %>
+      <%- include('../components/button', { id: 'signout' , inHtml: 'header', title: '' , icon: 'fa-arrow-right-from-bracket'  }); %>
     </div>
   </header>
 </div>

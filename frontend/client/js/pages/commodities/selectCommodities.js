@@ -66,9 +66,11 @@ class Selects {
         }
       }
 
-      divDOMs["row-list"].querySelectorAll(".wrapper-row").forEach((divDOM) => {
-        divDOM.remove();
-      });
+      divDOMs["list-commodity"]
+        .querySelectorAll(".wrapper-row")
+        .forEach((divDOM) => {
+          divDOM.remove();
+        });
 
       commodities
         .filter((commodity) => commodity.type)
@@ -76,9 +78,9 @@ class Selects {
           const { id, item_id, type, name, unit, price } = commodity;
 
           const data = [id, [item_id, type], name, unit, price];
-          const temp = tempDOMs["row-list"];
+          const temp = tempDOMs["list-commodity"];
           const { selectCommodity } = closure.handlers;
-          const outHtml = divDOMs["row-list"];
+          const outHtml = divDOMs["list-commodity"];
 
           clone("span", data, temp, ".list", { outHtml }, selectCommodity);
         });

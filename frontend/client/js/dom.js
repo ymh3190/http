@@ -1,93 +1,131 @@
-// input
-export const inputDOMs = {};
-document.querySelectorAll("input").forEach((inputDOM) => {
-  const { name, classList } = inputDOM;
-  if (name) {
-    inputDOMs[`${name}-${classList[0]}`] = inputDOM;
-  }
-});
-
-// select
-export const selectDOMs = {};
-document.querySelectorAll("select").forEach((selectDOM) => {
-  const { name, classList } = selectDOM;
-  if (name) {
-    selectDOMs[`${name}-${classList[0]}`] = selectDOM;
-  }
-});
-
-// textarea
-export const textareaDOMs = {};
-document.querySelectorAll("textarea").forEach((textareaDOM) => {
-  const { name, classList } = textareaDOM;
-  if (name) {
-    textareaDOMs[`${name}-${classList[0]}`] = textareaDOM;
-  }
-});
-
-// btn & icon
-export const btnDOMs = {};
-export const iconDOMs = {};
-document.querySelectorAll("button").forEach((buttonDOM) => {
-  const { id, classList } = buttonDOM;
-  const iconDOM = buttonDOM.querySelector("i");
-  if (id) {
-    iconDOMs[`${id}-${classList[0]}`] = iconDOM;
-    btnDOMs[`${id}-${classList[0]}`] = buttonDOM;
-  }
-});
-
-// form
-export const formDOMs = {};
-document.querySelectorAll("form").forEach((formDOM) => {
-  const { id, classList } = formDOM;
-  if (id) {
-    formDOMs[`${id}-${classList[0]}`] = formDOM;
-  }
-});
-
-// link
-export const linkDOMs = {};
-document.querySelectorAll("a").forEach((linkDOM) => {
-  const { id, classList } = linkDOM;
-  if (id) {
-    linkDOMs[`${id}-${classList[0]}`] = linkDOM;
-  }
-});
-
-// ul
-export const ulDOMs = {};
-document.querySelectorAll("ul").forEach((ulDOM) => {
-  const { id, classList } = ulDOM;
-  if (id) {
-    ulDOMs[`${id}-${classList[0]}`] = ulDOM;
-  }
-});
-
-// div
-export const divDOMs = {};
-document.querySelectorAll("div").forEach((divDOM) => {
-  const { id, classList } = divDOM;
-  if (id) {
-    divDOMs[`${id}-${classList[0]}`] = divDOM;
-  }
-});
-
-// page
 export const pageDOMs = {};
-document.querySelectorAll("section").forEach((sectionDOM) => {
-  const { id, classList } = sectionDOM;
-  pageDOMs[`${id}-${classList[0]}`] = sectionDOM;
-});
-
-// template
-export const tempDOMs = {};
-document.querySelectorAll("template").forEach((tempDOM) => {
-  const { id, classList } = tempDOM;
-  tempDOMs[`${id}-${classList[0]}`] = tempDOM;
-});
-
-// partial
-export const navDOM = document.getElementById("nav");
-export const headerDOM = document.getElementById("header");
-export const footerDOM = document.getElementById("footer");
+pageDOMs['client-page']=document.querySelector('section#client.page');
+pageDOMs['commodity-page']=document.querySelector('section#commodity.page');
+pageDOMs['image-page']=document.querySelector('section#image.page');
+pageDOMs['index-page']=document.querySelector('section#index.page');
+pageDOMs['product-page']=document.querySelector('section#product.page');
+pageDOMs['signin-page']=document.querySelector('section#signin.page');
+pageDOMs['signup-page']=document.querySelector('section#signup.page');
+pageDOMs['tank-page']=document.querySelector('section#tank.page');
+pageDOMs['user-page']=document.querySelector('section#user.page');
+pageDOMs['video-page']=document.querySelector('section#video.page');
+export const formDOMs = {};
+formDOMs['search-client']=document.querySelector('form#search.client');
+formDOMs['saveUpdate-client']=document.querySelector('form#saveUpdate.client');
+formDOMs['search-commodity']=document.querySelector('form#search.commodity');
+formDOMs['saveUpdate-commodity']=document.querySelector('form#saveUpdate.commodity');
+formDOMs['search-product']=document.querySelector('form#search.product');
+formDOMs['saveUpdate-product']=document.querySelector('form#saveUpdate.product');
+formDOMs['signin-signin']=document.querySelector('form#signin.signin');
+formDOMs['signup-signup']=document.querySelector('form#signup.signup');
+formDOMs['search-tank']=document.querySelector('form#search.tank');
+formDOMs['saveUpdate-tank']=document.querySelector('form#saveUpdate.tank');
+formDOMs['search-user']=document.querySelector('form#search.user');
+formDOMs['saveUpdate-user']=document.querySelector('form#saveUpdate.user');
+export const divDOMs = {};
+divDOMs['list-client']=document.querySelector('div#list.client');
+divDOMs['list-commodity']=document.querySelector('div#list.commodity');
+divDOMs['list-product']=document.querySelector('div#list.product');
+divDOMs['list-tank']=document.querySelector('div#list.tank');
+divDOMs['list-user']=document.querySelector('div#list.user');
+export const inputDOMs = {};
+inputDOMs['company-header']=document.querySelector('input#company.header')
+inputDOMs['company-detail']=document.querySelector('input#company.detail')
+inputDOMs['address-detail']=document.querySelector('input#address.detail')
+inputDOMs['tel-detail']=document.querySelector('input#tel.detail')
+inputDOMs['fax-detail']=document.querySelector('input#fax.detail')
+inputDOMs['tax_no-detail']=document.querySelector('input#tax_no.detail')
+inputDOMs['corp_no-detail']=document.querySelector('input#corp_no.detail')
+inputDOMs['manager_name-detail']=document.querySelector('input#manager_name.detail')
+inputDOMs['manager_tel-detail']=document.querySelector('input#manager_tel.detail')
+inputDOMs['ceo_name-detail']=document.querySelector('input#ceo_name.detail')
+inputDOMs['ceo_tel-detail']=document.querySelector('input#ceo_tel.detail')
+inputDOMs['name-header']=document.querySelector('input#name.header')
+inputDOMs['name-detail']=document.querySelector('input#name.detail')
+inputDOMs['unit-detail']=document.querySelector('input#unit.detail')
+inputDOMs['price-detail']=document.querySelector('input#price.detail')
+inputDOMs['specification-detail']=document.querySelector('input#specification.detail')
+inputDOMs['stock-detail']=document.querySelector('input#stock.detail')
+inputDOMs['temp-header']=document.querySelector('input#temp.header')
+inputDOMs['name-detail']=document.querySelector('input#name.detail')
+inputDOMs['username-signin']=document.querySelector('input#username.signin')
+inputDOMs['password-signin']=document.querySelector('input#password.signin')
+inputDOMs['username-signup']=document.querySelector('input#username.signup')
+inputDOMs['password-signup']=document.querySelector('input#password.signup')
+inputDOMs['rePassword-signup']=document.querySelector('input#rePassword.signup')
+inputDOMs['name-detail']=document.querySelector('input#name.detail')
+inputDOMs['address-detail']=document.querySelector('input#address.detail')
+inputDOMs['department-header']=document.querySelector('input#department.header')
+inputDOMs['name-header']=document.querySelector('input#name.header')
+inputDOMs['name-detail']=document.querySelector('input#name.detail')
+inputDOMs['address-detail']=document.querySelector('input#address.detail')
+export const selectDOMs = {};
+selectDOMs['type-header']=document.querySelector('select#type.header')
+selectDOMs['type-detail']=document.querySelector('select#type.detail')
+selectDOMs['type-header']=document.querySelector('select#type.header')
+selectDOMs['item_id-header']=document.querySelector('select#item_id.header')
+selectDOMs['type-detail']=document.querySelector('select#type.detail')
+selectDOMs['item_id-detail']=document.querySelector('select#item_id.detail')
+selectDOMs['item-header']=document.querySelector('select#item.header')
+selectDOMs['item-header']=document.querySelector('select#item.header')
+export const textareaDOMs = {};
+textareaDOMs['comment-detail']=document.querySelector('textarea#comment.detail')
+export const checkboxDOMs = {};
+checkboxDOMs['fired-header']=document.querySelector('input#fired.header')
+export const btnDOMs = {};
+btnDOMs['search-header']=document.querySelector('button#search.header')
+btnDOMs['print-header']=document.querySelector('button#print.header')
+btnDOMs['create-detail']=document.querySelector('button#create.detail')
+btnDOMs['save-detail']=document.querySelector('button#save.detail')
+btnDOMs['delete-detail']=document.querySelector('button#delete.detail')
+btnDOMs['search-header']=document.querySelector('button#search.header')
+btnDOMs['print-header']=document.querySelector('button#print.header')
+btnDOMs['create-detail']=document.querySelector('button#create.detail')
+btnDOMs['save-detail']=document.querySelector('button#save.detail')
+btnDOMs['delete-detail']=document.querySelector('button#delete.detail')
+btnDOMs['add-contents']=document.querySelector('button#add.contents')
+btnDOMs['search-header']=document.querySelector('button#search.header')
+btnDOMs['print-header']=document.querySelector('button#print.header')
+btnDOMs['create-detail']=document.querySelector('button#create.detail')
+btnDOMs['save-detail']=document.querySelector('button#save.detail')
+btnDOMs['delete-detail']=document.querySelector('button#delete.detail')
+btnDOMs['search-header']=document.querySelector('button#search.header')
+btnDOMs['print-header']=document.querySelector('button#print.header')
+btnDOMs['create-detail']=document.querySelector('button#create.detail')
+btnDOMs['save-detail']=document.querySelector('button#save.detail')
+btnDOMs['delete-detail']=document.querySelector('button#delete.detail')
+btnDOMs['search-header']=document.querySelector('button#search.header')
+btnDOMs['print-header']=document.querySelector('button#print.header')
+btnDOMs['create-detail']=document.querySelector('button#create.detail')
+btnDOMs['save-detail']=document.querySelector('button#save.detail')
+btnDOMs['delete-detail']=document.querySelector('button#delete.detail')
+btnDOMs['add-contents']=document.querySelector('button#add.contents')
+export const iconDOMs = {};
+iconDOMs['search-header']=document.querySelector('button#search.header > i')
+iconDOMs['print-header']=document.querySelector('button#print.header > i')
+iconDOMs['create-detail']=document.querySelector('button#create.detail > i')
+iconDOMs['save-detail']=document.querySelector('button#save.detail > i')
+iconDOMs['delete-detail']=document.querySelector('button#delete.detail > i')
+iconDOMs['search-header']=document.querySelector('button#search.header > i')
+iconDOMs['print-header']=document.querySelector('button#print.header > i')
+iconDOMs['create-detail']=document.querySelector('button#create.detail > i')
+iconDOMs['save-detail']=document.querySelector('button#save.detail > i')
+iconDOMs['delete-detail']=document.querySelector('button#delete.detail > i')
+iconDOMs['add-contents']=document.querySelector('button#add.contents > i')
+iconDOMs['search-header']=document.querySelector('button#search.header > i')
+iconDOMs['print-header']=document.querySelector('button#print.header > i')
+iconDOMs['create-detail']=document.querySelector('button#create.detail > i')
+iconDOMs['save-detail']=document.querySelector('button#save.detail > i')
+iconDOMs['delete-detail']=document.querySelector('button#delete.detail > i')
+iconDOMs['search-header']=document.querySelector('button#search.header > i')
+iconDOMs['print-header']=document.querySelector('button#print.header > i')
+iconDOMs['create-detail']=document.querySelector('button#create.detail > i')
+iconDOMs['save-detail']=document.querySelector('button#save.detail > i')
+iconDOMs['delete-detail']=document.querySelector('button#delete.detail > i')
+iconDOMs['search-header']=document.querySelector('button#search.header > i')
+iconDOMs['print-header']=document.querySelector('button#print.header > i')
+iconDOMs['create-detail']=document.querySelector('button#create.detail > i')
+iconDOMs['save-detail']=document.querySelector('button#save.detail > i')
+iconDOMs['delete-detail']=document.querySelector('button#delete.detail > i')
+iconDOMs['add-contents']=document.querySelector('button#add.contents > i')
+export const partialDOMs = {};

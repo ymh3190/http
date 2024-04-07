@@ -43,18 +43,23 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
     }
   }
 
-  const idClassExp = /id=('|")\w+('|")\sclass=('|")\w+/g;
-  const strExp = /('|")\w+/;
-  const includeExp = /<%-\sinclude\(('|")\.\.\/components\/.+(\s+.+)/g;
+  // const idClassExp = /id=('|")\w+('|")\sclass=('|")\w+/g;
+  // const strExp = /('|")\w+/;
+  // const includeExp = /<%-\sinclude\(('|")\.\.\/components\/.+(\s+.+)/g;
 
   let pages = "export const pageDOMs = {};\n";
   let forms = "export const formDOMs = {};\n";
   let divs = "export const divDOMs = {};\n";
-  let selects = "export const selectDOMs = {};\n";
+
   let inputs = "export const inputDOMs = {};\n";
+  let selects = "export const selectDOMs = {};\n";
+  let textareas = "export const textareaDOMs = {};\n";
+  let checkboxes = "export const checkboxDOMs = {};\n";
+
   let buttons = "export const btnDOMs = {};\n";
   let icons = "export const iconDOMs = {};\n";
-  let partials = "";
+
+  let partialDOMs = "export const partialDOMs = {};\n";
 
   for (const { primary, path, files } of hierarchy) {
     if (primary === "pages") {
@@ -65,9 +70,9 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
           const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
           for (const dom of doms) {
             if (dom.startsWith("<section")) {
-              let [id, className] = dom.match(/"\w+/g);
-              id = id.replace(/"/, "");
-              className = className.replace(/"/, "");
+              const [id, className] = dom
+                .match(/('|")\w+/g)
+                .map((str) => str.replace(/('|")/, ""));
               const property = `pageDOMs['${id}-${className}']`;
               const value = `document.querySelector('section#${id}.${className}')`;
               pages += `${property}=${value};\n`;
@@ -75,9 +80,9 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             }
 
             if (dom.startsWith("<form")) {
-              let [id, className] = dom.match(/"\w+/g);
-              id = id.replace(/"/, "");
-              className = className.replace(/"/, "");
+              const [id, className] = dom
+                .match(/('|")\w+/g)
+                .map((str) => str.replace(/('|")/, ""));
               const property = `formDOMs['${id}-${className}']`;
               const value = `document.querySelector('form#${id}.${className}')`;
               forms += `${property}=${value};\n`;
@@ -85,9 +90,9 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             }
 
             if (dom.startsWith("<div")) {
-              let [id, className] = dom.match(/"\w+/g);
-              id = id.replace(/"/, "");
-              className = className.replace(/"/, "");
+              const [id, className] = dom
+                .match(/('|")\w+/g)
+                .map((str) => str.replace(/('|")/, ""));
               const property = `divDOMs['${id}-${className}']`;
               const value = `document.querySelector('div#${id}.${className}')`;
               divs += `${property}=${value};\n`;
@@ -96,30 +101,144 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
           }
         }
 
-        if (file.match(/<%-\sinclude\(('|")\.\.\/.+(\s+.+)/g)) {
-          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+(\s+.+)/g);
+        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/g)) {
+          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
           for (const dom of doms) {
-            const dot2Path = dom.match(/('|")\.\.\/\w+\/\w+/).join("");
-            // console.log(dot2Path.replace(/('|")\.\.\//, "").split("/"));
-            if (dom.match(/name:\s('|")\w+('|")/g)) {
-              const names = dom.match(/name:\s('|")\w+('|")/g);
-              for (const name of names) {
-                // console.log(name.split(" ")[1].replace(/('|")/g, ""));
+            if (dom.includes("input")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `inputDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('input#${id}.${inHtml}')`;
+                inputs += `${property}=${value}\n`;
               }
               continue;
             }
 
-            if (dom.match(/inHtml:\s('|")\w+('|")/g)) {
-              const inHtmls = dom.match(/inHtml:\s('|")\w+('|")/g);
-              for (const inHtml of inHtmls) {
-                // console.log(inHtml.split(" ")[1].replace(/('|")/g, ""));
+            if (dom.includes("select")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
               }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `selectDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('select#${id}.${inHtml}')`;
+                selects += `${property}=${value}\n`;
+              }
+              continue;
+            }
+
+            if (dom.includes("textarea")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `textareaDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('textarea#${id}.${inHtml}')`;
+                textareas += `${property}=${value}\n`;
+              }
+              continue;
+            }
+
+            if (dom.includes("checkbox")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `checkboxDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('input#${id}.${inHtml}')`;
+                checkboxes += `${property}=${value}\n`;
+              }
+              continue;
+            }
+
+            if (dom.includes("button")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `btnDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('button#${id}.${inHtml}')`;
+                const icon = `document.querySelector('button#${id}.${inHtml} > i')`;
+                buttons += `${property}=${value}\n`;
+                icons += `iconDOMs['${id}-${inHtml}']=${icon}\n`;
+              }
+              continue;
             }
           }
         }
       }
     }
+
+    if (primary === "partials") {
+      for (const partial of files) {
+        const file = readFileSync(path.concat("/", partial), "utf-8");
+        console.log(file);
+      }
+    }
   }
 
-  writeFileSync(process.cwd() + "/client/js/dom-sub.js", pages + forms + divs);
+  writeFileSync(
+    process.cwd() + "/client/js/dom.js",
+    pages +
+      forms +
+      divs +
+      inputs +
+      selects +
+      textareas +
+      checkboxes +
+      buttons +
+      icons +
+      partialDOMs
+  );
 })();

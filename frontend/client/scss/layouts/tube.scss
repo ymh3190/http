@@ -1,64 +1,95 @@
-#header.partial,
-#nav.partial {
+.wrapper-header,
+.wrapper-nav {
   background-color: white !important;
 }
 
-.page {
-  background-color: initial;
-}
+.wrapper-header > header > .center > #search.partial {
+  display: flex;
+  align-items: center;
 
-#video.page > .content > .contents,
-#image.page > .content > .contents {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-
-  .container {
-    position: relative;
-  }
-
-  & > .wrapper-button {
-    display: flex;
-    justify-content: center;
-
-    & > button > i {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      min-height: 20vh;
-    }
+  & > .wrapper-button > button > i {
+    font-size: 1rem;
   }
 }
 
-#video.page > .content > .contents > .container {
-  & > video {
-    width: 100%;
-    height: 30vh;
-    object-fit: fill;
+.wrapper-nav {
+  a:first-child {
+    padding-bottom: 2vh;
+  }
+  a:not(:first-child) {
+    padding-block: 2vh;
   }
 
-  & > .wrapper-controls > .controls {
+  a {
+    display: inline-block;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+  }
 
-    & > .bottom {
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
+  i {
+    margin-right: 1vw;
+  }
+}
 
-      & > .left,
-      & > .right {
-        display: flex;
+.tube {
+  border-radius: $posBorderRadius;
+  margin-top: $pageTop;
+  margin-left: $navWidth;
+
+  & > .content > .contents {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+
+    .container {
+      position: relative;
+
+      & > img,
+      & > video {
+        width: 100%;
+        height: 30vh;
+        object-fit: fill;
+      }
+
+      & > .wrapper-controls > .controls {
+        width: 100%;
+        position: absolute;
+        bottom: 5px;
+
+        & > .bottom {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+
+          i {
+            font-size: 1rem;
+          }
+
+          & > .left,
+          & > .right {
+            display: flex;
+          }
+
+          & > .left {
+            margin-left: 10px;
+          }
+
+          & > .right {
+            margin-right: 10px;
+          }
+        }
       }
     }
-  }
-}
 
-#image.page > .content > .contents > .container {
-  & > img {
-    width: 100%;
-    height: 30vh;
-    object-fit: fill;
+    & > .wrapper-button {
+      display: flex;
+      justify-content: center;
+
+      & > button > i {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        min-height: 20vh;
+      }
+    }
   }
 }

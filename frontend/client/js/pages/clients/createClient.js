@@ -87,8 +87,8 @@ class Create {
       });
 
       const dataset = [id, type, company, manager_name, manager_tel];
-      const temp = tempDOMs["row-list"];
-      const outHtml = divDOMs["row-list"];
+      const temp = tempDOMs["list-client"];
+      const outHtml = divDOMs["list-client"];
       const { selectClient } = closure.handlers;
       const sort = true;
       clone("span", dataset, temp, ".list", { outHtml, sort }, selectClient);

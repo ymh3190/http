@@ -1,78 +1,70 @@
-#signin.page,
-#signup.page {
+.auth {
   padding: $posPadding;
   background-color: $pageBgColor;
   border-radius: $posBorderRadius;
   margin-left: 35vw;
   width: 30vw;
-}
 
-#signin.page > .content,
-#signup.page > .content {
-  display: flex;
-  height: 100%;
-}
-
-#signin.page > .content > .left,
-#signin.page > .content > .right,
-#signup.page > .content > .left,
-#signup.page > .content > .right {
-  padding: $posPadding;
-  border-radius: $posBorderRadius;
-  background-color: $pageTopBgColor;
-  margin-bottom: $posBetween;
-}
-
-#signin.page > .content > .left,
-#signup.page > .content > .left {
-  width: 30%;
-  margin-right: $posBetween;
-
-  & > .title {
+  & > .content {
+    display: flex;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-  }
-}
 
-#signin.page > .content > .right,
-#signup.page > .content > .right {
-  width: 70%;
+    & > .left,
+    & > .right {
+      padding: $posPadding;
+      border-radius: $posBorderRadius;
+      background-color: $pageTopBgColor;
+      margin-bottom: $posBetween;
+    }
 
-  .wrapper-input {
-    display: grid;
-    grid-template-columns: 4fr 6fr;
-  }
-}
+    & > .left {
+      width: 30%;
+      margin-right: $posBetween;
 
-#signin.page > .content > .right > .contents,
-#signup.page > .content > .right > .contents {
-  height: 100%;
-}
+      & > .title {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+      }
+    }
 
-#signin.page > .content > .right > .contents > form,
-#signup.page > .content > .right > .contents > form {
-  & > .top > .wrapper-input:not(:last-child) {
-    margin-bottom: 1rem;
-  }
+    & > .right {
+      width: 70%;
 
-  & > .bottom {
-    display: flex;
-    align-items: center;
-    height: 5vh;
-  }
+      .wrapper-input {
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+      }
 
-  & > .bottom > .link {
-    width: 80%;
-  }
+      & > .contents {
+        height: 100%;
 
-  & > .bottom > .button {
-    width: 20%;
+        & > form {
+          & > .top > .wrapper-input:not(:last-child) {
+            margin-bottom: 1rem;
+          }
 
-    & > button > span {
-      font-weight: 600;
+          & > .bottom {
+            display: flex;
+            align-items: center;
+            height: 5vh;
+          }
+
+          & > .bottom > .link {
+            width: 80%;
+          }
+
+          & > .bottom > .button {
+            width: 20%;
+
+            & > button > span {
+              font-weight: 600;
+            }
+          }
+        }
+      }
     }
   }
 }

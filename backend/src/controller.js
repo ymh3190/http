@@ -188,7 +188,7 @@ class VideoController {
   }
 
   async select(req, res) {
-    const { limit } = req.query;
+    const { limit, name } = req.query;
     if (limit) {
       const videos = await Video.select(
         {},
@@ -198,6 +198,11 @@ class VideoController {
           limit,
         }
       );
+      return res.status(200).json({ videos });
+    }
+
+    if (name) {
+      const videos = await Video.selectJoin("genre", { name });
       return res.status(200).json({ videos });
     }
 
@@ -239,7 +244,13 @@ class GenreController {
   }
 
   async select(req, res) {
-    const genres = await Genre.select(req.query);
+    const { name } = req.query;
+    if (name) {
+      const genres = await Genre.select(req.query);
+      return res.status(200).json({ genres });
+    }
+
+    const genres = await Genre.select({});
     res.status(200).json({ genres });
   }
 

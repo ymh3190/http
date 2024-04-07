@@ -1,12 +1,16 @@
-<section id="image" class="page">
+<section id="image" class="page tube">
   <div class="content">
     <div class="contents">
-      <% images.forEach((image)=> { %>
+      <% for(let i=0;i<images.length;i++) { %>
+      <% if (i<5) { %>
       <div class="container">
-        <img src="<%= image.path %>" alt="">
+        <img src="<%= images[i].path %>" alt="">
       </div>
-      <% }); %>
-      <%- include('../components/button', { title: '', id: 'add', icon: 'fa-plus', inHtml: 'contents' }); %>
+      <% continue; %>
+      <% } %>
+      <% break; %>
+      <% } %>
+      <%- include('../components/button', { id: 'add', inHtml: 'contents', title: '',  icon: 'fa-plus', }); %>
     </div>
   </div>
 </section>

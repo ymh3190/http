@@ -66,6 +66,6 @@ const { handleClick } = new Select();
 
 closure.handlers.selectCommodity = handleClick;
 
-divDOMs["row-list"].querySelectorAll(".list").forEach((listDOM) => {
+divDOMs["list-commodity"].querySelectorAll(".list").forEach((listDOM) => {
   listDOM.addEventListener("click", handleClick);
 });

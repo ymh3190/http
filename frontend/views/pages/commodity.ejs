@@ -1,26 +1,26 @@
-<section id="commodity" class="page">
+<section id="commodity" class="page mes">
   <div class="content">
     <div class="top">
       <div class="header">
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="commodity">
-              <%- include('../components/select', { title: '구분' , name: 'type', values: types , inHtml: 'header' }); %>
-              <%- include('../components/select', { title: '종류' , name: 'item_id' , values: [] , inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '원자재 명' , name: 'name', inHtml: 'header' }); %>
+              <%- include('../components/select', { id: 'type', inHtml: 'header', title: '구분' , values: types  }); %>
+              <%- include('../components/select', { id: 'item_id', inHtml: 'header', title: '종류',  values: []  }); %>
+              <%- include('../components/input', { id: 'name', inHtml: 'header', title: '원자재 명' }); %>
             </form>
           </div>
         </div>
         <div class="right">
-          <%- include('../components/button', { title: '조회' , id: 'search' , icon: '' , inHtml: 'header' }); %>
-          <%- include('../components/button', { title: '출력' , id: 'print' , icon: '' , inHtml: 'header' }); %>
+          <%- include('../components/button', { id: 'search' , inHtml: 'header', title: '조회' ,  icon: ''  }); %>
+          <%- include('../components/button', { id: 'print' , inHtml: 'header', title: '출력' ,  icon: ''  }); %>
         </div>
       </div>
     </div>
     <div class="bottom">
       <div class="contents">
         <div class="left">
-          <div class="list">
+          <div class="table">
             <div class="head">
               <div class="th">
                 <span>구분</span>
@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="body">
-              <div id="row" class="list">
+              <div id="list" class="commodity">
                 <% commodities.forEach((commodity)=> { %>
                 <% items.forEach((item)=> { %>
                 <% if(commodity.item_id===item.id) { %>
@@ -54,19 +54,19 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="commodity">
-                <%- include('../components/input', { title: '원자재 명' , name: 'name' , inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '구분' , name: 'type' , values: types , inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '종류' , name: 'item_id' , values:[] , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '포장 단위' , name: 'unit' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '가격' , name: 'price' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '사양' , name: 'specification' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '수량' , name: 'stock' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { id:'name', inHtml: 'detail', title: '원자재 명'  }); %>
+                <%- include('../components/select', { id:'type', inHtml: 'detail', title: '구분' , values: types  }); %>
+                <%- include('../components/select', { id:'item_id', inHtml: 'detail', title: '종류' , values:[]  }); %>
+                <%- include('../components/input', { id:'unit', inHtml: 'detail', title: '포장 단위'  }); %>
+                <%- include('../components/input', { id:'price', inHtml: 'detail', title: '가격'  }); %>
+                <%- include('../components/input', { id:'specification', inHtml: 'detail', title: '사양'  }); %>
+                <%- include('../components/input', { id:'stock', inHtml: 'detail', title: '수량' }); %>
               </form>
             </div>
             <div class="bottom">
-              <%- include('../components/button', { title: '신규' , id: 'create' , icon: '' ,inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '저장' , id: 'save' , icon: '' , inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '삭제' , id: 'delete', icon: '' , inHtml: 'detail' }); %>
+              <%- include('../components/button', { id: 'create' , inHtml: 'detail', title: '신규' ,  icon: '' }); %>
+              <%- include('../components/button', { id: 'save' , inHtml: 'detail', title: '저장' ,  icon: ''  }); %>
+              <%- include('../components/button', { id: 'delete', inHtml: 'detail', title: '삭제' ,  icon: ''  }); %>
             </div>
           </div>
         </div>

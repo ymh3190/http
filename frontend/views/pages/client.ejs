@@ -1,25 +1,25 @@
-<section id="client" class="page">
+<section id="client" class="page mes">
   <div class="content">
     <div class="top">
       <div class="header">
         <div class="left">
           <div class="wrapper-form">
             <form id="search" class="client">
-              <%- include('../components/select', { title: '구분' , name: 'type' , values: types, inHtml: 'header' }); %>
-              <%- include('../components/input', { title: '거래처 명' , name: 'company' , inHtml: 'header' }); %>
+              <%- include('../components/select', { id: 'type', inHtml: 'header', title: '구분' , values: types }); %>
+              <%- include('../components/input', { id: 'company', inHtml: 'header', title: '거래처 명' }); %>
             </form>
           </div>
         </div>
         <div class="right">
-          <%- include('../components/button', { title: '조회' , id: 'search' , icon: '' , inHtml: 'header' }); %>
-          <%- include('../components/button', { title: '출력' , id: 'print' , icon: '' , inHtml: 'header' }); %>
+          <%- include('../components/button', { id: 'search' ,inHtml: 'header', title: '조회' , icon: '' }); %>
+          <%- include('../components/button', { id: 'print' , inHtml: 'header', title: '출력' , icon: '' }); %>
         </div>
       </div>
     </div>
     <div class="bottom">
       <div class="contents">
         <div class="left">
-          <div class="list">
+          <div class="table">
             <div class="head">
               <div class="th">
                 <span>카테고리</span>
@@ -35,11 +35,11 @@
               </div>
             </div>
             <div class="body">
-              <div id="row" class="list">
+              <div id="list" class="client">
                 <% clients.forEach((client)=> { %>
-                <%- include('../components/row', { row: client, page:'client', inHtml: 'list' }); %>
+                <%- include('../components/row', { inHtml: 'list', row: client, page: 'client',  }); %>
                 <% }); %>
-                <%- include('../templates/row' , { row: {}, page:'client', inHtml: 'list' }); %>
+                <%- include('../templates/row' , { inHtml: 'list', row: {}, page: 'client' }); %>
               </div>
             </div>
           </div>
@@ -48,25 +48,25 @@
           <div class="detail">
             <div class="top">
               <form id="saveUpdate" class="client">
-                <%- include('../components/input', { title: '거래처 명' , name: 'company' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '주소' , name: 'address' , inHtml: 'detail' }); %>
+                <%- include('../components/input', { id:'company',inHtml: 'detail', title: '거래처 명'  }); %>
+                <%- include('../components/input', { id:'address',inHtml: 'detail', title: '주소'  }); %>
                 <%- include('../third-party/post-code', { inHtml: 'detail' }); %>
-                <%- include('../components/select', { title: '유형' , name: 'type' , values: types, inHtml: 'detail'}); %>
-                <%- include('../components/input', { title: '번호' , name: 'tel' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '팩스' , name: 'fax' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '사업자 등록 번호' , name: 'tax_no' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '법인 등록 번호' , name: 'corp_no' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '담당자 명' , name: 'manager_name' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '담당자 연락처' , name: 'manager_tel' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '대표 명' , name: 'ceo_name' , inHtml: 'detail' }); %>
-                <%- include('../components/input', { title: '대표 연락처' , name: 'ceo_tel' , inHtml: 'detail' }); %>
-                <%- include('../components/textarea', { title: '메모' , name: 'comment' , inHtml: 'detail' }); %>
+                <%- include('../components/select', { id:'type', inHtml: 'detail', title: '유형' ,  values: types}); %>
+                <%- include('../components/input', { id:'tel', inHtml: 'detail', title: '번호'  }); %>
+                <%- include('../components/input', { id:'fax', inHtml: 'detail', title: '팩스'  }); %>
+                <%- include('../components/input', { id:'tax_no', inHtml: 'detail', title: '사업자 등록 번호' }); %>
+                <%- include('../components/input', { id:'corp_no', inHtml: 'detail', title: '법인 등록 번호' }); %>
+                <%- include('../components/input', { id:'manager_name', inHtml: 'detail', title: '담당자 명' }); %>
+                <%- include('../components/input', { id:'manager_tel', inHtml: 'detail', title: '담당자 연락처' }); %>
+                <%- include('../components/input', { id:'ceo_name', inHtml: 'detail', title: '대표 명' }); %>
+                <%- include('../components/input', { id:'ceo_tel', inHtml: 'detail', title: '대표 연락처' }); %>
+                <%- include('../components/textarea', { id:'comment', inHtml: 'detail', title: '메모' }); %>
               </form>
             </div>
             <div class="bottom">
-              <%- include('../components/button', { title: '신규' , id: 'create', icon: '', inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '저장' , id: 'save', icon: '', inHtml: 'detail' }); %>
-              <%- include('../components/button', { title: '삭제' , id: 'delete', icon: '', inHtml: 'detail' }); %>
+              <%- include('../components/button', { id: 'create', inHtml: 'detail', title: '신규' , icon: '' }); %>
+              <%- include('../components/button', { id: 'save', inHtml: 'detail', title: '저장' , icon: '' }); %>
+              <%- include('../components/button', { id: 'delete', inHtml: 'detail', title: '삭제' , icon: '' }); %>
             </div>
           </div>
         </div>

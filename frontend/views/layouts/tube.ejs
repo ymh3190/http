@@ -15,7 +15,7 @@
 
 <body>
   <div class="root">
-    <div id="header" class="partial">
+    <div class="wrapper-header">
       <header>
         <div class="start">
           <div class="logo">
@@ -25,19 +25,19 @@
           </div>
         </div>
         <div class="center">
-          <form id="search" class="partial flex">
-            <%- include('../components/input', { name: 'name', title: '', inHtml: 'center' }); %>
-            <%- include('../components/button', { id: 'search', title: '', icon: 'fa-search', inHtml: 'center' }); %>
+          <form id="search" class="partial">
+            <%- include('../components/input', { id: 'name', inHtml: 'center', title: ''  }); %>
+            <%- include('../components/button', { id: 'search', inHtml: 'center', title: '', icon: 'fa-search' }); %>
           </form>
         </div>
         <div class="end">
         </div>
       </header>
     </div>
-    <div id="nav" class="partial">
+    <div class="wrapper-nav">
       <nav>
-        <%- include('../components/list', { title: '비디오' , depth: 'header' , link: '/videos' , isClick: '' }); %>
-        <%- include('../components/list', { title: '사진' , depth: 'header' , link: '/images' , isClick: '' }); %>
+        <%- include('../components/list', { title: 'Videos' , depth: '' , icon: 'fa-video', link: '/videos' , isClick: '' }); %>
+        <%- include('../components/list', { title: 'Images' , depth: '' , icon: 'fa-image', link: '/images' , isClick: '' }); %>
       </nav>
     </div>
     <main>
@@ -52,8 +52,15 @@
     <%- include('../partials/footer') %>
   </div>
   <%- include('../scripts/user') %>
-  <%- include('../scripts/videos') %>
   <%- include('../scripts/genres') %>
+
+  <% if (url==='/videos') { %>
+  <%- include('../scripts/videos') %>
+
+  <% } else if (url==='/images') { %>
+  <%- include('../scripts/images') %>
+
+  <% } %>
   <script src="/public/js/tube.js"></script>
 
   <% if (url==='/images' ) { %>

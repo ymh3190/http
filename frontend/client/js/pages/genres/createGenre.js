@@ -38,5 +38,5 @@ const { handleChange, handleSubmit } = new Create();
 
 closure.handlers.createGenre = handleSubmit;
 
-formDOMs["genre-contents"].addEventListener("submit", handleSubmit);
-inputDOMs["name-popup"].addEventListener("change", handleChange);
+// formDOMs["genre-contents"].addEventListener("submit", handleSubmit);
+// inputDOMs["name-popup"].addEventListener("change", handleChange);

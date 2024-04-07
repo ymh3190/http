@@ -108,8 +108,8 @@ class Create {
         });
 
       const dataset = [id, [item_id, type], name, unit, price];
-      const temp = tempDOMs["row-list"];
-      const outHtml = divDOMs["row-list"];
+      const temp = tempDOMs["list-commodity"];
+      const outHtml = divDOMs["list-commodity"];
       const { selectCommodity } = closure.handlers;
       const sort = true;
       clone("span", dataset, temp, ".list", { outHtml, sort }, selectCommodity);

@@ -4,7 +4,7 @@
 
 ### MySQL ORM
 
-- create, select, update, delete
+- create, select, update, delete, join
 
       데이터베이스(입력)에 대한 일반화
       https://github.com/ymh3190/http/blob/main/backend/src/db.js
@@ -123,5 +123,8 @@
 ### Origin/path?param
 
 - % 전송 인코딩 문제
+
   - % -> %25
   - The encodeURI() function escapes characters by UTF-8 code units, with each octet encoded in the format %XX, left-padded with 0 if necessary.
+  - encodeURI와 encodeURIComponent 차이
+  - 레퍼런스: https://codingeverybody.kr/자바스크립트-인코딩-함수-비교/
