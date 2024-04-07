@@ -1,4 +1,4 @@
-import { formDOMs, inputDOMs } from "../../dom";
+import { popupDOMs, inputDOMs } from "../../dom";
 import FetchAPI from "../../fetch-api";
 import { useState } from "../../state";
 
@@ -30,7 +30,7 @@ class Create {
     });
 
     window.closure.video_id = "";
-    formDOMs["genre-contents"].classList.add("hidden");
+    popupDOMs["genre-contents"].classList.add("hidden");
   }
 }
 
@@ -38,5 +38,5 @@ const { handleChange, handleSubmit } = new Create();
 
 closure.handlers.createGenre = handleSubmit;
 
-// formDOMs["genre-contents"].addEventListener("submit", handleSubmit);
-// inputDOMs["name-popup"].addEventListener("change", handleChange);
+popupDOMs["genre-contents"].addEventListener("submit", handleSubmit);
+inputDOMs["name-popup"].addEventListener("change", handleChange);

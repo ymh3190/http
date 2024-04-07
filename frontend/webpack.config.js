@@ -10,10 +10,10 @@ module.exports = {
     css: path.join(__dirname, jsPath, "css"),
 
     base: path.join(__dirname, layoutsPath, "base"),
-
-    mes: path.join(__dirname, layoutsPath, "mes"),
     signin: path.join(__dirname, pagesPath, "signin"),
     signup: path.join(__dirname, pagesPath, "signup"),
+
+    mes: path.join(__dirname, layoutsPath, "mes"),
     client: path.join(__dirname, pagesPath, "client"),
     product: path.join(__dirname, pagesPath, "product"),
     commodity: path.join(__dirname, pagesPath, "commodity"),

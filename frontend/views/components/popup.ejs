@@ -1,6 +1,6 @@
 <div class="wrapper-popup">
   <form id="<%= id %>" class="<%= inHtml %> popup hidden">
-    <%- include('../components/input', { name: 'name', title: '장르', inHtml: 'popup' }); %>
-    <%- include('../components/button', { id: '', title: '확인', icon: '', inHtml: 'hidden' }); %>
+    <%- include('../components/input', { id: 'name', inHtml: 'popup', title: '장르'  }); %>
+    <%- include('../components/button', { id: '', inHtml: 'hidden', title: '확인', icon: '' }); %>
   </form>
 </div>

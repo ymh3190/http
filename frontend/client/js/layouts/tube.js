@@ -96,5 +96,5 @@ class Search {
 
 const { handleChange, handleSubmit } = new Search();
 
-// formDOMs["search-partial"].addEventListener("submit", handleSubmit);
-// inputDOMs["name-center"].addEventListener("change", handleChange);
+formDOMs["search-partial"].addEventListener("submit", handleSubmit);
+inputDOMs["name-center"].addEventListener("change", handleChange);

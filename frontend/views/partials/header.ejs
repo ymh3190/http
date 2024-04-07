@@ -1,4 +1,24 @@
 <div class="wrapper-header">
+  <% if (url==='/videos' || url==='/images') { %>
+  <header>
+    <div class="start">
+      <div class="logo">
+        <a href="/videos" class="header">
+          <img src="/static/logo/logo.png" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="center">
+      <form id="search" class="partial">
+        <%- include('../components/input', { id: 'name', inHtml: 'center', title: ''  }); %>
+        <%- include('../components/button', { id: 'search', inHtml: 'center', title: '', icon: 'fa-search' }); %>
+      </form>
+    </div>
+    <div class="end">
+    </div>
+  </header>
+
+  <% } else { %>
   <header>
     <div class="start">
       <div>
@@ -24,4 +44,5 @@
       <%- include('../components/button', { id: 'signout' , inHtml: 'header', title: '' , icon: 'fa-arrow-right-from-bracket'  }); %>
     </div>
   </header>
+  <% } %>
 </div>

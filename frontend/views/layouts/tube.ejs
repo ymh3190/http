@@ -15,25 +15,7 @@
 
 <body>
   <div class="root">
-    <div class="wrapper-header">
-      <header>
-        <div class="start">
-          <div class="logo">
-            <a href="/videos" class="header">
-              <img src="/static/logo/logo.png" alt="">
-            </a>
-          </div>
-        </div>
-        <div class="center">
-          <form id="search" class="partial">
-            <%- include('../components/input', { id: 'name', inHtml: 'center', title: ''  }); %>
-            <%- include('../components/button', { id: 'search', inHtml: 'center', title: '', icon: 'fa-search' }); %>
-          </form>
-        </div>
-        <div class="end">
-        </div>
-      </header>
-    </div>
+    <%- include('../partials/header') %>
     <div class="wrapper-nav">
       <nav>
         <%- include('../components/list', { title: 'Videos' , depth: '' , icon: 'fa-video', link: '/videos' , isClick: '' }); %>

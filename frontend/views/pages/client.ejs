@@ -39,7 +39,7 @@
                 <% clients.forEach((client)=> { %>
                 <%- include('../components/row', { inHtml: 'list', row: client, page: 'client',  }); %>
                 <% }); %>
-                <%- include('../templates/row' , { inHtml: 'list', row: {}, page: 'client' }); %>
+                <%- include('../templates/row' , { id: "row", inHtml: 'list', row: {}, page: 'client' }); %>
               </div>
             </div>
           </div>

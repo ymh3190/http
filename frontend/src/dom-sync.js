@@ -59,14 +59,17 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
   let buttons = "export const btnDOMs = {};\n";
   let icons = "export const iconDOMs = {};\n";
 
-  let partialDOMs = "export const partialDOMs = {};\n";
+  let partials = "export const partialDOMs = {};\n";
+
+  let templates = "export const tempDOMs = {};\n";
+  let popups = "export const popupDOMs = {};\n";
 
   for (const { primary, path, files } of hierarchy) {
     if (primary === "pages") {
       for (const page of files) {
         const file = readFileSync(path.concat("/", page), "utf-8");
 
-        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g)) {
+        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
           const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
           for (const dom of doms) {
             if (dom.startsWith("<section")) {
@@ -101,7 +104,7 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
           }
         }
 
-        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/g)) {
+        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/)) {
           const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
           for (const dom of doms) {
             if (dom.includes("input")) {
@@ -215,6 +218,102 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
               }
               continue;
             }
+
+            if (dom.includes("row")) {
+              continue;
+            }
+
+            if (dom.includes("popup")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `popupDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('form#${id}.${inHtml}')`;
+                popups += `${property}=${value}\n`;
+              }
+              continue;
+            }
+
+            if (dom.includes("controls")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `tempDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('template#${id}.${inHtml}')`;
+                templates += `${property}=${value}\n`;
+              }
+              continue;
+            }
+          }
+        }
+      }
+    }
+
+    if (primary === "components") {
+      for (const partial of files) {
+        const file = readFileSync(path.concat("/", partial), "utf-8");
+
+        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
+          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
+          for (const dom of doms) {
+            if (dom.startsWith("<form")) {
+              const [id, className] = dom
+                .match(/('|")\w+/g)
+                .map((str) => str.replace(/('|")/, ""));
+              const property = `formDOMs['${id}-${className}']`;
+              const value = `document.querySelector('form#${id}.${className}')`;
+              forms += `${property}=${value};\n`;
+              continue;
+            }
+          }
+        }
+
+        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/)) {
+          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
+          for (const dom of doms) {
+            if (dom.includes("input")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `inputDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('input#${id}.${inHtml}')`;
+                inputs += `${property}=${value}\n`;
+              }
+              continue;
+            }
           }
         }
       }
@@ -223,7 +322,60 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
     if (primary === "partials") {
       for (const partial of files) {
         const file = readFileSync(path.concat("/", partial), "utf-8");
-        console.log(file);
+
+        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
+          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
+          for (const dom of doms) {
+            if (dom.startsWith("<form")) {
+              const [id, className] = dom
+                .match(/('|")\w+/g)
+                .map((str) => str.replace(/('|")/, ""));
+              const property = `formDOMs['${id}-${className}']`;
+              const value = `document.querySelector('form#${id}.${className}')`;
+              forms += `${property}=${value};\n`;
+              continue;
+            }
+          }
+        }
+
+        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/)) {
+          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
+          for (const dom of doms) {
+            if (dom.includes("input")) {
+              let id, inHtml;
+
+              if (dom.match(/id:\s?('|")\w+('|")/)) {
+                [id] = dom
+                  .match(/id:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
+                [inHtml] = dom
+                  .match(/inHtml:\s?('|")\w+('|")/g)
+                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              }
+
+              if (id && inHtml) {
+                const property = `inputDOMs['${id}-${inHtml}']`;
+                const value = `document.querySelector('input#${id}.${inHtml}')`;
+                inputs += `${property}=${value}\n`;
+              }
+              continue;
+            }
+          }
+        }
+      }
+    }
+
+    if (primary === "templates") {
+      for (const template of files) {
+        const file = readFileSync(path.concat("/", template), "utf-8");
+
+        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
+          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
+          for (const dom of doms) {
+          }
+        }
       }
     }
   }
@@ -239,6 +391,8 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
       checkboxes +
       buttons +
       icons +
-      partialDOMs
+      partials +
+      templates +
+      popups
   );
 })();
