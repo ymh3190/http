@@ -3,7 +3,7 @@
   background-color: white !important;
 }
 
-.wrapper-header > header > .center > #search.partial {
+.wrapper-header > header > .center > #search.header {
   display: flex;
   align-items: center;
 
@@ -83,12 +83,10 @@
     & > .wrapper-button {
       display: flex;
       justify-content: center;
+      align-items: center;
 
-      & > button > i {
-        display: flex;
-        align-items: center;
+      & > button {
         padding: 10px;
-        min-height: 20vh;
       }
     }
   }

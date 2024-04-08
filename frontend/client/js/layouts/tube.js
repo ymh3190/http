@@ -6,7 +6,7 @@ import { inputDOMs, formDOMs, tempDOMs } from "../dom";
 import { useState } from "../state";
 
 const [values, setValues] = useState({
-  "name-center": "",
+  "name-header": "",
 });
 
 class Search {
@@ -96,5 +96,5 @@ class Search {
 
 const { handleChange, handleSubmit } = new Search();
 
-formDOMs["search-partial"].addEventListener("submit", handleSubmit);
-inputDOMs["name-center"].addEventListener("change", handleChange);
+formDOMs["search-header"].addEventListener("submit", handleSubmit);
+inputDOMs["name-header"].addEventListener("change", handleChange);

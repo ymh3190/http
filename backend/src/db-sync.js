@@ -8,7 +8,7 @@ if (Boolean(process.env.WATCH)) {
 
   let statement = "import {";
   for (let i = 0; i < tables.length; i++) {
-    if (i !== tables.length - 1) {
+    if (i < tables.length - 1) {
       statement += ` ${tables[i]},`;
       continue;
     }

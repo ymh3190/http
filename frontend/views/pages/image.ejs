@@ -5,12 +5,15 @@
       <% if (i<5) { %>
       <div class="container">
         <img src="<%= images[i].path %>" alt="">
+        <%- include('../components/controls') %>
       </div>
       <% continue; %>
       <% } %>
       <% break; %>
       <% } %>
-      <%- include('../components/button', { id: 'add', inHtml: 'contents', title: '',  icon: 'fa-plus', }); %>
+      <%- include('../components/button', { id: 'addition', inHtml: 'contents', title: '',  icon: 'fa-plus', }); %>
+      <%- include('../components/popup', { id: 'genre', inHtml: 'contents', icon: 'fa-plus'}); %>
+      <%- include('../templates/controls', { id: 'controls', inHtml: 'contents' }); %>
     </div>
   </div>
 </section>
