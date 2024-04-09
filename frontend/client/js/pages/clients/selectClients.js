@@ -48,7 +48,7 @@ class Selects {
         const { id, type, company, manager_name, manager_tel } = client;
 
         const data = [id, type, company, manager_name, manager_tel];
-        const temp = tempDOMs["list-client"];
+        const temp = tempDOMs["row-list"];
         const { selectClient } = closure.handlers;
         const outHtml = divDOMs["list-client"];
 

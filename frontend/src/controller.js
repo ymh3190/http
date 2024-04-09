@@ -333,16 +333,26 @@ class ImageController {
   }
 
   async select(req, res) {
-    const { limit } = req.query;
+    const { limit, name } = req.query;
 
+    const cookie = { cookie: req.headers.cookie };
     if (limit) {
       const query = `?limit=${limit[0]}&limit=${limit[1]}`;
-      const response = await FetchAPI.get("/images" + query, {
-        cookie: req.headers.cookie,
-      });
+      const response = await FetchAPI.get("/images" + query, cookie);
       const data = await response.json();
-      res.status(200).json({ images: data.images });
+      return res.status(200).json({ images: data.images });
     }
+
+    if (name) {
+      const query = `?name=${name}`;
+      const response = await FetchAPI.get("/images" + query, cookie);
+      const data = await response.json();
+      return res.status(200).json({ images: data.images });
+    }
+
+    const response = await FetchAPI.get("/images", cookie);
+    const data = await response.json();
+    res.status(200).json({ images: data.images });
   }
 
   async selectById(req, res) {
@@ -405,7 +415,7 @@ class VideoController {
 
     const response = await FetchAPI.get("/videos", cookie);
     const data = await response.json();
-    return res.status(200).json({ videos: data.videos });
+    res.status(200).json({ videos: data.videos });
   }
 
   async selectById(req, res) {

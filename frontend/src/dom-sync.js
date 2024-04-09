@@ -43,10 +43,6 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
     }
   }
 
-  // const idClassExp = /id=('|")\w+('|")\sclass=('|")\w+/g;
-  // const strExp = /('|")\w+/;
-  // const includeExp = /<%-\sinclude\(('|")\.\.\/components\/.+(\s+.+)/g;
-
   let pages = "export const pageDOMs = {};\n";
   let forms = "export const formDOMs = {};\n";
   let divs = "export const divDOMs = {};\n";
@@ -64,18 +60,46 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
   let templates = "export const tempDOMs = {};\n";
   let popups = "export const popupDOMs = {};\n";
 
+  const getDOMs = (regExp, file) => {
+    return file.match(new RegExp(regExp, "g"));
+  };
+
+  const getIdClassName = (dom) => {
+    const [id, className] = dom
+      .match(/('|")\w+/g)
+      .map((str) => str.replace(/('|")/, ""));
+    return [id, className];
+  };
+
+  const getId = (dom) => {
+    const id = dom
+      .match(/id:\s?('|")\w+('|")/g)
+      .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+    return id;
+  };
+
+  const getInhtml = (dom) => {
+    const id = dom
+      .match(/inHtml:\s?('|")\w+('|")/g)
+      .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+    return id;
+  };
+
+  const idClassExp = /<\w+\sid=('|")\w+('|")\sclass=('|")\w+/;
+  const includeExp = /<%-\sinclude\(('|")\.\.\/.+/;
+  const idExp = /id:\s?('|")\w+('|")/;
+  const inHtmlExp = /inHtml:\s?('|")\w+('|")/;
+
   for (const { primary, path, files } of hierarchy) {
     if (primary === "pages") {
       for (const page of files) {
         const file = readFileSync(path.concat("/", page), "utf-8");
 
-        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
-          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
+        if (file.match(idClassExp)) {
+          const doms = getDOMs(idClassExp, file);
           for (const dom of doms) {
             if (dom.startsWith("<section")) {
-              const [id, className] = dom
-                .match(/('|")\w+/g)
-                .map((str) => str.replace(/('|")/, ""));
+              const [id, className] = getIdClassName(dom);
               const property = `pageDOMs['${id}-${className}']`;
               const value = `document.querySelector('section#${id}.${className}')`;
               pages += `${property}=${value};\n`;
@@ -83,9 +107,7 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             }
 
             if (dom.startsWith("<form")) {
-              const [id, className] = dom
-                .match(/('|")\w+/g)
-                .map((str) => str.replace(/('|")/, ""));
+              const [id, className] = getIdClassName(dom);
               const property = `formDOMs['${id}-${className}']`;
               const value = `document.querySelector('form#${id}.${className}')`;
               forms += `${property}=${value};\n`;
@@ -93,9 +115,7 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             }
 
             if (dom.startsWith("<div")) {
-              const [id, className] = dom
-                .match(/('|")\w+/g)
-                .map((str) => str.replace(/('|")/, ""));
+              const [id, className] = getIdClassName(dom);
               const property = `divDOMs['${id}-${className}']`;
               const value = `document.querySelector('div#${id}.${className}')`;
               divs += `${property}=${value};\n`;
@@ -104,21 +124,17 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
           }
         }
 
-        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/)) {
-          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
+        if (file.match(includeExp)) {
+          const doms = getDOMs(includeExp, file);
           for (const dom of doms) {
             if (dom.includes("input")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -132,15 +148,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             if (dom.includes("select")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -154,15 +166,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             if (dom.includes("textarea")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -176,15 +184,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             if (dom.includes("checkbox")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -198,15 +202,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             if (dom.includes("button")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -226,15 +226,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             if (dom.includes("popup")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -248,15 +244,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
             if (dom.includes("controls")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -275,13 +267,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
       for (const partial of files) {
         const file = readFileSync(path.concat("/", partial), "utf-8");
 
-        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
-          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
+        if (file.match(idClassExp)) {
+          const doms = getDOMs(idClassExp, file);
           for (const dom of doms) {
             if (dom.startsWith("<form")) {
-              const [id, className] = dom
-                .match(/('|")\w+/g)
-                .map((str) => str.replace(/('|")/, ""));
+              const [id, className] = getIdClassName(dom);
               const property = `formDOMs['${id}-${className}']`;
               const value = `document.querySelector('form#${id}.${className}')`;
               forms += `${property}=${value};\n`;
@@ -290,21 +280,17 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
           }
         }
 
-        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/)) {
-          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
+        if (file.match(includeExp)) {
+          const doms = getDOMs(includeExp, file);
           for (const dom of doms) {
             if (dom.includes("input")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -313,6 +299,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
                 inputs += `${property}=${value}\n`;
               }
               continue;
+            }
+
+            if (dom.includes("button")) {
+              // TODO
+              // console.log(dom);
             }
           }
         }
@@ -323,13 +314,11 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
       for (const partial of files) {
         const file = readFileSync(path.concat("/", partial), "utf-8");
 
-        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
-          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
+        if (file.match(idClassExp)) {
+          const doms = getDOMs(idClassExp, file);
           for (const dom of doms) {
             if (dom.startsWith("<form")) {
-              const [id, className] = dom
-                .match(/('|")\w+/g)
-                .map((str) => str.replace(/('|")/, ""));
+              const [id, className] = getIdClassName(dom);
               const property = `formDOMs['${id}-${className}']`;
               const value = `document.querySelector('form#${id}.${className}')`;
               forms += `${property}=${value};\n`;
@@ -338,21 +327,17 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
           }
         }
 
-        if (file.match(/<%-\sinclude\(('|")\.\.\/.+/)) {
-          const doms = file.match(/<%-\sinclude\(('|")\.\.\/.+/g);
+        if (file.match(includeExp)) {
+          const doms = getDOMs(includeExp, file);
           for (const dom of doms) {
             if (dom.includes("input")) {
               let id, inHtml;
 
-              if (dom.match(/id:\s?('|")\w+('|")/)) {
-                [id] = dom
-                  .match(/id:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(idExp)) {
+                id = getId(dom);
               }
-              if (dom.match(/inHtml:\s?('|")\w+('|")/)) {
-                [inHtml] = dom
-                  .match(/inHtml:\s?('|")\w+('|")/g)
-                  .map((str) => str.split(":")[1].trim().replace(/('|")/g, ""));
+              if (dom.match(inHtmlExp)) {
+                inHtml = getInhtml(dom);
               }
 
               if (id && inHtml) {
@@ -367,16 +352,23 @@ import { readFileSync, readdirSync, writeFileSync } from "fs";
       }
     }
 
-    if (primary === "templates") {
-      for (const template of files) {
-        const file = readFileSync(path.concat("/", template), "utf-8");
+    if (primary === "scripts") {
+      for (const partial of files) {
+        const file = readFileSync(path.concat("/", partial), "utf-8");
 
-        if (file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/)) {
-          const doms = file.match(/<\w+\sid=('|")\w+('|")\sclass=('|")\w+/g);
-          for (const dom of doms) {
-          }
+        if (file.match(/data-\w+=('|")\w+/)) {
+          const doms = file.match(/data-js=('|")\w+/g);
+          // console.log(doms, file);
         }
       }
+    }
+
+    if (primary === "third-party") {
+    }
+  }
+
+  for (const { secondary, path, files } of hierarchy) {
+    if (secondary) {
     }
   }
 

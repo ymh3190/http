@@ -53,15 +53,16 @@
       & > .wrapper-controls > .controls {
         width: 100%;
         position: absolute;
-        bottom: 5px;
+        bottom: 1rem;
 
         & > .bottom {
           display: flex;
           justify-content: space-between;
-          width: 100%;
 
-          i {
+          i,
+          span {
             font-size: 1rem;
+            color: white;
           }
 
           & > .left,
@@ -70,11 +71,19 @@
           }
 
           & > .left {
-            margin-left: 10px;
+            margin-left: 2rem;
+
+            & > .wrapper-button:first-child {
+              margin-right: 1rem;
+            }
           }
 
           & > .right {
-            margin-right: 10px;
+            margin-right: 2rem;
+
+            & > .wrapper-button:last-child {
+              margin-left: 1rem;
+            }
           }
         }
       }
@@ -84,6 +93,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100%;
+      min-height: 30vh;
 
       & > button {
         padding: 10px;

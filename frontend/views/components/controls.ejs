@@ -3,12 +3,21 @@
     <div class="top"></div>
     <div class="bottom">
       <div class="left">
+        <% if (url==='/videos') { %>
         <%- include('../components/button', { id: 'play', inHtml: 'controls', title: '',  icon: 'fa-play' }); %>
         <%- include('../components/button', { id: 'volume', inHtml: 'controls', title: '', icon: 'fa-volume-high' }); %>
+        <div>
+          <span id="currentTime"></span>
+          <span>/</span>
+          <span id="totalTime"></span>
+        </div>
+        <% } %>
       </div>
       <div class="right">
         <%- include('../components/button', { id: 'plus', inHtml: 'controls', title: '',  icon: 'fa-plus' }); %>
+        <% if (url==='/videos') { %>
         <%- include('../components/button', { id: 'expand', inHtml: 'controls', title: '',  icon: 'fa-expand' }); %>
+        <% } %>
       </div>
     </div>
   </div>

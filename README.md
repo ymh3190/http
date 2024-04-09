@@ -2,30 +2,36 @@
 
 ## 개발자로 근무하면서 느낀 문제 의식에 대한 프로젝트
 
+### 타입스크립트로 전환 예정
+
+    여러 사람이 개발하는 환경에서 타입을 강제할 필요를 느낌, 회사 템플릿에 기여하기 위함
+
 ### MySQL ORM
 
 - create, select, update, delete, join
 
-      - 데이터베이스(입력)에 대한 일반화
-      https://github.com/ymh3190/http/blob/main/backend/src/db.js
+  - 데이터베이스(입력)에 대한 일반화
+    https://github.com/ymh3190/http/blob/main/backend/src/db.js
 
-      - 조인시 테이블간 id 칼럼명 중복에 대한 부분은 FROM 테이블 기준으로 변경
+  - 조인시 테이블간 id 칼럼명 중복에 대한 부분은 FROM 테이블 기준으로 변경
 
 - UUID char(32) vs binary(16)
 
-      1. crypto.randomUUID() 사용할 경우
-        - char(32) 타입으로 binary(16)에 비해 큰 저장 공간을 차지(하이픈(-) 제외)
-        - INSERT 성능 이슈(MySQL RDBMS: B+Tree)
-        - 레퍼런스: https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql#uuidv4
+  1. crypto.randomUUID() 사용할 경우
 
-        - 해결 방안
-          UUIDv1 time_high <-> time_low
+     - char(32) 타입으로 binary(16)에 비해 큰 저장 공간을 차지(하이픈(-) 제외)
+     - INSERT 성능 이슈(MySQL RDBMS: B+Tree)
+     - 레퍼런스: https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql#uuidv4
 
-      2. UUID_TO_BIN 내장함수를 사용할 경우
-          - INSERT 후 해당 id를 선택해 오는 문제
+     - 해결 방안
+       UUIDv1 time_high <-> time_low
 
-      3. 선택
-          - 모든 테이블의 id를 Char(32)로 하고, UUIDv1에서 high와 low를 변경해서 B+Tree 성능 유지
+  2. UUID_TO_BIN 내장함수를 사용할 경우
+
+     - INSERT 후 해당 id를 선택해 오는 문제
+
+  3. 선택
+     - 모든 테이블의 id를 Char(32)로 하고, UUIDv1에서 high와 low를 변경해서 B+Tree 성능 유지
 
 ### Linux
 
@@ -112,8 +118,8 @@
 
 ### DOM Tree
 
-    - DOM 객체에 접근하는 것을 자동으로 할 수 없을까?, 다른 프로젝트에서도 사용하고 싶은데?
-        https://github.com/ymh3190/http/blob/main/frontend/src/dom-sync.js
+- DOM 객체에 접근하는 것을 자동으로 할 수 없을까?, 다른 프로젝트에서도 사용하고 싶은데?
+  https://github.com/ymh3190/http/blob/main/frontend/src/dom-sync.js
 
 ### WebSocket
 

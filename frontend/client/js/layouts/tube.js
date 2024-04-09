@@ -64,32 +64,65 @@ class Search {
     //   });
     // }
 
-    const response = await FetchAPI.get(
-      "/videos?" + encodeURI(`name=%25${name}%25`)
-    );
-    if (response) {
-      const data = await response.json();
+    const { pathname } = location;
+    if (pathname === "/videos") {
+      const response = await FetchAPI.get(
+        "/videos?" + encodeURI(`name=%25${name}%25`)
+      );
+      if (response) {
+        const data = await response.json();
 
-      const containerDOMs = document.querySelectorAll(".container");
-      containerDOMs.forEach((containerDOM) => {
-        containerDOM.remove();
-      });
+        const containerDOMs = document.querySelectorAll(".container");
+        containerDOMs.forEach((containerDOM) => {
+          containerDOM.remove();
+        });
 
-      const { playVideo, showPopup, fullscreen } = closure.handlers;
+        const { playVideo, showPopup, fullscreen } = closure.handlers;
 
-      const contentsDOM = document.querySelector(".contents");
-      data.videos.forEach((video) => {
-        const containerDiv = document.createElement("div");
-        containerDiv.classList.add("container");
-        const videoEl = document.createElement("video");
-        videoEl.src = video.path;
-        videoEl.addEventListener("click", playVideo);
-        const clone = tempDOMs["controls-contents"].content.cloneNode(true);
-        clone.querySelector("#plus").addEventListener("click", showPopup);
-        clone.querySelector("#expand").addEventListener("click", fullscreen);
-        containerDiv.append(videoEl, clone);
-        contentsDOM.insertAdjacentElement("afterbegin", containerDiv);
-      });
+        const contentsDOM = document.querySelector(".contents");
+        data.videos.forEach((video) => {
+          const containerDiv = document.createElement("div");
+          containerDiv.classList.add("container");
+          const videoEl = document.createElement("video");
+          videoEl.src = video.path;
+          videoEl.addEventListener("click", playVideo);
+          const clone = tempDOMs["controls-contents"].content.cloneNode(true);
+          clone.querySelector("#plus").addEventListener("click", showPopup);
+          clone.querySelector("#expand").addEventListener("click", fullscreen);
+          containerDiv.append(videoEl, clone);
+          contentsDOM.insertAdjacentElement("afterbegin", containerDiv);
+        });
+      }
+      return;
+    }
+
+    if (pathname === "/images") {
+      const response = await FetchAPI.get(
+        "/images?" + encodeURI(`name=%25${name}%25`)
+      );
+      if (response) {
+        const data = await response.json();
+
+        const containerDOMs = document.querySelectorAll(".container");
+        containerDOMs.forEach((containerDOM) => {
+          containerDOM.remove();
+        });
+
+        const { playVideo, showPopup, fullscreen } = closure.handlers;
+
+        const contentsDOM = document.querySelector(".contents");
+        data.images.forEach((image) => {
+          const containerDiv = document.createElement("div");
+          containerDiv.classList.add("container");
+          const imageEl = document.createElement("img");
+          imageEl.src = image.path;
+          const clone = tempDOMs["controls-contents"].content.cloneNode(true);
+          clone.querySelector("#plus").addEventListener("click", showPopup);
+          containerDiv.append(imageEl, clone);
+          contentsDOM.insertAdjacentElement("afterbegin", containerDiv);
+        });
+      }
+      return;
     }
   }
 }

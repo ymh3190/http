@@ -138,7 +138,7 @@ class ImageController {
   }
 
   async select(req, res) {
-    const { limit } = req.query;
+    const { limit, name } = req.query;
 
     if (limit) {
       delete req.query.limit;
@@ -147,6 +147,11 @@ class ImageController {
         id: "asc",
         limit,
       });
+      return res.status(200).json({ images });
+    }
+
+    if (name) {
+      const images = await Image.selectJoin("genre", { name });
       return res.status(200).json({ images });
     }
 

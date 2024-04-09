@@ -14,23 +14,39 @@ class Create {
   async handleSubmit(event) {
     event.preventDefault();
 
-    const { video_id } = window.closure;
-    if (!video_id) {
+    const { video_id, image_id } = window.closure;
+    if (!video_id && !image_id) {
       return;
     }
 
     const { name } = values;
+    if (video_id) {
+      const response = await FetchAPI.post("/genres", { name, video_id });
+      if (response) {
+        const data = await response.json();
+      }
+      setValues({
+        name: "",
+      });
 
-    const response = await FetchAPI.post("/genres", { name, video_id });
-    if (response) {
-      const data = await response.json();
+      window.closure.video_id = "";
+      popupDOMs["genre-contents"].classList.add("hidden");
+      return;
     }
-    setValues({
-      name: "",
-    });
 
-    window.closure.video_id = "";
-    popupDOMs["genre-contents"].classList.add("hidden");
+    if (image_id) {
+      const response = await FetchAPI.post("/genres", { name, image_id });
+      if (response) {
+        const data = await response.json();
+      }
+      setValues({
+        name: "",
+      });
+
+      window.closure.image_id = "";
+      popupDOMs["genre-contents"].classList.add("hidden");
+      return;
+    }
   }
 }
 
