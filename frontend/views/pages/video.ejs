@@ -4,7 +4,7 @@
       <% for(let i=0;i<videos.length;i++) { %>
       <% if (i<5) { %>
       <div class="container">
-        <video src="<%= videos[i].path %>" loop></video>
+        <video src="<%= videos[i].path %>"></video>
         <%- include('../components/controls') %>
       </div>
       <% continue; %>

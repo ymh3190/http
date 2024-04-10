@@ -311,28 +311,42 @@ class MySQLAPI {
 
   /**
    *
-   * @param {string} table
    * @param {{}} filter
+   * @param {{}} query
    * @returns
    */
-  static async selectJoin(table, filter) {
-    if (!table) {
+  static async selectJoin(filter, query) {
+    const { tables, columns } = filter;
+    if (!tables) {
       throw new CustomError.BadRequestError("Provide table");
     }
+    if (!columns) {
+      throw new CustomError.BadRequestError("Provide columns");
+    }
 
-    let sql = `
-    SELECT ${this.asColumns} FROM ${this.table} JOIN ${table}
-    ON ${this.table}.id = ${table}.${this.table}_id
-    `;
+    let sql = `SELECT `;
 
-    const keys = Object.keys(filter);
+    for (const [table, column] of Object.entries(columns)) {
+      const cols = column.split(" ");
+      for (const col of cols) {
+        sql += `${table}.${col}, `;
+      }
+    }
+
+    sql = sql.replace(/,\s$/, " ").concat(`FROM ${this.table} `);
+    for (const [table, join] of Object.entries(tables)) {
+      sql += `${join} ${table} ON ${this.table}.id = ${table}.${this.table}_id `;
+    }
+
+    const keys = Object.keys(query);
     if (!keys.length) {
       const [result] = await MySQLAPI.pool.execute(sql);
       return result;
     }
 
     sql += `WHERE `;
-    const values = Object.values(filter);
+    const values = Object.values(query);
+    const table = Object.keys(tables)[0];
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
         if (values[i].match(/\%/)) {

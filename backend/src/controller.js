@@ -151,7 +151,10 @@ class ImageController {
     }
 
     if (name) {
-      const images = await Image.selectJoin("genre", { name });
+      const images = await Image.selectJoin(
+        { tables: { genre: "join" } },
+        { name }
+      );
       return res.status(200).json({ images });
     }
 
@@ -207,7 +210,13 @@ class VideoController {
     }
 
     if (name) {
-      const videos = await Video.selectJoin("genre", { name });
+      const videos = await Video.selectJoin(
+        {
+          tables: { genre: "join" },
+          columns: { video: "id path created_at", genre: "name" },
+        },
+        { name }
+      );
       return res.status(200).json({ videos });
     }
 
