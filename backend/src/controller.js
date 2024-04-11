@@ -141,12 +141,14 @@ class ImageController {
     const { limit, name } = req.query;
 
     if (limit) {
-      delete req.query.limit;
-      const images = await Image.select(req.query, {
-        created_at: "desc",
-        id: "asc",
-        limit,
-      });
+      const images = await Image.select(
+        {},
+        {
+          created_at: "desc",
+          id: "asc",
+          limit,
+        }
+      );
       return res.status(200).json({ images });
     }
 

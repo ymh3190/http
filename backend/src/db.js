@@ -351,30 +351,22 @@ class MySQLAPI {
     }
 
     sql += "WHERE ";
-    const words = Object.values(filter);
     const values = [];
-    for (let i = 0; i < keys.length; i++) {
-      for (let j = 0; j < words.length; j++) {
-        for (const [key, value] of Object.entries(words[j])) {
-          values.push(value);
-          if (j < keys.length - 1) {
-            if (value.match(/\%/)) {
-              sql += `${keys[i]}.${key} LIKE '?' AND `;
+    for (const table of Object.keys(tables)) {
+      if (keys.includes(table)) {
+        for (const value of Object.values(filter)) {
+          for (const [key, word] of Object.entries(value)) {
+            values.push(word);
+            if (word.match(/%/)) {
+              sql += `${table}.${key} LIKE ? AND `;
+              continue;
             }
-
-            sql += `${keys[i]}.${key} = ? AND `;
-            continue;
+            sql += `${table}.${key} = ? AND `;
           }
-
-          if (value.match(/\%/)) {
-            sql += `${keys[i]}.${key} LIKE ?`;
-            break;
-          }
-          sql += `${keys[i]}.${key} = ?`;
         }
       }
     }
-
+    sql = sql.replace(/\sand\s$/i, "");
     const [result] = await MySQLAPI.pool.execute(sql, values);
     return result;
   }
