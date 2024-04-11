@@ -71,12 +71,12 @@ class MySQLAPI {
     let query = "";
     const format = "%Y-%m-%d %H:%i:%s";
     for (let i = 0; i < dateTimes.length; i++) {
-      const date = `DATE_FORMAT(${dateTimes[i]}, '${format}')`;
+      const date = `DATE_FORMAT(${dateTimes[i]}, '${format}') `;
       if (i < dateTimes.length - 1) {
-        query = query.concat(date, ` AS ${dateTimes[i]}, `);
+        query = query.concat(date, `AS ${dateTimes[i]}, `);
         continue;
       }
-      query = query.concat(date, ` AS ${dateTimes[i]}`);
+      query = query.concat(date, `AS ${dateTimes[i]}`);
     }
     return query;
   }
@@ -201,21 +201,21 @@ class MySQLAPI {
 
     const values = Object.values(filter);
 
-    let sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE`;
+    let sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE `;
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
         if (keys[i] === "created_at") {
           const [start, end] = values[i];
-          sql += ` ${keys[i]} BETWEEN '${start}' AND '${end}' AND`;
+          sql += `${keys[i]} BETWEEN '${start}' AND '${end}' AND`;
           continue;
         }
 
         if (values[i].match(/\%/)) {
-          sql = sql.concat(" ", `${keys[i]}`, ` LIKE ? AND`);
+          sql = sql.concat(keys[i], ` LIKE ? AND`);
           continue;
         }
 
-        sql = sql.concat(" ", keys[i], " = ? AND");
+        sql = sql.concat(keys[i], " = ? AND");
         continue;
       }
 
@@ -226,11 +226,11 @@ class MySQLAPI {
       }
 
       if (values[i].match(/\%/)) {
-        sql = sql.concat(" ", `${keys[i]}`, ` LIKE ?`);
+        sql = sql.concat(keys[i], ` LIKE ?`);
         break;
       }
 
-      sql = sql.concat(" ", keys[i], " = ?");
+      sql = sql.concat(keys[i], " = ?");
     }
 
     if (!projection) {
@@ -288,14 +288,14 @@ class MySQLAPI {
       throw new CustomError.BadRequestError("Provide key");
     }
 
-    let sql = `SELECT * FROM ${this.table} WHERE`;
+    let sql = `SELECT * FROM ${this.table} WHERE `;
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
-        sql = sql.concat(" ", keys[i], " = ? AND");
+        sql = sql.concat(keys[i], " = ? AND");
         continue;
       }
 
-      sql = sql.concat(" ", keys[i], " = ?");
+      sql = sql.concat(keys[i], " = ?");
     }
     const values = Object.values(filter);
     const [[result]] = await MySQLAPI.pool.execute(sql, values);
@@ -311,12 +311,13 @@ class MySQLAPI {
 
   /**
    *
-   * @param {{}} filter
    * @param {{}} query
+   * @param {{}} filter
+   * @param {{}} projection
    * @returns
    */
-  static async selectJoin(filter, query) {
-    const { tables, columns } = filter;
+  static async selectJoin(query, filter, projection) {
+    const { tables, columns } = query;
     if (!tables) {
       throw new CustomError.BadRequestError("Provide table");
     }
@@ -324,10 +325,15 @@ class MySQLAPI {
       throw new CustomError.BadRequestError("Provide columns");
     }
 
-    let sql = `SELECT `;
-
+    let sql = "SELECT ";
     for (const [table, column] of Object.entries(columns)) {
       const cols = column.split(" ");
+      if (this.table !== table) {
+        for (const col of cols) {
+          sql += `${table}.${col} AS ${table}_${col}, `;
+        }
+        continue;
+      }
       for (const col of cols) {
         sql += `${table}.${col}, `;
       }
@@ -338,30 +344,35 @@ class MySQLAPI {
       sql += `${join} ${table} ON ${this.table}.id = ${table}.${this.table}_id `;
     }
 
-    const keys = Object.keys(query);
+    const keys = Object.keys(filter);
     if (!keys.length) {
       const [result] = await MySQLAPI.pool.execute(sql);
       return result;
     }
 
-    sql += `WHERE `;
-    const values = Object.values(query);
-    const table = Object.keys(tables)[0];
+    sql += "WHERE ";
+    const words = Object.values(filter);
+    const values = [];
     for (let i = 0; i < keys.length; i++) {
-      if (i < keys.length - 1) {
-        if (values[i].match(/\%/)) {
-          sql += `${table}.${keys[i]} LIKE '?' AND `;
+      for (let j = 0; j < words.length; j++) {
+        for (const [key, value] of Object.entries(words[j])) {
+          values.push(value);
+          if (j < keys.length - 1) {
+            if (value.match(/\%/)) {
+              sql += `${keys[i]}.${key} LIKE '?' AND `;
+            }
+
+            sql += `${keys[i]}.${key} = ? AND `;
+            continue;
+          }
+
+          if (value.match(/\%/)) {
+            sql += `${keys[i]}.${key} LIKE ?`;
+            break;
+          }
+          sql += `${keys[i]}.${key} = ?`;
         }
-
-        sql += `${table}.${keys[i]} = ? AND `;
-        continue;
       }
-
-      if (values[i].match(/\%/)) {
-        sql += `${table}.${keys[i]} LIKE ?`;
-        break;
-      }
-      sql += `${table}.${keys[i]} = ?`;
     }
 
     const [result] = await MySQLAPI.pool.execute(sql, values);
@@ -382,13 +393,13 @@ class MySQLAPI {
       throw new CustomError.BadRequestError("Provide key");
     }
 
-    let sql = `DELETE FROM ${this.table} WHERE`;
+    let sql = `DELETE FROM ${this.table} WHERE `;
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
-        sql = sql.concat(" ", keys[i], " = ? AND");
+        sql = sql.concat(keys[i], " = ? AND");
         continue;
       }
-      sql = sql.concat(" ", keys[i], " = ?");
+      sql = sql.concat(keys[i], " = ?");
     }
     const values = Object.values(filter);
     await MySQLAPI.pool.execute(sql, values);
@@ -415,13 +426,13 @@ class MySQLAPI {
       throw new CustomError.NotFoundError(`${this.name} not found`);
     }
 
-    let sql = `UPDATE ${this.table} SET`;
+    let sql = `UPDATE ${this.table} SET `;
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
-        sql = sql.concat(" ", keys[i], " = ?,");
+        sql = sql.concat(keys[i], " = ?,");
         continue;
       }
-      sql = sql.concat(" ", keys[i], " = ? WHERE").concat(" ", "id = ?");
+      sql = sql.concat(keys[i], " = ? WHERE id = ?");
     }
 
     if (!options) {
@@ -472,27 +483,27 @@ class MySQLAPI {
 
       const isOrder = value === "desc" || value === "asc";
       if (!sql.match(/order/i) && isOrder) {
-        sql = sql.concat(" ORDER BY");
+        sql = sql.concat(" ORDER BY ");
       } else if (key === "limit") {
-        sql = sql.replace(/\,$/, "").concat(" LIMIT");
+        sql = sql.replace(/,$/, "").concat(" LIMIT ");
       }
 
       if (i < args.length - 1) {
         if (key === "limit") {
           const [start, length] = value;
-          sql = sql.concat(" ", `${start}, ${length},`);
+          sql = sql.concat(`${start}, ${length}, `);
           continue;
         }
-        sql = sql.concat(" ", `${key} ${value},`);
+        sql = sql.concat(`${key} ${value}, `);
         continue;
       }
 
       if (key === "limit") {
         const [start, length] = value;
-        sql = sql.concat(" ", `${start}, ${length}`);
+        sql = sql.concat(`${start}, ${length}`);
         break;
       }
-      sql = sql.concat(" ", `${key} ${value}`);
+      sql = sql.concat(`${key} ${value}`);
     }
 
     if (values) {
