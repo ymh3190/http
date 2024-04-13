@@ -60,6 +60,8 @@ class Server {
             "connect-src": ["'self'", "*.fontawesome.com"],
           },
         },
+        crossOriginOpenerPolicy: false,
+        originAgentCluster: false,
       })
     );
     this.#app.use(cors());

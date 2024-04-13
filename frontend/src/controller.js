@@ -20,23 +20,23 @@ class RootController {
   async getImage(req, res) {
     let imageRes, genreRes;
     let images, genres;
+
     try {
-      const cookie = {
-        cookie: req.headers.cookie,
-      };
+      const cookie = { cookie: req.headers.cookie };
       [imageRes, genreRes] = await Promise.all([
         FetchAPI.get("/images", cookie),
         FetchAPI.get("/genres", cookie),
       ]);
+
       let data = await imageRes.json();
       images = data.images;
-
       data = await genreRes.json();
       genres = data.genres;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
+
     const data = { pageTitle: "Images", images, genres };
     const cookies = imageRes.headers.raw()["set-cookie"];
     if (!cookies) {
@@ -53,17 +53,16 @@ class RootController {
   async getVideo(req, res) {
     let videoRes, genreRes;
     let videos, genres;
+
     try {
-      const cookie = {
-        cookie: req.headers.cookie,
-      };
+      const cookie = { cookie: req.headers.cookie };
       [videoRes, genreRes] = await Promise.all([
         FetchAPI.get("/videos", cookie),
         FetchAPI.get("/genres", cookie),
       ]);
+
       let data = await videoRes.json();
       videos = data.videos;
-
       data = await genreRes.json();
       genres = data.genres;
     } catch (error) {

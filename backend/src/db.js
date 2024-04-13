@@ -194,22 +194,22 @@ class MySQLAPI {
       if (i < keys.length - 1) {
         if (keys[i] === "created_at") {
           const [start, end] = values[i];
-          sql += `${keys[i]} BETWEEN '${start}' AND '${end}' AND`;
+          sql += `${keys[i]} BETWEEN '${start}' AND '${end}' AND `;
           continue;
         }
 
         if (values[i].match(/%/)) {
-          sql = sql.concat(keys[i], ` LIKE ? AND`);
+          sql = sql.concat(keys[i], ` LIKE ? AND `);
           continue;
         }
 
-        sql = sql.concat(keys[i], " = ? AND");
+        sql = sql.concat(keys[i], " = ? AND ");
         continue;
       }
 
       if (keys[i] === "created_at") {
         const [start, end] = values[i];
-        sql += ` ${keys[i]} BETWEEN '${start}' AND '${end}'`;
+        sql += `${keys[i]} BETWEEN '${start}' AND '${end}'`;
         break;
       }
 
@@ -261,12 +261,12 @@ class MySQLAPI {
     let sql = `SELECT * FROM ${this.table} WHERE `;
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
-        sql = sql.concat(keys[i], " = ? AND");
+        sql = sql.concat(keys[i], " = ? AND ");
         continue;
       }
-
       sql = sql.concat(keys[i], " = ?");
     }
+
     const values = Object.values(filter);
     const [[result]] = await MySQLAPI.pool.execute(sql, values);
     return result;

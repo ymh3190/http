@@ -45,7 +45,13 @@ class Server {
   }
 
   #useMiddleware() {
-    this.#app.use(helmet());
+    this.#app.use(
+      helmet({
+        contentSecurityPolicy: false,
+        crossOriginOpenerPolicy: false,
+        originAgentCluster: false,
+      })
+    );
     this.#app.use(cors());
     this.#app.use(express.json());
     this.#app.use(cookieParser(process.env.JWT_SECRET));
