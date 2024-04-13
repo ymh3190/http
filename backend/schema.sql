@@ -3,6 +3,7 @@ show full columns from table_name
 alter table table_name add column_name char(32) after another_column_name;
 alter table table_name add foreign key (column_name) references table_name(id);
 alter table table_name add unique (column_name, column_name2, column_name3);
+alter table table_name modify column_name type;
 
 drop database test;
 

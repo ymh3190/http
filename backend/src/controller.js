@@ -83,7 +83,7 @@ class AuthController {
   }
 
   async signout(req, res) {
-    await Token.selectOneAndDelete({ user_id: req.user.user_id });
+    await Token.deleteByOne({ user_id: req.user.user_id });
 
     res.cookie("access_token", "signout", {
       httpOnly: true,
@@ -117,7 +117,7 @@ class UserController {
   async update(req, res) {
     const { id } = req.params;
 
-    const user = await User.selectByIdAndUpdate(id, req.body, {
+    const user = await User.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ user });
@@ -126,7 +126,7 @@ class UserController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await User.selectByIdAndDelete(id);
+    await User.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -180,7 +180,7 @@ class ImageController {
   async update(req, res) {
     const { id } = req.params;
 
-    const image = await Image.selectByIdAndUpdate(id, req.body, {
+    const image = await Image.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ image });
@@ -189,7 +189,7 @@ class ImageController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Image.selectByIdAndDelete(id);
+    await Image.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -242,7 +242,7 @@ class VideoController {
   async update(req, res) {
     const { id } = req.params;
 
-    const video = await Video.selectByIdAndUpdate(id, req.body, {
+    const video = await Video.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ video });
@@ -251,7 +251,7 @@ class VideoController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Video.selectByIdAndDelete(id);
+    await Video.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -286,7 +286,7 @@ class GenreController {
   async update(req, res) {
     const { id } = req.params;
 
-    const genre = await Genre.selectByIdAndUpdate(id, req.body, {
+    const genre = await Genre.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ genre });
@@ -295,7 +295,7 @@ class GenreController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Genre.selectByIdAndDelete(id);
+    await Genre.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -341,7 +341,7 @@ class ClientController {
   async update(req, res) {
     const { id } = req.params;
 
-    const client = await Client.selectByIdAndUpdate(id, req.body, {
+    const client = await Client.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ client });
@@ -350,7 +350,7 @@ class ClientController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Client.selectByIdAndDelete(id);
+    await Client.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 
@@ -383,7 +383,7 @@ class ProductController {
   async update(req, res) {
     const { id } = req.params;
 
-    const product = await Product.selectByIdAndUpdate(id, req.body, {
+    const product = await Product.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ product });
@@ -392,7 +392,7 @@ class ProductController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Product.selectByIdAndDelete(id);
+    await Product.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -425,7 +425,7 @@ class CommodityController {
   async update(req, res) {
     const { id } = req.params;
 
-    const commodity = await Commodity.selectByIdAndUpdate(id, req.body, {
+    const commodity = await Commodity.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ commodity });
@@ -434,7 +434,7 @@ class CommodityController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Commodity.selectByIdAndDelete(id);
+    await Commodity.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -463,7 +463,7 @@ class TankController {
   async update(req, res) {
     const { id } = req.params;
 
-    const tank = await Tank.selectByIdAndUpdate(id, req.body, {
+    const tank = await Tank.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ tank });
@@ -472,7 +472,7 @@ class TankController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Tank.selectByIdAndDelete(id);
+    await Tank.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 }
@@ -502,7 +502,7 @@ class ItemController {
   async update(req, res) {
     const { id } = req.params;
 
-    const item = await Item.selectByIdAndUpdate(id, req.body, {
+    const item = await Item.updateById(id, req.body, {
       new: true,
     });
     res.status(200).json({ item });
@@ -511,7 +511,7 @@ class ItemController {
   async delete(req, res) {
     const { id } = req.params;
 
-    await Item.selectByIdAndDelete(id);
+    await Item.deleteById(id);
     res.status(200).json({ message: "Delete success" });
   }
 

@@ -36,7 +36,7 @@ class MySQLAPI {
   static getTable() {
     let name = "";
     for (let i = 0; i < this.name.length; i++) {
-      if (this.name[i] !== this.name[i].toUpperCase()) {
+      if (this.name[i] === this.name[i].toLowerCase()) {
         name += this.name[i];
         continue;
       }
@@ -99,10 +99,6 @@ class MySQLAPI {
    * @param {{}} filter
    */
   static async createByManualId(filter) {
-    if (!filter) {
-      throw new CustomError.BadRequestError("Provide filter");
-    }
-
     let sql = `INSERT INTO ${this.table}(`;
     const keys = Object.keys(filter);
     for (let i = 0; i < keys.length; i++) {
@@ -129,10 +125,6 @@ class MySQLAPI {
    * @param {{} | null} options
    */
   static async create(filter, options) {
-    if (!filter) {
-      throw new CustomError.BadRequestError("Provide filter");
-    }
-
     let sql = `INSERT INTO ${this.table}(`.concat("id, ");
     const keys = Object.keys(filter);
     for (let i = 0; i < keys.length; i++) {
@@ -174,10 +166,6 @@ class MySQLAPI {
    * @param {{} | string | null} projection
    */
   static async select(filter, projection) {
-    if (!filter) {
-      throw new CustomError.BadRequestError("Provide filter");
-    }
-
     const keys = Object.keys(filter);
     if (!keys.length) {
       let sql = `SELECT *, ${this.dateFormat} FROM ${this.table}`;
@@ -210,7 +198,7 @@ class MySQLAPI {
           continue;
         }
 
-        if (values[i].match(/\%/)) {
+        if (values[i].match(/%/)) {
           sql = sql.concat(keys[i], ` LIKE ? AND`);
           continue;
         }
@@ -225,7 +213,7 @@ class MySQLAPI {
         break;
       }
 
-      if (values[i].match(/\%/)) {
+      if (values[i].match(/%/)) {
         sql = sql.concat(keys[i], ` LIKE ?`);
         break;
       }
@@ -247,25 +235,11 @@ class MySQLAPI {
    * @param {string | null} projection
    */
   static async selectById(id, projection) {
-    if (!id) {
-      throw new CustomError.BadRequestError("Provide id");
-    }
-
     const sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE id = ?`;
 
     if (!projection) {
       const [[result]] = await MySQLAPI.pool.execute(sql, [id]);
       return result;
-    }
-
-    Object.keys(projection).forEach((key) => {
-      if (key) {
-        throw new CustomError.BadRequestError("Provide only string");
-      }
-    });
-
-    if (!projection.startsWith("-")) {
-      throw new CustomError.BadRequestError("Starts with -");
     }
 
     const column = projection.replace("-", "");
@@ -279,10 +253,6 @@ class MySQLAPI {
    * @param {{}} filter
    */
   static async selectOne(filter) {
-    if (!filter) {
-      throw new CustomError.BadRequestError("Provide filter");
-    }
-
     const keys = Object.keys(filter);
     if (!keys.length) {
       throw new CustomError.BadRequestError("Provide key");
@@ -318,12 +288,6 @@ class MySQLAPI {
    */
   static async selectJoin(query, filter, projection) {
     const { tables, columns } = query;
-    if (!tables) {
-      throw new CustomError.BadRequestError("Provide table");
-    }
-    if (!columns) {
-      throw new CustomError.BadRequestError("Provide columns");
-    }
 
     let sql = "SELECT ";
     for (const [table, column] of Object.entries(columns)) {
@@ -375,15 +339,8 @@ class MySQLAPI {
    *
    * @param {{}} filter
    */
-  static async selectOneAndDelete(filter) {
-    if (!filter) {
-      throw new CustomError.BadRequestError("Provide filter");
-    }
-
+  static async deleteByOne(filter) {
     const keys = Object.keys(filter);
-    if (!keys.length) {
-      throw new CustomError.BadRequestError("Provide key");
-    }
 
     let sql = `DELETE FROM ${this.table} WHERE `;
     for (let i = 0; i < keys.length; i++) {
@@ -403,20 +360,8 @@ class MySQLAPI {
    * @param {{}} filter
    * @param {{} | null} options
    */
-  static async selectByIdAndUpdate(id, filter, options) {
-    if (!id || !filter) {
-      throw new CustomError.BadRequestError("Provide id and filter");
-    }
-
+  static async updateById(id, filter, options) {
     const keys = Object.keys(filter);
-    if (!keys.length) {
-      throw new CustomError.BadRequestError("Provide key");
-    }
-
-    const result = await this.selectById(id);
-    if (!result) {
-      throw new CustomError.NotFoundError(`${this.name} not found`);
-    }
 
     let sql = `UPDATE ${this.table} SET `;
     for (let i = 0; i < keys.length; i++) {
@@ -447,16 +392,7 @@ class MySQLAPI {
    *
    * @param {string} id
    */
-  static async selectByIdAndDelete(id) {
-    if (!id) {
-      throw new CustomError.BadRequestError("Provide id");
-    }
-
-    const result = await this.selectById(id);
-    if (!result) {
-      throw new CustomError.NotFoundError(`${this.name} not found`);
-    }
-
+  static async deleteById(id) {
     const sql = `DELETE FROM ${this.table} WHERE id = ?`;
     await MySQLAPI.pool.execute(sql, [id]);
   }
@@ -477,7 +413,7 @@ class MySQLAPI {
       if (!sql.match(/order/i) && isOrder) {
         sql = sql.concat(" ORDER BY ");
       } else if (key === "limit") {
-        sql = sql.replace(/,$/, "").concat(" LIMIT ");
+        sql = sql.replace(/,\s$/, "").concat(" LIMIT ");
       }
 
       if (i < args.length - 1) {
