@@ -71,18 +71,18 @@
           }
 
           & > .left {
-            margin-left: 2rem;
+            margin-left: 1rem;
 
-            & > .wrapper-button:first-child {
-              margin-right: 1rem;
+            & > .wrapper-button {
+              margin-right: 0.5rem;
             }
           }
 
           & > .right {
-            margin-right: 2rem;
+            margin-right: 1rem;
 
             & > .wrapper-button:last-child {
-              margin-left: 1rem;
+              margin-left: 0.5rem;
             }
           }
         }

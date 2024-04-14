@@ -77,8 +77,14 @@ class Search {
           containerDOM.remove();
         });
 
-        const { playVideo, showPopup, fullscreen, dblFullscreen } =
-          closure.handlers;
+        const {
+          playVideo,
+          showPopup,
+          fullscreen,
+          dblFullscreen,
+          duration,
+          timeUpdate,
+        } = closure.handlers;
 
         const contentsDOM = document.querySelector(".contents");
         data.videos.forEach((video) => {
@@ -86,8 +92,11 @@ class Search {
           containerDiv.classList.add("container");
           const videoEl = document.createElement("video");
           videoEl.src = video.path;
+          videoEl.loop = true;
           videoEl.addEventListener("click", playVideo);
           videoEl.addEventListener("dblclick", dblFullscreen);
+          videoEl.addEventListener("loadedmetadata", duration);
+          videoEl.addEventListener("timeupdate", timeUpdate);
           const clone = tempDOMs["controls-contents"].content.cloneNode(true);
           clone.querySelector("#plus").addEventListener("click", showPopup);
           clone.querySelector("#expand").addEventListener("click", fullscreen);
