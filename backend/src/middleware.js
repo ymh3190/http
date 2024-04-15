@@ -56,9 +56,17 @@ class Middleware {
       statusCode: err.statusCode || 500,
       message: err.message || "Something wrong",
     };
-    if (err.errno === 1062 || err.errno === 1366 || err.errno === 1265) {
+
+    if (err.errno === 1062) {
+      error.statusCode = 400;
+      error.message = `Duplicate ${
+        err.message.split("entry '")[1].split("-")[0]
+      }`;
+    }
+    if (err.errno === 1366 || err.errno === 1265) {
       error.statusCode = 400;
     }
+
     return res.status(error.statusCode).json({ message: error.message });
   }
 }
