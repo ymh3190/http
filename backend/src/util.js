@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { v1 as uuidv1 } from "uuid";
+import * as CustomError from "./error";
 
 class Util {
   attachCookiesToResponse({ res, user, refresh_token }) {
@@ -22,6 +23,20 @@ class Util {
       signed: true,
       expires: new Date(Date.now() + longerExp),
     });
+  }
+
+  chechPermissions(reqUser, ownerId) {
+    if (reqUser.role === "admin") {
+      return;
+    }
+
+    if (reqUser.userId === ownerId.toString()) {
+      return;
+    }
+
+    throw new CustomError.UnauthorizedError(
+      "Unauthorized to access this route"
+    );
   }
 
   // createId() {

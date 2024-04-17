@@ -8,6 +8,8 @@
 
 ### MySQL ORM
 
+- sequelize와 비교하기
+
 - create, select, update, delete, join
 
   - 데이터베이스(입력)에 대한 일반화
