@@ -3,6 +3,7 @@ public/
 build/
 images/
 videos/
+.vscode/
 
 .env
 .DS_Store
