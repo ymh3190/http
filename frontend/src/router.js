@@ -250,7 +250,7 @@ class UserRouter {
     this.router = express.Router();
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin"),
@@ -269,7 +269,7 @@ class ImageRouter {
       .get(imageController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(imageController.selectById)
       .patch(imageController.update)
       .delete(imageController.delete);
@@ -286,7 +286,7 @@ class VideoRouter {
       .get(videoController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(videoController.selectById)
       .patch(videoController.update)
       .delete(videoController.delete);
@@ -322,7 +322,7 @@ class ClientRouter {
       .get(clientController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin"),
@@ -361,7 +361,7 @@ class CommodityRouter {
       .get(commodityController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .all(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin")
@@ -394,7 +394,7 @@ class ItemRouter {
     this.router.get("/enums", itemController.selectEnums);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin"),

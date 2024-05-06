@@ -1,5 +1,5 @@
 import { WebSocketServer } from "ws";
-import orderer from "./alarm";
+// import orderer from "./alarm";
 
 class Socket {
   #wss;
@@ -8,7 +8,7 @@ class Socket {
     this.#wss = new WebSocketServer({ server });
 
     this.#wss.on("connection", (ws, req) => {
-      orderer.addField(ws);
+      // orderer.addField(ws);
 
       ws.on("error", console.error);
 
@@ -17,7 +17,7 @@ class Socket {
       });
 
       ws.on("close", () => {
-        orderer.removeField(ws);
+        // orderer.removeField(ws);
       });
     });
   }

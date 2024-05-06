@@ -42,7 +42,7 @@ class UserRouter {
       .get(userController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .all(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin")
@@ -67,7 +67,7 @@ class ImageRouter {
       );
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(imageController.selectById)
       .patch(imageController.update)
       .delete(imageController.delete);
@@ -88,7 +88,7 @@ class VideoRouter {
       );
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(videoController.selectById)
       .patch(videoController.update)
       .delete(videoController.delete);
@@ -126,7 +126,7 @@ class ClientRouter {
     this.router.get("/enums", clientController.selectEnums);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .all(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin")
@@ -151,7 +151,7 @@ class ProductRouter {
       .get(productController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .get(productController.selectById)
       .patch(productController.update)
       .delete(productController.delete);
@@ -172,7 +172,7 @@ class CommodityRouter {
       .get(commodityController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .all(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin")
@@ -197,7 +197,7 @@ class TankRouter {
       .get(tankController.select);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .all(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin")
@@ -224,7 +224,7 @@ class ItemRouter {
     this.router.get("/enums", itemController.selectEnums);
 
     this.router
-      .route("/:id(\\d|\\w{32})")
+      .route("/:id")
       .all(
         middleware.authenticateUser,
         middleware.authorizePermissions("admin")
