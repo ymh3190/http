@@ -163,19 +163,29 @@ class ImageController {
       return res.status(200).json({ images });
     }
 
-    const images = await Image.select({}, { created_at: "desc", id: "asc" });
+    const images = await Image.select({}, { created_at: "desc" });
     res.status(200).json({ images });
   }
 
-  async selectById(req, res) {
+  async selectOne(req, res) {
     const { id } = req.params;
 
-    const image = await Image.selectById(id);
+    const image = await Image.selectOne({ file: id });
     if (!image) {
       throw new CustomError.NotFoundError("Image not found");
     }
     res.status(200).json({ image });
   }
+
+  // async selectById(req, res) {
+  //   const { id } = req.params;
+
+  //   const image = await Image.selectById(id);
+  //   if (!image) {
+  //     throw new CustomError.NotFoundError("Image not found");
+  //   }
+  //   res.status(200).json({ image });
+  // }
 
   async update(req, res) {
     const { id } = req.params;
@@ -196,7 +206,8 @@ class ImageController {
 
 class VideoController {
   async create(req, res) {
-    await Video.createByManualId(req.body);
+    await Video.create(req.body);
+    // await Video.createByManualId(req.body);
     res.status(201).end();
   }
 
@@ -225,19 +236,29 @@ class VideoController {
       return res.status(200).json({ videos });
     }
 
-    const videos = await Video.select({}, { created_at: "desc", id: "asc" });
+    const videos = await Video.select({}, { created_at: "desc" });
     res.status(200).json({ videos });
   }
 
-  async selectById(req, res) {
+  async selectOne(req, res) {
     const { id } = req.params;
 
-    const video = await Video.selectById(id);
+    const video = await Video.selectOne({ file: id });
     if (!video) {
       throw new CustomError.NotFoundError("Video not found");
     }
     res.status(200).json({ video });
   }
+
+  // async selectById(req, res) {
+  //   const { id } = req.params;
+
+  //   const video = await Video.selectById(id);
+  //   if (!video) {
+  //     throw new CustomError.NotFoundError("Video not found");
+  //   }
+  //   res.status(200).json({ video });
+  // }
 
   async update(req, res) {
     const { id } = req.params;

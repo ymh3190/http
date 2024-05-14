@@ -43,6 +43,10 @@
 
   4. Snowflake가 대안이 될 것 같다.
 
+  5. 선택(O)
+
+     - int auto_increnment
+
 ### Linux
 
 - iptables

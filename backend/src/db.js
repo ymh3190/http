@@ -125,14 +125,16 @@ class MySQLAPI {
    * @param {{} | null} options
    */
   static async create(filter, options) {
-    let sql = `INSERT INTO ${this.table}(`.concat("id, ");
+    let sql = `INSERT INTO ${this.table}(`;
+    // let sql = `INSERT INTO ${this.table}(`.concat("id, ");
     const keys = Object.keys(filter);
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
         sql = sql.concat(keys[i], ", ");
         continue;
       }
-      sql = sql.concat(keys[i], ") VALUES(").concat("?, ");
+      sql = sql.concat(keys[i], ") VALUES(");
+      // sql = sql.concat(keys[i], ") VALUES(").concat("?, ");
     }
     for (let i = 0; i < keys.length; i++) {
       if (i < keys.length - 1) {
@@ -142,22 +144,23 @@ class MySQLAPI {
       sql = sql.concat("?)");
     }
 
-    const id = util.createId();
-    const values = [id, ...Object.values(filter)];
+    const values = Object.values(filter);
+    // const id = util.createId();
+    // const values = [id, ...Object.values(filter)];
 
     if (!options) {
       await MySQLAPI.pool.execute(sql, values);
       return;
     }
 
-    await MySQLAPI.pool.execute(sql, values);
-    for (const [key, value] of Object.entries(options)) {
-      if (key === "new" && value) {
-        const sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE id = ?`;
-        const [[result]] = await MySQLAPI.pool.execute(sql, [id]);
-        return result;
-      }
-    }
+    // await MySQLAPI.pool.execute(sql, values);
+    // for (const [key, value] of Object.entries(options)) {
+    //   if (key === "new" && value) {
+    //     const sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE id = ?`;
+    //     const [[result]] = await MySQLAPI.pool.execute(sql, [id]);
+    //     return result;
+    //   }
+    // }
   }
 
   /**

@@ -354,7 +354,7 @@ class ImageController {
     res.status(200).json({ images: data.images });
   }
 
-  async selectById(req, res) {
+  async selectOne(req, res) {
     const { id } = req.params;
 
     const response = await FetchAPI.get(`/images/${id}`, {
@@ -363,6 +363,16 @@ class ImageController {
     const data = await response.json();
     res.status(200).json({ image: data.image });
   }
+
+  // async selectById(req, res) {
+  //   const { id } = req.params;
+
+  //   const response = await FetchAPI.get(`/images/${id}`, {
+  //     cookie: req.headers.cookie,
+  //   });
+  //   const data = await response.json();
+  //   res.status(200).json({ image: data.image });
+  // }
 
   async update(req, res) {
     const { id } = req.params;
@@ -417,7 +427,7 @@ class VideoController {
     res.status(200).json({ videos: data.videos });
   }
 
-  async selectById(req, res) {
+  async selectOne(req, res) {
     const { id } = req.params;
 
     const response = await FetchAPI.get(`/videos/${id}`, {
@@ -426,6 +436,16 @@ class VideoController {
     const data = await response.json();
     res.status(200).json({ video: data.video });
   }
+
+  // async selectById(req, res) {
+  //   const { id } = req.params;
+
+  //   const response = await FetchAPI.get(`/videos/${id}`, {
+  //     cookie: req.headers.cookie,
+  //   });
+  //   const data = await response.json();
+  //   res.status(200).json({ video: data.video });
+  // }
 
   async update(req, res) {
     const { id } = req.params;

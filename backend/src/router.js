@@ -68,7 +68,8 @@ class ImageRouter {
 
     this.router
       .route("/:id")
-      .get(imageController.selectById)
+      .get(imageController.selectOne)
+      // .get(imageController.selectById)
       .patch(imageController.update)
       .delete(imageController.delete);
   }
@@ -89,7 +90,8 @@ class VideoRouter {
 
     this.router
       .route("/:id")
-      .get(videoController.selectById)
+      .get(videoController.selectOne)
+      // .get(videoController.selectById)
       .patch(videoController.update)
       .delete(videoController.delete);
   }
