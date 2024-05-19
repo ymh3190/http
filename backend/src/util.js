@@ -1,6 +1,6 @@
 import crypto from "crypto";
 import jwt from "jsonwebtoken";
-import { v1 as uuidv1 } from "uuid";
+// import { v1 as uuidv1 } from "uuid";
 import * as CustomError from "./error";
 
 class Util {
@@ -44,11 +44,11 @@ class Util {
   //   return id;
   // }
 
-  createId() {
-    const layouts = uuidv1().split("-");
-    const id = layouts[2] + layouts[1] + layouts[0] + layouts[3] + layouts[4];
-    return id;
-  }
+  // createId() {
+  //   const layouts = uuidv1().split("-");
+  //   const id = layouts[2] + layouts[1] + layouts[0] + layouts[3] + layouts[4];
+  //   return id;
+  // }
 
   createToken() {
     const hex = crypto.randomBytes(20).toString("hex");

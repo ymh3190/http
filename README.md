@@ -2,6 +2,68 @@
 
 ## 개발자로 근무하면서 느낀 문제 의식에 대한 프로젝트
 
+### 프로젝트 구조
+
+    1. 아키텍처 구조: client <-> frontend서버 <-> backend서버 <-> db
+    2. 데이터 흐름:
+      - client: frontend서버에 리소스를 요청
+      - frontend 서버: 필요한 데이터를 backend 서버에 요청
+      - backend 서버: 데이터 조회 후 frontend 서버에 응답
+      - frontend 서버: ejs렌더 및 backend 서버로 부터 받은 데이터를 클라이언트에 응답
+
+    3. 서비스 설정
+      - frontend 서버: 예) port 8081에서 listening 상태
+      - frontend 서버만 외부에 노출시킴
+      - view engine ejs는 서버 사이드 렌더링
+      - backend 서버: 예) port 8082에서 listening 상태
+      - db서버:
+        - bind-address 127.0.0.1으로 외부노출 X
+        - 만약 db서버를 따로 구축한다면 bind-address를 0.0.0.0으로 설정하고
+        - iptables로 backend서버 공인IP/32만 허용
+
+    4. 스케일업 계획
+      - 각각의 서버만 따로 분리시켜서 구축하는 구조
+      - frontend 서버: 내부망에 nginx나 apache를 사용할 계층. 이 서버만 외부에 노출시키고
+                      nginx나 apache를 프록시 서버 기능으로 사용
+      - backend 서버: 마찬가지로 내부망에 nginx나 apache를 사용할 계층. 이 서버만 frontend
+                      서버에 노출시키고 iptables -s 기능으로 해당 프론트엔드 서버에서 오는 트래픽만 허용
+      - db 서버: iptables로 backend 서버의 아이피만 허용
+
+### REST API
+
+    - AWS의 REST API개념 설명을 가져왔습니다. reference) https://aws.amazon.com/what-is/restful-api/
+    1. REST API란? 두 컴퓨터가 통신하는 표준
+    2. API란? 서로 다른 두 컴퓨터가 서로에게 얘기하는 방법
+    3. REST란? API 작동 방식에 대한 조건을 부과하는 소프트웨어 아키텍처
+      - API 개발자는 여러 아키텍처를 사용하여 API를 설계할 수 있습니다. REST 아키텍처 스타일을 따르는 API를 REST API라고 합니다. REST 아키텍처를 구현하는 웹 서비스를 RESTful 웹 서비스라고 합니다. RESTful API라는 용어는 일반적으로 RESTful 웹 API를 나타냅니다. 하지만 REST API와 RESTful API라는 용어는 같은 의미로 사용할 수 있습니다.
+      - REST API를 따르는 실 서비스: Stripe, Google Maps reference) https://www.youtube.com/watch?v=-mN3VyJuCjM
+      3-1. Uniform interface(균일한 인터페이스)
+        - HTTP/1.1
+        - 요청은 리소스를 식별해야 한다. 이를 위해 균일한 리소스 식별자(URI)를 사용한다.
+        - https://example.com/api/v3/products -> Product database, Create, Read products
+        - https://example.com/api/v3/products/:id -> Read, Update, Delete product
+        - https://example.com/api/v3/users -> User database
+        - 명사를 사용한다. https://example.com/api/v3/getAllProducts -> 잘못된 사용
+        - POST Method: Create new a resource
+        - GET Method: Read the data about an existing resource
+        - PUT(Patch) Method: Update an existing resource
+        - DELETE Method: Remove an existing resource
+        - 응답에 상태 코드를 포함한다.
+        - OK: 200, 201, 206, 304
+        - Client Side Error: 400, 401, 403, 404
+        - Server Side Error: 500
+        - when an api is idempotent, making multiple identical requests has the same effect as making a single request.
+        - api가 멱등하다는 것은 작업 결과가 한 번 수행하든 여러 번 수행하든 결과가 같다는 것 reference) https://docs.tosspayments.com/blog/what-is-idempotency
+        - POST, PATCH: not idempotent
+        - GET, PUT, DELETE: idempotent
+        - pagination scheme: limit, offset -> /products?limit=25&offset=50
+        - Versioning -> v1, v2
+        - REST API가 항상 좋으냐? 그건 아니고 GraphQL, gRPC와 같은 아키텍처가 있다.
+      3-2. Stateless(무상태)
+        - 클라이언트와 서버가 세션 상태 정보를 저장하지 않는다는 것. 모든 요청과 응답의 사이클은 독립적이다. 이로 인해 웹 애플리케이션의 스케일 조정을 쉽게 하고 잘 동작하게 됐다.
+      3-3. Layered system(계층화 시스템)
+      3-4. Cacheability(캐시 가능성)
+
 ### 타입스크립트로 전환 예정
 
     - 여러 사람이 개발하는 환경에서 타입을 강제할 필요를 느낌, 회사 템플릿에 기여하기 위함
@@ -13,7 +75,7 @@
 
 ### MySQL ORM
 
-- sequelize와 비교하기
+- sequelize 및 typeORM과 비교하기
 
 - create, select, update, delete, join
 
