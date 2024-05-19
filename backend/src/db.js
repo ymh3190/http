@@ -1,7 +1,5 @@
 import { writeFileSync, existsSync } from "fs";
-
 import "dotenv/config";
-import mysql from "mysql2/promise";
 if (
   Boolean(process.env.WATCH) &&
   !existsSync(process.cwd() + "/src/db-sub.js")
@@ -9,6 +7,7 @@ if (
   writeFileSync(process.cwd() + "/src/db-sub.js", "");
 }
 
+import mysql from "mysql2/promise";
 import * as CustomError from "./error";
 import util from "./util";
 

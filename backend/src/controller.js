@@ -156,7 +156,7 @@ class ImageController {
       const images = await Image.selectJoin(
         {
           tables: { genre: "join" },
-          columns: { image: "id path created_at", genre: "name" },
+          columns: { image: "file path created_at", genre: "name" },
         },
         { genre: { name } }
       );
@@ -229,7 +229,7 @@ class VideoController {
       const videos = await Video.selectJoin(
         {
           tables: { genre: "join" },
-          columns: { video: "id path created_at", genre: "name" },
+          columns: { video: "file path created_at", genre: "name" },
         },
         { genre: { name } }
       );

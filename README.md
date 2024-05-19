@@ -12,9 +12,10 @@
       - frontend 서버: ejs렌더 및 backend 서버로 부터 받은 데이터를 클라이언트에 응답
 
     3. 서비스 설정
-      - frontend 서버: 예) port 8081에서 listening 상태
-      - frontend 서버만 외부에 노출시킴
-      - view engine ejs는 서버 사이드 렌더링
+      - frontend 서버:
+        - 예) port 8081에서 listening 상태
+        - frontend 서버만 외부에 노출시킴
+        - view engine ejs는 서버 사이드 렌더링
       - backend 서버: 예) port 8082에서 listening 상태
       - db서버:
         - bind-address 127.0.0.1으로 외부노출 X
@@ -62,7 +63,10 @@
       3-2. Stateless(무상태)
         - 클라이언트와 서버가 세션 상태 정보를 저장하지 않는다는 것. 모든 요청과 응답의 사이클은 독립적이다. 이로 인해 웹 애플리케이션의 스케일 조정을 쉽게 하고 잘 동작하게 됐다.
       3-3. Layered system(계층화 시스템)
+        - 레이어 분리
       3-4. Cacheability(캐시 가능성)
+        - Server Side: 응답 헤더 ETag
+        - Client Side: 요청 헤더 If-None-Match
 
 ### 타입스크립트로 전환 예정
 
