@@ -69,26 +69,32 @@
       - REST API를 따르는 실 서비스: Stripe, Google Maps
 
       3-1. Uniform interface(균일한 인터페이스)
-        - HTTP/1.1
         - 요청은 리소스를 식별해야 한다. 이를 위해 균일한 리소스 식별자(URI)를 사용한다.
         - https://example.com/api/v3/products -> Product database, Create, Read products
         - https://example.com/api/v3/products/:id -> Read, Update, Delete product
         - https://example.com/api/v3/users -> User database
+
         - 명사를 사용한다. https://example.com/api/v3/getAllProducts -> 잘못된 사용
+
         - POST Method: Create new a resource
         - GET Method: Read the data about an existing resource
         - PUT(Patch) Method: Update an existing resource
         - DELETE Method: Remove an existing resource
+
         - 응답에 상태 코드를 포함한다.
         - OK: 200, 201, 206, 304
         - Client Side Error: 400, 401, 403, 404
         - Server Side Error: 500
+
         - when an api is idempotent, making multiple identical requests has the same effect as making a single request.
         - api가 멱등하다는 것은 작업 결과가 한 번 수행하든 여러 번 수행하든 결과가 같다는 것
         - POST, PATCH: not idempotent
         - GET, PUT, DELETE: idempotent
+
         - pagination scheme: limit, offset -> /products?limit=25&offset=50
+
         - Versioning -> v1, v2
+
         - REST API가 항상 좋으냐? 그건 아니고 GraphQL, gRPC와 같은 아키텍처가 있다.
 
       3-2. Stateless(무상태)
