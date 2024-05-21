@@ -4,7 +4,8 @@ create database cultivation default character set utf8mb4 collate utf8mb4_genera
 use cultivation;
 
 -- 유형 엔터티: 물탱크, 재배기
--- 사건 엔터티: 측정, 제어, 설정, 알람
+-- 사건 엔터티: 측정, 제어, 설정, 알람?
+-- 개념 엔터티: 알람?
 
 -- 타입 결정 근거
 -- 감지 혹은 측정 테이블의 PK가 int(4bytes)인 이유
