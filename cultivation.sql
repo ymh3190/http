@@ -3,10 +3,6 @@ drop database cultivation;
 create database cultivation default character set utf8mb4 collate utf8mb4_general_ci;
 use cultivation;
 
--- 유형 엔터티: 물탱크, 재배기
--- 사건 엔터티: 측정, 제어, 설정, 알람?
--- 개념 엔터티: 알람?
-
 -- 타입 결정 근거
 -- 감지 혹은 측정 테이블의 PK가 int(4bytes)인 이유
 -- 1분 데이터를 평균하여 저장한다는 전제로
@@ -25,9 +21,9 @@ create table detection_cult(
     id int primary key auto_increment,
     is_open_tp_hum_co2 boolean not null comment '온도/습도/CO2 단선 알람 On: true, Off: false',
     is_limited_max_tp boolean not null comment '온도 상한 알람 On: true, Off: false',
-    is_limited_low_tp boolean not null comment '온도 하한 알람 On: true, Off: false',
+    is_limited_min_tp boolean not null comment '온도 하한 알람 On: true, Off: false',
     is_limited_max_hum boolean not null comment '습도 상한 알람 On: true, Off: false',
-    is_limited_low_hum boolean not null comment '습도 하한 알람 On: true, Off: false',
+    is_limited_min_hum boolean not null comment '습도 하한 알람 On: true, Off: false',
     is_limited_co2 boolean not null comment 'CO2 알람 On: true, Off: false',
     is_pump_valve boolean not null comment '펌프/밸브 On/Off 알람 On: true, Off: false',
     is_led1 boolean not null comment 'LED1 On/Off 알람 On: true, Off: false',
@@ -41,7 +37,7 @@ create table detection_wt(
     is_open_tp_ph boolean not null comment '온도/pH 단선 알람 On: true, Off: false',
     is_open_ec boolean not null comment 'EC 단선 알람 On: true, Off: false',
     is_limited_max_tp boolean not null comment '온도 상한 알람 On: true, Off: false',
-    is_limited_low_tp boolean not null comment '온도 하한 알람 On: true, Off: false',
+    is_limited_min_tp boolean not null comment '온도 하한 알람 On: true, Off: false',
     is_ph boolean not null comment 'pH 알람 On: true, Off: false',
     is_ec boolean not null comment 'EC 알람 On: true, Off: false',
     is_water_level boolean not null comment '수위 알람 On: true, Off: false',
@@ -71,9 +67,9 @@ create table measure_wt(
 create table config_cult(
     id int primary key auto_increment,
     limited_max_tp float not null comment '온도 상한',
-    limited_low_tp float not null comment '온도 하한',
+    limited_min_tp float not null comment '온도 하한',
     limited_max_hum float not null comment '습도 상한',
-    limited_low_hum float not null comment '습도 하한',
+    limited_min_hum float not null comment '습도 하한',
     limited_co2 float not null comment 'CO2',
     led1_on_hr tinyint not null comment 'LED1 동작 시간',
     led1_on_min tinyint not null comment 'LED1 동작 분',
@@ -94,7 +90,7 @@ create table config_cult(
 create table config_wt(
     id int primary key auto_increment,
     limited_max_tp float not null comment '온도 상한',
-    limited_low_tp float not null comment '온도 하한',
+    limited_min_tp float not null comment '온도 하한',
     ph float not null comment 'pH',
     ec float not null comment 'EC',
     created_at datetime not null default current_timestamp comment '생성 일자'

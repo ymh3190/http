@@ -2,10 +2,8 @@ node_modules/
 public/
 build/
 images/
-thumbnails/
 videos/
 .vscode/
 
 .env
 .DS_Store
-db-sub.js

@@ -36,11 +36,6 @@
 
       - db 서버: iptables로 backend 서버의 아이피만 허용
 
-### 고민 중인 문제
-
-    - 시리얼 통신 R/W 대기열 문제
-      - 옵션: Circular Queue
-
 ### 데이터베이스 설계
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y
