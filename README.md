@@ -36,7 +36,7 @@
 
       - db 서버: iptables로 backend 서버의 아이피만 허용
 
-### 데이터베이스 설계
+### 데이터베이스 설계 원칙
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y
   - PK: auto_increment
@@ -47,73 +47,89 @@
 
 ### REST API
 
-    - reference:
-      - https://aws.amazon.com/what-is/restful-api
-      - https://www.youtube.com/watch?v=-mN3VyJuCjM
-      - https://docs.tosspayments.com/blog/what-is-idempotency
+- reference:
 
-    - AWS의 REST API개념 설명을 가져왔습니다.
+  - https://aws.amazon.com/what-is/restful-api
+  - https://www.youtube.com/watch?v=-mN3VyJuCjM
+  - https://docs.tosspayments.com/blog/what-is-idempotency
 
-    1. REST API란? 두 컴퓨터가 통신하는 표준
+- AWS의 REST API개념 설명을 가져왔습니다.
 
-    2. API란? 서로 다른 두 컴퓨터가 서로에게 얘기하는 방법
+      1. REST API란? 두 컴퓨터가 통신하는 표준
 
-    3. REST란? API 작동 방식에 대한 조건을 부과하는 소프트웨어 아키텍처
+      2. API란? 서로 다른 두 컴퓨터가 서로에게 얘기하는 방법
+
+      3. REST란? API 작동 방식에 대한 조건을 부과하는 소프트웨어 아키텍처
+
       - API 개발자는 여러 아키텍처를 사용하여 API를 설계할 수 있습니다. REST 아키텍처 스타일을 따르는 API를 REST API라고 합니다. REST 아키텍처를 구현하는 웹 서비스를 RESTful 웹 서비스라고 합니다. RESTful API라는 용어는 일반적으로 RESTful 웹 API를 나타냅니다. 하지만 REST API와 RESTful API라는 용어는 같은 의미로 사용할 수 있습니다.
 
       - REST API를 따르는 실 서비스: Stripe, Google Maps
 
-      3-1. Uniform interface(균일한 인터페이스)
-        - 요청은 리소스를 식별해야 한다. 이를 위해 균일한 리소스 식별자(URI)를 사용한다.
-        - https://example.com/api/v3/products -> Product database, Create, Read products
-        - https://example.com/api/v3/products/:id -> Read, Update, Delete product
-        - https://example.com/api/v3/users -> User database
+      3-1. Uniform interface(균일한 인터페이스) - 요청은 리소스를 식별해야 한다. 이를 위해 균일한 리소스 식별자(URI)를 사용한다. - https://example.com/api/v3/products -> Product database, Create, Read products - https://example.com/api/v3/products/:id -> Read, Update, Delete product - https://example.com/api/v3/users -> User database
 
-        - 명사를 사용한다. https://example.com/api/v3/getAllProducts -> 잘못된 사용
+            - 명사를 사용한다. https://example.com/api/v3/getAllProducts -> 잘못된 사용
 
-        - POST Method: Create new a resource
-        - GET Method: Read the data about an existing resource
-        - PUT(Patch) Method: Update an existing resource
-        - DELETE Method: Remove an existing resource
+            - POST Method: Create new a resource
+            - GET Method: Read the data about an existing resource
+            - PUT(Patch) Method: Update an existing resource
+            - DELETE Method: Remove an existing resource
 
-        - 응답에 상태 코드를 포함한다.
-        - OK: 200, 201, 206, 304
-        - Client Side Error: 400, 401, 403, 404
-        - Server Side Error: 500
+            - 응답에 상태 코드를 포함한다.
+            - OK: 200, 201, 206, 304
+            - Client Side Error: 400, 401, 403, 404
+            - Server Side Error: 500
 
-        - when an api is idempotent, making multiple identical requests has the same effect as making a single request.
-        - api가 멱등하다는 것은 작업 결과가 한 번 수행하든 여러 번 수행하든 결과가 같다는 것
-        - POST, PATCH: not idempotent
-        - GET, PUT, DELETE: idempotent
+            - when an api is idempotent, making multiple identical requests has the same effect as making a single request.
+            - api가 멱등하다는 것은 작업 결과가 한 번 수행하든 여러 번 수행하든 결과가 같다는 것
+            - POST, PATCH: not idempotent
+            - GET, PUT, DELETE: idempotent
 
-        - pagination scheme: limit, offset -> /products?limit=25&offset=50
+            - pagination scheme: limit, offset -> /products?limit=25&offset=50
 
-        - Versioning -> v1, v2
+            - Versioning -> v1, v2
 
-        - REST API가 항상 좋으냐? 그건 아니고 GraphQL, gRPC와 같은 아키텍처가 있다.
+            - REST API가 항상 좋으냐? 그건 아니고 GraphQL, gRPC와 같은 아키텍처가 있다.
 
-      3-2. Stateless(무상태)
-        - 클라이언트와 서버가 세션 상태 정보를 저장하지 않는다는 것. 모든 요청과 응답의 사이클은 독립적이다. 이로 인해 웹 애플리케이션의 스케일 조정을 쉽게 하고 잘 동작하게 됐다.
+      3-2. Stateless(무상태) - 클라이언트와 서버가 세션 상태 정보를 저장하지 않는다는 것. 모든 요청과 응답의 사이클은 독립적이다. 이로 인해 웹 애플리케이션의 스케일 조정을 쉽게 하고 잘 동작하게 됐다.
 
-      3-3. Layered system(계층화 시스템)
-        - 레이어 분리
+      3-3. Layered system(계층화 시스템) - 레이어 분리
 
-      3-4. Cacheability(캐시 가능성)
-        - Server Side: 응답 헤더 ETag
-        - Client Side: 요청 헤더 If-None-Match
+      3-4. Cacheability(캐시 가능성) - Server Side: 응답 헤더 ETag - Client Side: 요청 헤더 If-None-Match
 
-    4. 사용하는 이유
+      4. 사용하는 이유
+
       - 서비스 크기에 따른 확장성
       - 클라이언트-서버 분리에 따른 유연성
       - 프로그래밍 언어에 따른 독립성
 
-### 타입스크립트로 전환 예정
+### Middleware
 
-    - 여러 사람이 개발하는 환경에서 타입을 강제할 필요를 느낌, 회사 템플릿에 기여하기 위함
+- reference: https://aws.amazon.com/ko/what-is/middleware/
+
+      - 개념: 미들웨어는 서로 다른 애플리케이션이 서로 통신하는 데 사용되는 소프트웨어입니다. 미들웨어는 더욱 빠르게 혁신할 수 있도록 애플리케이션을 지능적이고 효율적으로 연결하는 기능을 제공합니다. 미들웨어는 단일 시스템에 원활하게 통합할 수 있도록 다양한 기술, 도구, 데이터베이스 간에 다리 역할을 합니다. 그런 다음 이 단일 시스템은 사용자에게 통합된 서비스를 제공합니다. 예를 들어 Windows 프런트엔드 애플리케이션은 Linux 백엔드 서버에서 데이터를 송수신하지만, 애플리케이션 사용자는 그 차이를 인식하지 못합니다.
+
+      - 사용 사례
+
+        - 게임 개발: 게임 엔진
+        - 전자: 다양한 유형의 센서를 메시징 프레임워크를 통해 컨트롤러와 통신
+
+### CI / CD
+
+    - Continuous Integration / Continuous Delivery, Deployment
+
+    - 개념: 애플리케이션 개발 단계부터 배포 때까지 이 모든 단계들을 자동화를 통해서 조금 더 효율적이고 빠르게 사용자에게 빈번이 배포할 수 있도록 만드는 것을 말함
+
+    - 사용 하는 이유
+      빈번한 배포로 머지 주기를 짧게하여 충돌 문제를 덜 겪고, 문제시 해결 시간 단축의 장점
+      자동 빌드, 테스트를 거쳐 수동 배포(Delivery) 혹은 자동 배포(Deployment)
+
+    - 도구
+      - jenkins, buildkite, github actions, gitlab ci/cd, bitbucket pipelines, circleci
 
 ### VS Code 디버깅
 
     - 디버그 모드 실행: 서버 환경에서 디버깅을 위해서 launch.json 파일 생성을 클릭하고 Node.js를 선택합니다
+
     - 왼쪽 위 실행 프로그램을 선택하는 부분에서 Node.js를 선택 후 실행할 스크립트를 클릭합니다
 
 ### MySQL ORM
@@ -180,8 +196,7 @@
 
 - cron
 
-  - 스케줄링
-  - crontab -e
+  - 스케줄링: crontab
 
 ### Windows
 

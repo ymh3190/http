@@ -8,7 +8,6 @@ if (
 }
 
 import mysql from "mysql2/promise";
-import * as CustomError from "./error";
 import util from "./util";
 
 class MySQLAPI {
@@ -256,9 +255,6 @@ class MySQLAPI {
    */
   static async selectOne(filter) {
     const keys = Object.keys(filter);
-    if (!keys.length) {
-      throw new CustomError.BadRequestError("Provide key");
-    }
 
     let sql = `SELECT * FROM ${this.table} WHERE `;
     for (let i = 0; i < keys.length; i++) {

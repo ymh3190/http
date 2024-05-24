@@ -5,8 +5,6 @@ alter table table_name add foreign key (column_name) references table_name(id);
 alter table table_name add unique (column_name, column_name2, column_name3);
 alter table table_name modify column_name type;
 
-drop database test;
-
 create database test default character set utf8mb4 collate utf8mb4_general_ci;
 use test;
 
