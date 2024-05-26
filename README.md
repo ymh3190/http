@@ -36,14 +36,17 @@
 
       - db 서버: iptables로 backend 서버의 아이피만 허용
 
-### 데이터베이스 설계 원칙
+### REST API를 위한 데이터베이스 설계 원칙
 
-- PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y
+- PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
   - PK: auto_increment
   - FK: table_id
 - auto_increment 이점: https://www.quora.com/What-are-the-advantages-of-using-an-auto-increment-column-as-a-primary-key-in-MySQL
   - 고유성, 단순성, 효율성, 데이터 무결성, 인덱싱
   - 데이터베이스 관리 단순화 및 성능 개선 및 데이터 무결성 향상
+- 비정규화
+  - reference: https://www.youtube.com/watch?v=V27XkmVPqYQ 5:20
+  - 테이블간 join시 성능 저하 이슈를 해결하기 위한 것
 
 ### REST API
 
@@ -75,7 +78,7 @@
             - DELETE Method: Remove an existing resource
 
             - 응답에 상태 코드를 포함한다.
-            - OK: 200, 201, 206, 304
+            - OK: 200, 201, 304
             - Client Side Error: 400, 401, 403, 404
             - Server Side Error: 500
 
@@ -125,6 +128,14 @@
 
     - 도구
       - jenkins, buildkite, github actions, gitlab ci/cd, bitbucket pipelines, circleci
+
+### NGINX
+
+### MSA
+
+### Docker
+
+### AWS
 
 ### VS Code 디버깅
 
