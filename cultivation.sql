@@ -1,7 +1,9 @@
-drop database cultivation;
-
 create database cultivation default character set utf8mb4 collate utf8mb4_general_ci;
 use cultivation;
+
+-- 유형 엔터티: 재배기, 물탱크
+-- 사건 엔터티: 측정, 제어, 설정, 감지
+-- 개념 엔터티: 알람
 
 -- 타입 결정 근거
 -- 감지 혹은 측정 테이블의 PK가 int(4bytes)인 이유
@@ -113,7 +115,7 @@ insert into control_code(code_name, control_name) values('is_manual_cult', '재�
 insert into control_code(code_name, control_name) values('is_manual_pump1_value_on', '재배기 Pump1/Valve 수동 On/Off');
 insert into control_code(code_name, control_name) values('is_manual_led1', '재배기 LED1 수동 On/Off');
 insert into control_code(code_name, control_name) values('is_manual_led2', '재배기 LED2 수동 On/Off');
-insert into control_code(code_name, control_name) values('is_manual_pump2_cooler', '재배기 Pump2/Cooler 수동 On/Off');
+insert into control_code(code_name, control_name) values('is_manual_pump2_cooler', '물탱크 Pump2/Cooler 수동 On/Off');
 
 -- 재배기측 제어
 create table control_cult(

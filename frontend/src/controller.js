@@ -18,27 +18,29 @@ class RootController {
   }
 
   async getImage(req, res) {
-    let imageRes, genreRes;
+    let response, response_;
     let images, genres;
 
     try {
       const cookie = { cookie: req.headers.cookie };
-      [imageRes, genreRes] = await Promise.all([
+      [response, response_] = await Promise.all([
         FetchAPI.get("/images", cookie),
         FetchAPI.get("/genres", cookie),
       ]);
 
-      let data = await imageRes.json();
+      const [data, data_] = await Promise.all([
+        response.json(),
+        response_.json(),
+      ]);
       images = data.images;
-      data = await genreRes.json();
-      genres = data.genres;
+      genres = data_.genres;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
 
     const data = { pageTitle: "Images", images, genres };
-    const cookies = imageRes.headers.raw()["set-cookie"];
+    const cookies = response.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("tube", data);
     }
@@ -51,27 +53,29 @@ class RootController {
   }
 
   async getVideo(req, res) {
-    let videoRes, genreRes;
+    let response, response_;
     let videos, genres;
 
     try {
       const cookie = { cookie: req.headers.cookie };
-      [videoRes, genreRes] = await Promise.all([
+      [response, response_] = await Promise.all([
         FetchAPI.get("/videos", cookie),
         FetchAPI.get("/genres", cookie),
       ]);
 
-      let data = await videoRes.json();
+      const [data, data_] = await Promise.all([
+        response.json(),
+        response_.json(),
+      ]);
       videos = data.videos;
-      data = await genreRes.json();
-      genres = data.genres;
+      genres = data_.genres;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
     }
 
     const data = { pageTitle: "Videos", videos, genres };
-    const cookies = videoRes.headers.raw()["set-cookie"];
+    const cookies = response.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("tube", data);
     }
@@ -84,13 +88,13 @@ class RootController {
   }
 
   async getClient(req, res) {
-    let clientRes;
+    let response;
     let clients;
 
     try {
       const cookie = { cookie: req.headers.cookie };
-      clientRes = await FetchAPI.get("/clients", cookie);
-      let data = await clientRes.json();
+      response = await FetchAPI.get("/clients", cookie);
+      const data = await response.json();
       clients = data.clients;
     } catch (error) {
       util.detachCookiesToResponse(res);
@@ -99,7 +103,7 @@ class RootController {
 
     const types = global.clientTypes;
     const data = { pageTitle: "거래처 정보", clients, types };
-    const cookies = clientRes.headers.raw()["set-cookie"];
+    const cookies = response.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("mes", data);
     }
@@ -112,20 +116,21 @@ class RootController {
   }
 
   async getCommodity(req, res) {
-    let commodityRes, itemRes;
+    let response, response_;
     let commodities, items;
 
     try {
       const cookie = { cookie: req.headers.cookie };
-      [commodityRes, itemRes] = await Promise.all([
+      [response, response_] = await Promise.all([
         FetchAPI.get("/commodities", cookie),
         FetchAPI.get("/items", cookie),
       ]);
-      let data = await commodityRes.json();
+      const [data, data_] = await Promise.all([
+        response.json(),
+        response_.json(),
+      ]);
       commodities = data.commodities;
-
-      data = await itemRes.json();
-      items = data.items;
+      items = data_.items;
     } catch (error) {
       util.detachCookiesToResponse(res);
       return res.status(200).render("error", { message: error.message });
@@ -133,7 +138,7 @@ class RootController {
 
     const types = global.itemTypes;
     const data = { pageTitle: "원자재 정보", commodities, types, items };
-    const cookies = commodityRes.headers.raw()["set-cookie"];
+    const cookies = response.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("mes", data);
     }
@@ -146,13 +151,13 @@ class RootController {
   }
 
   async getProduct(req, res) {
-    let productRes;
+    let response;
     let products;
 
     try {
       const cookie = { cookie: req.headers.cookie };
-      [productRes] = await Promise.all([FetchAPI.get("/products", cookie)]);
-      let data = await productRes.json();
+      [response] = await Promise.all([FetchAPI.get("/products", cookie)]);
+      const data = await response.json();
       products = data.products;
     } catch (error) {
       util.detachCookiesToResponse(res);
@@ -160,7 +165,7 @@ class RootController {
     }
 
     const data = { pageTitle: "제품 정보", products };
-    const cookies = productRes.headers.raw()["set-cookie"];
+    const cookies = response.headers.raw()["set-cookie"];
     if (!cookies) {
       return res.status(200).render("mes", data);
     }
