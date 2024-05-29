@@ -5,6 +5,7 @@
 ### 프로젝트 구조
 
     1. 아키텍처 구조: client <-> reverse proxy <-> frontend서버 <-> reverse proxy <-> backend서버 <-> db
+                                                                                            <-> middleware <-> PLC
 
     2. 데이터 흐름:
       - client: frontend서버에 리소스를 요청
@@ -41,6 +42,7 @@
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
   - PK: auto_increment
   - FK: table_id
+  - Composite PK: Unique(column, column2, ...)로 고유성을 보장
 - auto_increment 이점: https://www.quora.com/What-are-the-advantages-of-using-an-auto-increment-column-as-a-primary-key-in-MySQL
   - 고유성, 단순성, 효율성, 데이터 무결성, 인덱싱
   - 데이터베이스 관리 단순화 및 성능 개선 및 데이터 무결성 향상
@@ -78,7 +80,7 @@
         - DELETE Method: Remove an existing resource
 
         - 응답에 상태 코드를 포함한다.
-        - OK: 200, 201, 304
+        - OK: 200, 201, 304, 301, 302, 307, 308
         - Client Side Error: 400, 401, 403, 404
         - Server Side Error: 500
 
