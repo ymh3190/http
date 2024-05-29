@@ -67,6 +67,26 @@ class FetchAPI {
   /**
    *
    * @param {string} path /api/v1 + path
+   * @param {{}} data
+   * @returns
+   */
+  static async put(path, data) {
+    const response = await fetch("/api/v1" + path, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    if (response?.ok) {
+      return response;
+    }
+    await catchResponseError(response);
+  }
+
+  /**
+   *
+   * @param {string} path /api/v1 + path
    * @returns
    */
   static async delete(path) {

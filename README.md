@@ -4,7 +4,7 @@
 
 ### 프로젝트 구조
 
-    1. 아키텍처 구조: client <-> frontend서버 <-> backend서버 <-> db
+    1. 아키텍처 구조: client <-> reverse proxy <-> frontend서버 <-> reverse proxy <-> backend서버 <-> db
 
     2. 데이터 흐름:
       - client: frontend서버에 리소스를 요청
@@ -142,10 +142,40 @@
         - http {
           include mime.types;
         }
-      - location:
-        - path
-        - html
-        - proxy_pass
+
+        - location:
+          - path
+          - html
+          - proxy_pass
+
+        - upstream ws {
+          server 127.0.0.1:3000;
+          server 127.0.0.1:3001;
+          server 127.0.0.1:3002;
+        }
+
+        - upstream was {
+          server 127.0.0.1:4000;
+          server 127.0.0.1:4001;
+          server 127.0.0.1:4002;
+        }
+
+        server {
+          listen 8080;
+
+          location / {
+            proxy_pass http://ws/;
+          }
+        }
+
+        server {
+          listen 9090;
+
+          location / {
+            proxy_pass http://was/;
+          }
+
+        }
 
       - command:
         - nginx -s reload

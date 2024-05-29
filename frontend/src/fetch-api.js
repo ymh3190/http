@@ -49,7 +49,7 @@ class FetchAPI {
       if (response?.ok) {
         return response;
       }
-      return await catchResponseError(response);
+      return catchResponseError(response);
     }
 
     const response = await fetch(FetchAPI.#url + path);
@@ -67,10 +67,8 @@ class FetchAPI {
    * @returns
    */
   static async post(path, data, options) {
+    const headers = { "Content-Type": "application/json" };
     if (options) {
-      const headers = {
-        "Content-Type": "application/json",
-      };
       if (options.ip) {
         headers["X-Forwared-For"] = options.ip;
       }
@@ -80,22 +78,11 @@ class FetchAPI {
       if (options.cookie) {
         headers.cookie = options.cookie;
       }
-      const response = await fetch(FetchAPI.#url + path, {
-        method: "POST",
-        headers,
-        body: JSON.stringify(data),
-      });
-      if (response?.ok) {
-        return response;
-      }
-      return await catchResponseError(response);
     }
 
     const response = await fetch(FetchAPI.#url + path, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers,
       body: JSON.stringify(data),
     });
     if (response?.ok) {
@@ -118,6 +105,30 @@ class FetchAPI {
         "Content-Type": "application/json",
         cookie: options.cookie,
       },
+      body: JSON.stringify(data),
+    });
+    if (response?.ok) {
+      return response;
+    }
+    await catchResponseError(response);
+  }
+
+  /**
+   *
+   * @param {string} path remote_origin + /api/v1 + path
+   * @param {{}} data
+   * @param {{}} options
+   * @returns
+   */
+  static async put(path, data, options) {
+    const headers = { "Content-Type": "application/json" };
+    if (options) {
+      headers.cookie = options.cookie;
+    }
+
+    const response = await fetch(FetchAPI.#url + path, {
+      method: "PUT",
+      headers,
       body: JSON.stringify(data),
     });
     if (response?.ok) {
