@@ -134,6 +134,31 @@
     - 도구
       - jenkins, buildkite, github actions, gitlab ci/cd, bitbucket pipelines, circleci
 
+    - reference: https://www.youtube.com/watch?v=sIPU_VkrguI
+      - 마틴 파울러가 제시하는 CI의 4가지 규칙
+        - 모든 소스코드가 살아 있고 누구든 현재의 소스에 접근할 수 있는 단일 지점을 유지할 것
+        - 빌드 프로세스를 자동화해서 누구든 소스로부터 시스템을 빌드할 수 있게 할 것
+        - 테스팅을 자동화해서 언제든지 시스템에 대한 건전한 테스트 수트를 실행할 수 있게 할 것
+        - 누구든 현재 실행 파일을 얻으면 지금까지 가장 완전한 실행 파일을 얻었다는 확신을 하게 할 것
+
+      - 무중단 배포 구현 방법
+        - AWS에서 Blue-Green 무중단 배포
+        - 도커를 이용한 무중단 배포
+        - L4, L7 스위치를 이용한 무중단 배포
+        - Nginx를 이용한 무중단 배포
+          - Rolling 배포: 서버를 차례대로 업데이트 시키는 방식
+            - 장점: 인스턴스를 추가하지 않아도 되는 점
+            - 단점: 트래픽 쏠림, 구버전과 신버전의 공존으로 인한 호환성 문제
+          - Canary 배포: 신버전을 소수의 사용자에게만 배포
+            - 장점: 문제 상황을 빠르게 감지
+            - 단점: 모니터링 관리 비용, 구버전과 신버전의 공존으로 인한 호환성 문제
+          - Blue / Green 배포
+            - Blue: 구버전, Green: 신버전
+            - 구버전과 동일하게 신버전의 인스턴스를 구성
+            - 신버전 배포 시 로드 밸런서를 통해 신버전으로만 트래픽을 전환
+            - 장점: 빠른 배포 속도, 롤백 가능
+            - 단점: 시스템 자원이 2배로 필요
+
 ### NGINX
 
 - references: https://www.youtube.com/watch?v=9t9Mp0BGnyI
@@ -166,7 +191,7 @@
         }
 
         server {
-          listen 8080;
+          listen 80;
 
           location / {
             proxy_pass http://ws/;
