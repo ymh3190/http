@@ -49,6 +49,9 @@
 - 비정규화
   - reference: https://www.youtube.com/watch?v=V27XkmVPqYQ 5:20
   - 테이블 join시 성능 저하 이슈를 해결하기 위한 것
+- url
+  - ex) ?sort=-id&limit=1
+  - ex) ?filter=color:blue
 
 ### REST API
 

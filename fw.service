@@ -1,0 +1,8 @@
+[Unit]
+Description=Firewall service
+
+[Service]
+ExecStart=bash /home/user/cultivation/fw
+
+[Install]
+WantedBy=multi-user.target

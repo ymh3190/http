@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Name=Cultivation
+Type=Application
+Terminal=false
+Exec=/home/user/cultivation/frontend/exec/linux-unpacked/frontend %U
+Icon=/home/user/cultivation/frontend/static/logo/logo.png
