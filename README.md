@@ -168,6 +168,7 @@
 
       - directive:
         - key-value pair
+
       - context(block):
         - http {
           include mime.types;
@@ -191,7 +192,7 @@
         }
 
         server {
-          listen 80;
+          listen 8080;
 
           location / {
             proxy_pass http://ws/;
@@ -209,8 +210,6 @@
 
       - command:
         - nginx -s reload
-
-### MSA
 
 ### Docker
 
