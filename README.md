@@ -1,6 +1,6 @@
 # HTTP
 
-## 개발자로 근무하면서 느낀 문제 의식에 대한 프로젝트
+## 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
 ### 프로젝트 구조
 
@@ -209,34 +209,60 @@
         }
 
       - command:
-        - nginx -s reload
+        - nginx -s reload|stop|quit|reopen: send signal to a master process
+        - nginx -t: test configuration
+        - nginx -T: test configuration && show configuration
 
 ### Docker
 
     - command:
       - docker build -f Dockerfile -t fun-docker .
-      - .: build context, Dockerfile 위치
-      - -f: Dockerfile 이름 명시
-      - -t: 이미지 이름 부여, 깃헙 리파지토리와 동일. 컨테이너 레지스트리에 푸시할 때 재사용됨
+        - .: build context, Dockerfile 위치
+        - -f: Dockerfile 이름 명시, Dockerfile이면 생략 가능
+        - -t: 이미지 이름 부여, 깃헙 리파지토리와 동일. 컨테이너 레지스트리에 푸시할 때 재사용됨
+
+      - docker build -t webserver .
 
       - docker images: 로컬PC에서 만든 이미지를 확인
 
       - docker run -d -p 3000:3000 fun-docker
-      - -d: detached, 백그라운드 실행을 의미
-      - -p: port 지정, 호스트:컨테이너
+        - -d: detached, 백그라운드 실행을 의미
+        - -p: port 지정, 호스트:컨테이너
+
+      - docker run -it --rm -d -p 8000:80 --name web webserver
 
       - docker ps: 현재 구동중인 컨테이너 리스트
 
       - docker logs container_id
-      - ex) docker logs f22c0f33b3c3
+        - ex) docker logs f22c0f33b3c3
 
       - docker tag fun-docker:latest ymh3190/docker-example:latest
-      - 도커허브에 이미지를 푸시하기 위해서는 docker images의 REPOSITORY이 동일해야한다
-      - 그렇기 때문에 docker tag 명령어를 실행해서 리파지토리와 동일한 이름의 이미지를 생성한다.
+        - 도커허브에 이미지를 푸시하기 위해서는 docker images의 REPOSITORY이 동일해야한다
+        - 그렇기 때문에 docker tag 명령어를 실행해서 리파지토리와 동일한 이름의 이미지를 생성한다.
 
       - docker login
 
       - docker push ymh3190/docker-example:fun-docker:latest
+
+      - docker run -it --rm -d -p 8000:80 --name website nginx
+        - -it: instruct docker to allocate a pseudo tty conneciton or allow us to have an interactive bash
+
+        - --rm: clean up the containers and remove the file system if the container exists already
+
+      - docker exec -it container_id bash || docker exec -it container_name bash
+        - 해당 컨테이너 쉘모드 진입
+
+      - docker top container_id || docker top container_name
+        - 해당 컨테이너 사용중인 프로세스 확인
+
+      - service nginx start|stop
+        - 해당 컨테이너 쉘모드에서 nginx 시작|정지
+
+      - custom nginx image
+        - docker-compose
+          - docker-compose up: yml파일을 읽어 컨테이너 실행
+          - docker-compose up -d: yml파일을 읽어 데몬으로 컨테이너 실행
+          - docker-compose down: stop and remove containers, networks
 
 ### AWS
 
