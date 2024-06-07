@@ -213,6 +213,31 @@
 
 ### Docker
 
+    - command:
+      - docker build -f Dockerfile -t fun-docker .
+      - .: build context, Dockerfile 위치
+      - -f: Dockerfile 이름 명시
+      - -t: 이미지 이름 부여, 깃헙 리파지토리와 동일. 컨테이너 레지스트리에 푸시할 때 재사용됨
+
+      - docker images: 로컬PC에서 만든 이미지를 확인
+
+      - docker run -d -p 3000:3000 fun-docker
+      - -d: detached, 백그라운드 실행을 의미
+      - -p: port 지정, 호스트:컨테이너
+
+      - docker ps: 현재 구동중인 컨테이너 리스트
+
+      - docker logs container_id
+      - ex) docker logs f22c0f33b3c3
+
+      - docker tag fun-docker:latest ymh3190/docker-example:latest
+      - 도커허브에 이미지를 푸시하기 위해서는 docker images의 REPOSITORY이 동일해야한다
+      - 그렇기 때문에 docker tag 명령어를 실행해서 리파지토리와 동일한 이름의 이미지를 생성한다.
+
+      - docker login
+
+      - docker push ymh3190/docker-example:fun-docker:latest
+
 ### AWS
 
 ### VS Code 디버깅
