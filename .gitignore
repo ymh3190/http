@@ -7,6 +7,3 @@ videos/
 
 .env
 .DS_Store
-.dockerignore
-Dockerfile
-docker-compose.yml
