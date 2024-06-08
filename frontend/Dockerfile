@@ -1,7 +1,7 @@
 # 도커 이미지를 만들 때 처음부터 우리가 다 만드는게 아니라
 # 만들어진 걸 가져다 쓴다
 # nodejs를 예로, 18은 버전, 앨파인은 리눅스 최소 단위 버전
-FROM node:18-alpine
+FROM node:18.17.0-alpine
 
 # 도커 이미지(컨테이너) 안에서 어떤 경로에 이 이미지를 실행할 건지 명시
 # WORKDIR는 cd와 같은 명령어
@@ -27,10 +27,6 @@ COPY package.json package-lock.json ./
 # ci를 사용하면 lock.json에 명시된 버전으로 설치됨
 # 이름이 왜 ci냐? CI/CD를 세팅할 때 사용. continuous integration의 약자
 RUN npm ci
-
-COPY static ./static
-
-COPY views ./views
 
 COPY webpack.config.js ./
 

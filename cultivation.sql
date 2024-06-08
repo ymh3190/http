@@ -1,4 +1,4 @@
-create database cultivation default character set utf8mb4 collate utf8mb4_general_ci;
+create database cultivation default character set utf8mb4 collate utf8mb4_unicode_ci;
 use cultivation;
 
 -- 유형 엔터티: 재배기, 물탱크
