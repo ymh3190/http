@@ -9,8 +9,6 @@ FROM node:18.17.0-alpine
 # app 디렉토리에 들어왔다
 WORKDIR /app
 
-# RUN mkdir static
-
 COPY babel.config.json .
 
 # Dockerfile에서 복사하거나 명령어를 수행하는 것은
@@ -31,14 +29,10 @@ COPY package*.json ./
 RUN npm ci
 
 COPY webpack.config.js .
-
 COPY client ./client
-
 COPY views ./views
-
+COPY static ./static
 COPY src ./src
-
 RUN npm run build
-
 CMD [ "npm", "start" ]
 # ENTRYPOINT ["node", "index.js"]

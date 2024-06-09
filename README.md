@@ -1,8 +1,8 @@
 # HTTP
 
-## 개발자로 근무하면서 정리한 내용에 대한 프로젝트
+개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
-### 프로젝트 구조
+## 프로젝트 구조(On-Premise)
 
     1. 아키텍처 구조: client <-> reverse proxy <-> frontend서버 <-> reverse proxy <-> backend서버 <-> db
                                                                                             <-> middleware <-> PLC
@@ -37,7 +37,9 @@
 
       - db 서버: iptables로 backend 서버의 아이피만 허용
 
-### REST API를 위한 데이터베이스 설계 원칙
+## 프로젝트 구조(Container)
+
+## REST API를 위한 데이터베이스 설계 원칙
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
   - PK: auto_increment
@@ -53,7 +55,7 @@
   - ex) ?sort=-id&limit=1
   - ex) ?filter=color:blue
 
-### REST API
+## REST API
 
 - reference:
 
@@ -110,7 +112,7 @@
         - 클라이언트-서버 분리에 따른 유연성
         - 프로그래밍 언어에 따른 독립성
 
-### Middleware
+## Middleware
 
 - reference: https://aws.amazon.com/ko/what-is/middleware/
 
@@ -121,7 +123,7 @@
         - 게임 개발: 게임 엔진
         - 전자: 다양한 유형의 센서를 메시징 프레임워크를 통해 컨트롤러와 통신
 
-### CI / CD
+## CI / CD
 
     - Continuous Integration / Continuous Delivery, Deployment
 
@@ -159,7 +161,7 @@
             - 장점: 빠른 배포 속도, 롤백 가능
             - 단점: 시스템 자원이 2배로 필요
 
-### NGINX
+## NGINX
 
 - references: https://www.youtube.com/watch?v=9t9Mp0BGnyI
 
@@ -202,7 +204,7 @@
         server {
           listen 9090;
 
-          location / {
+          location /api {
             proxy_pass http://was/;
           }
 
@@ -213,7 +215,7 @@
         - nginx -t: test configuration
         - nginx -T: test configuration && show configuration
 
-### Docker
+## Docker
 
     - command:
       - docker build -f Dockerfile -t fun-docker .
@@ -264,15 +266,15 @@
           - docker-compose up -d: yml파일을 읽어 데몬으로 컨테이너 실행
           - docker-compose down: stop and remove containers, networks
 
-### AWS
+## AWS
 
-### VS Code 디버깅
+## VS Code 디버깅
 
     - 디버그 모드 실행: 서버 환경에서 디버깅을 위해서 launch.json 파일 생성을 클릭하고 Node.js를 선택합니다
 
     - 왼쪽 위 실행 프로그램을 선택하는 부분에서 Node.js를 선택 후 실행할 스크립트를 클릭합니다
 
-### MySQL ORM
+## MySQL ORM
 
 - 데이터베이스(입력)에 대한 일반화
   https://github.com/ymh3190/http/blob/main/backend/src/db.js
@@ -284,7 +286,7 @@
   - insert 성능 이슈(MySQL RDBMS: B+Tree)
   - reference: https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql#uuidv4
 
-### Linux
+## Linux
 
 - iptables
 
@@ -338,7 +340,7 @@
 
   - 스케줄링: crontab
 
-### Windows
+## Windows
 
 - batch script
 
@@ -366,17 +368,17 @@
         start "front" %batsPath%\front.bat
         start "dist" %batsPath%\dist.bat
 
-### DOM Tree
+## DOM Tree
 
 - DOM 객체에 접근하는 것을 자동으로 할 수 없을까?, 다른 프로젝트에서도 사용하고 싶은데?
   https://github.com/ymh3190/http/blob/main/frontend/src/dom-sync.js
 
-### WebSocket
+## WebSocket
 
 - observer design pattern
 - alarm
 
-### Status Code
+## Status Code
 
 - 206
 - 304
@@ -387,7 +389,7 @@
   - 307: Temperary Redirect
   - 308: Permanent Redirect
 
-### Origin/path?param
+## Origin/path?param
 
 - % 전송 인코딩 문제
 

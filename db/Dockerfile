@@ -1,3 +1,14 @@
 FROM mysql:8.0
 
 COPY init.sql /docker-entrypoint-initdb.d
+
+RUN cat <<EOF > /etc/mysql/conf.d/my.cnf
+[client]
+default-character-set = utf8mb4
+[mysql]
+default-character-set = utf8mb4
+[mysqld]
+collation-server = utf8mb4_0900_ai_ci
+init-connect='SET NAMES utf8mb4'
+character-set-server = utf8mb4
+EOF
