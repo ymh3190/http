@@ -83,7 +83,6 @@ class MySQLAPI {
     const enums = {};
     for (const [key, value] of Object.entries(this.columns)) {
       if (value.startsWith("enum")) {
-        console.log(key, value, this.table);
         const types = value.match(/('|")[a-zㄱ-힣]+/g).map((type) => {
           return type.replace(/('|")/, "");
         });

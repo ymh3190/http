@@ -34,7 +34,7 @@ class Server {
   }
 
   listen() {
-    const port = process.env.PORT || 8082;
+    const port = process.env.BE_PORT || 4999;
     this.#app.listen(port, () => {
       console.log(`Server is listening port ${port}`);
     });

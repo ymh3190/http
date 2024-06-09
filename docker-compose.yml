@@ -3,8 +3,7 @@ services:
     build: ./db
     image: db
     container_name: db
-    env_file: 
-      - ./.env
+    env_file: ./.env
     command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped
     volumes:
@@ -20,15 +19,31 @@ services:
     build: ./backend
     image: back
     container_name: back
-    env_file: 
-      - ./.env
+    env_file: ./.env
     restart: on-failure
     ports:
-      - ${BACK_PORT}:${BACK_PORT}
+      - ${BE_PORT}:${BE_PORT}
     expose:
-      - ${BACK_PORT}
+      - ${BE_PORT}
     depends_on:
       - db
+    networks:
+      - internalnet
+
+  front:
+    build: ./frontend
+    image: front
+    container_name: front
+    env_file: ./.env
+    restart: on-failure
+    volumes:
+      - ./frontend/static:/app/static
+    ports:
+      - ${FE_PORT}:${FE_PORT}
+    expose:
+      - ${FE_PORT}
+    depends_on:
+      - back
     networks:
       - internalnet
 

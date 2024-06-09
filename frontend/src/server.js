@@ -34,7 +34,7 @@ class Server {
   }
 
   listen() {
-    const port = process.env.PORT || 8081;
+    const port = process.env.FE_PORT || 3999;
     const http = this.#app.listen(port, () => {
       console.log(`Server is listening port ${port}`);
     });
