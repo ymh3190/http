@@ -39,6 +39,8 @@
 
 ## 프로젝트 구조(Container)
 
+    - AWS EC2에 Docker 배포 완료
+
 ## REST API를 위한 데이터베이스 설계 원칙
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
