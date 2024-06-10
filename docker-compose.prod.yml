@@ -1,0 +1,45 @@
+services:
+  db:
+    image: ymh3190/http-db:v2
+    container_name: db
+    env_file: ./.env
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    expose:
+      - ${DB_PORT}
+    networks:
+      - internalnet
+      
+  back:
+    image: ymh3190/http-back:v2
+    container_name: back
+    env_file: ./.env
+    restart: on-failure
+    ports:
+      - ${BE_PORT}:${BE_PORT}
+    expose:
+      - ${BE_PORT}
+    depends_on:
+      - db
+    networks:
+      - internalnet
+
+  front:
+    image: ymh3190/http-front:v2
+    container_name: front
+    env_file: ./.env
+    restart: on-failure
+    ports:
+      - ${FE_PORT}:${FE_PORT}
+    expose:
+      - ${FE_PORT}
+    depends_on:
+      - back
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge

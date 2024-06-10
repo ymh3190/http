@@ -39,7 +39,13 @@
 
 ## 프로젝트 구조(Container)
 
-    - AWS EC2에 Docker 배포 완료
+    - AWS EC2에 Docker 배포
+    - webserver-backend-db 3tier architecture 구성
+    - network 구성:
+      - 172.20.0.1: gateway
+      - 172.20.0.2: db
+      - 172.20.0.3: backend
+      - 172.20.0.4: webserver
 
 ## REST API를 위한 데이터베이스 설계 원칙
 
@@ -269,6 +275,10 @@
           - docker-compose down: stop and remove containers, networks
 
 ## AWS
+
+    - ec2 docker compose 배포
+    - 1. 로컬PC에서 image를 빌드하고(db, back, front) 각각 dockerHub에 올리고
+    - 2. docker-compose.ym에서 해당 이미지를 다운받아서 컨데이너 빌드 및 실행
 
 ## VS Code 디버깅
 
