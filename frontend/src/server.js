@@ -4,19 +4,7 @@ import express from "express";
 import helmet from "helmet";
 import cors from "cors";
 
-import {
-  authRouter,
-  clientRouter,
-  commodityRouter,
-  genreRouter,
-  imageRouter,
-  itemRouter,
-  productRouter,
-  rootRouter,
-  tankRouter,
-  userRouter,
-  videoRouter,
-} from "./router";
+import { rootRouter } from "./router";
 import middleware from "./middleware";
 
 import socket from "./socket";
@@ -74,16 +62,6 @@ class Server {
 
   #useRouter() {
     this.#app.use("/", rootRouter);
-    this.#app.use("/api/v1/auth", authRouter);
-    this.#app.use("/api/v1/users", userRouter);
-    this.#app.use("/api/v1/images", imageRouter);
-    this.#app.use("/api/v1/videos", videoRouter);
-    this.#app.use("/api/v1/genres", genreRouter);
-    this.#app.use("/api/v1/clients", clientRouter);
-    this.#app.use("/api/v1/products", productRouter);
-    this.#app.use("/api/v1/commodities", commodityRouter);
-    this.#app.use("/api/v1/tanks", tankRouter);
-    this.#app.use("/api/v1/items", itemRouter);
   }
 
   #errorHandler() {

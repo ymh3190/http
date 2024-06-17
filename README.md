@@ -225,6 +225,10 @@
 
 ## Docker
 
+    - EC2
+      - db, backend, frontend: 도커 컨테이너 실행 시 메모리 720M
+      - db, backend, frontend: systemd 실행 시 메모리 590M
+
     - command:
       - docker build -f Dockerfile -t fun-docker .
         - .: build context, Dockerfile 위치
@@ -348,6 +352,60 @@
   - 데몬: systemctl
   - 로그: journalctl
 
+- touch
+
+  - touch file_name{1..10}
+  - file_name, file_name1, file_name2, ... , file_name10
+
+  - touch -d tommorow file_name
+  - 파일 생성 예약
+
+- shred: 파일을 안전하게 지우는 방법. 임의의 데이터로 덮어씌움
+
+- useradd user_name -> create user
+- adduser user_name -> reverse useradd
+
+- su user_name: swtich user, 종료는 exit
+- passwd user_name: change password
+
+- whatis command: 명령어 설명
+- which command: command binary path
+- whereis command
+
+- less: 한 페이지씩 cat
+
+- cmp file_a file_b: 두 파일 내용 비교. 라인 표시
+- diff file_a file_b: 정확히 어떤 부분이 다른지 비교
+
+- sort: ex) cat file_name | sort
+
+- find
+
+  - find / -name file_name: 해당 경로에 있는 파일이 있는지 확인
+  - find . -type f -name ".\*": 숨겨진 파일 찾기
+  - find . -type f -empty: 숨겨진 디렉토리 찾기
+  - find . -perm /a=x: 숨겨진 실행 파일 찾기
+
+- awk '{print $1}'
+
+- resolvectl status
+
+  - /etc/resolv.conf
+
+- ping -c 5 -s 500 ip
+
+  - -c: count
+  - -s: size
+
+- traceroute ip
+- netstat -tulpn
+- uname -a
+- free
+- df -H
+- ps -aux
+- top: process
+- htop: process pretty
+
 - cron
 
   - 스케줄링: crontab
@@ -392,6 +450,9 @@
 
 ## Status Code
 
+- 204:
+  - No Content, ex) save and continue editing, ex) put, delete
+  - reference: https://stackoverflow.com/questions/2342579/http-status-code-for-update-and-delete
 - 206
 - 304
 - 리다이렉트:

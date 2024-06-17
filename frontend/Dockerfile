@@ -30,8 +30,6 @@ RUN npm ci
 
 COPY webpack.config.js .
 COPY client ./client
-COPY views ./views
-COPY static ./static
 COPY src ./src
 RUN npm run build
 CMD [ "npm", "start" ]
