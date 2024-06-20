@@ -15,7 +15,7 @@
 ## REST API를 위한 데이터베이스 설계 원칙
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
-  - PK: auto_increment, bigint unsigned: 2^53, int unsigned: 2^32
+  - PK: auto_increment, bigint: 2^64, int: 2^32
   - FK: table_id
   - Composite PK: Unique(column, column2, ...)로 고유성을 보장
 - auto_increment 이점: https://www.quora.com/What-are-the-advantages-of-using-an-auto-increment-column-as-a-primary-key-in-MySQL
