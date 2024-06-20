@@ -4,53 +4,18 @@
 
 ## 프로젝트 구조(On-Premise)
 
-    1. 아키텍처 구조: client <-> reverse proxy <-> frontend서버 <-> reverse proxy <-> backend서버 <-> db
-                                                                                            <-> middleware <-> PLC
+    1. 아키텍처 구조: client <-> nginx <-> frontend
+                                    <-> backend <-> db
+                                    <-> middleware <-> PLC
 
-    2. 데이터 흐름:
-      - client: frontend서버에 리소스를 요청
-      - frontend 서버: 필요한 데이터를 backend 서버에 요청
-      - backend 서버: 데이터 조회 후 frontend 서버에 응답
-      - frontend 서버: ejs렌더 및 backend 서버로 부터 받은 데이터를 클라이언트에 응답
-
-    3. 서비스 설정
-      - frontend 서버:
-        - 예) port 8081에서 listening 상태
-        - frontend 서버만 외부에 노출시킴
-        - view engine ejs는 서버 사이드 렌더링
-
-      - backend 서버: 예) port 8082에서 listening 상태
-
-      - db서버:
-        - bind-address 127.0.0.1으로 외부노출 X
-        - 만약 db서버를 따로 구축한다면 bind-address를 0.0.0.0으로 설정하고
-        - iptables로 backend서버 공인IP/32만 허용
-
-    4. 스케일업 계획
-      - 각각의 서버만 따로 분리시켜서 구축하는 구조
-
-      - frontend 서버: 내부망에 nginx나 apache를 사용할 계층. 이 서버만 외부에 노출시키고
-                      nginx나 apache를 프록시 서버 기능으로 사용
-
-      - backend 서버: 마찬가지로 내부망에 nginx나 apache를 사용할 계층. 이 서버만 frontend
-                      서버에 노출시키고 iptables -s 기능으로 해당 프론트엔드 서버에서 오는 트래픽만 허용
-
-      - db 서버: iptables로 backend 서버의 아이피만 허용
-
-## 프로젝트 구조(Container)
-
-    - AWS EC2에 Docker 배포
-    - webserver-backend-db 3tier architecture 구성
-    - network 구성:
-      - 172.20.0.1: gateway
-      - 172.20.0.2: db
-      - 172.20.0.3: backend
-      - 172.20.0.4: webserver
+    2. location /: frontend
+    3. location /api: backend
+    4. location ^~ /api/mem: middleware
 
 ## REST API를 위한 데이터베이스 설계 원칙
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
-  - PK: auto_increment
+  - PK: auto_increment, bigint unsigned: 2^53, int unsigned: 2^32
   - FK: table_id
   - Composite PK: Unique(column, column2, ...)로 고유성을 보장
 - auto_increment 이점: https://www.quora.com/What-are-the-advantages-of-using-an-auto-increment-column-as-a-primary-key-in-MySQL

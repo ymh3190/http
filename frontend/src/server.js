@@ -37,17 +37,6 @@ class Server {
   #useMiddleware() {
     this.#app.use(
       helmet({
-        // contentSecurityPolicy: {
-        //   directives: {
-        //     "script-src": [
-        //       "'self'",
-        //       "*.fontawesome.com",
-        //       "'unsafe-inline'",
-        //       "'unsafe-eval'",
-        //     ],
-        //     "connect-src": ["'self'", "*.fontawesome.com"],
-        //   },
-        // },
         contentSecurityPolicy: false,
         crossOriginOpenerPolicy: false,
         originAgentCluster: false,
