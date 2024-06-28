@@ -21,7 +21,7 @@ class Signin {
     const response = await signin({ username, password });
     if (response) {
       setValues({ username: "", password: "" });
-      // window.location.href = "/";
+      window.location.href = "/";
     }
   }
 

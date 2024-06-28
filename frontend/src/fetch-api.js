@@ -33,7 +33,8 @@ const catchResponseError = async (response) => {
 };
 
 class FetchAPI {
-  static #url = `http://${process.env.WAS_HOST}:${process.env.WAS_PORT}/api/v1`;
+  // static #url = `http://${process.env.WAS_HOST}:${process.env.WAS_PORT}/api/v1`;
+  static #url = `http://${process.env.NGINX_HOST}:${process.env.NGINX_PORT}/api/v1`;
 
   /**
    *
