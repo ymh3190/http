@@ -12,7 +12,6 @@ class Util {
     const longerExp = 1000 * 60 * 60 * 24;
 
     res.cookie("access_token", accessToken, {
-      domain: "",
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       signed: true,

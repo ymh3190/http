@@ -328,7 +328,6 @@ class ClientController {
       throw new CustomError.BadRequestError("Provide company");
     }
     req.body.creator_id = req.user.user_id;
-    console.log(req.body);
     const client = await Client.create(req.body, { new: true });
     res.status(201).json({ client });
   }

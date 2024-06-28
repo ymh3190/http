@@ -7,7 +7,6 @@ class Middleware {
   }
 
   authenticateUser(req, res, next) {
-    console.log(req.headers);
     try {
       const cookies = req.headers.cookie.split("; ");
 
