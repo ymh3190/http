@@ -27,17 +27,6 @@ services:
       - 4000
     networks:
       - http
-  # was:
-  #   image: nginx
-  #   restart: on-failure
-  #   volumes:
-  #     - ./was/default.conf:/etc/nginx/conf.d/default.conf
-  #   ports:
-  #     - 8080:8080
-  #   expose:
-  #     - 8080
-  #   networks:
-  #     - http
   front:
     # platform: linux/amd64
     build: ./frontend
@@ -50,15 +39,6 @@ services:
       - 3000
     networks:
       - http
-  # ws:
-  #   image: nginx
-  #   restart: on-failure
-  #   volumes:
-  #     - ./ws/default.conf:/etc/nginx/conf.d/default.conf
-  #   ports:
-  #     - 80:80
-  #   networks:
-  #     - http
   nginx:
     image: nginx
     restart: on-failure
