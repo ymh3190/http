@@ -20,7 +20,7 @@ services:
       - http
   back:
     platform: linux/amd64
-    image: ymh3190/http-back
+    build: ./backend
     env_file: ./backend/.env.prod
     restart: on-failure
     expose:
@@ -29,7 +29,7 @@ services:
       - http
   front:
     platform: linux/amd64
-    image: ymh3190/http-front
+    build: ./frontend
     env_file: ./frontend/.env.prod
     restart: on-failure
     volumes:
