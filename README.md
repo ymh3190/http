@@ -435,3 +435,8 @@
   - The encodeURI() function escapes characters by UTF-8 code units, with each octet encoded in the format %XX, left-padded with 0 if necessary.
   - encodeURI와 encodeURIComponent 차이
   - 레퍼런스: https://codingeverybody.kr/자바스크립트-인코딩-함수-비교/
+
+## CORS
+
+- references: https://serverfault.com/questions/928912/how-do-i-remove-a-server-added-header-from-proxied-location
+- references: https://medium.com/@hubian/nginx-easily-solves-cross-domain-issues-009b95a5185e

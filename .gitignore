@@ -8,4 +8,5 @@ data/
 
 .env
 .env.test
+.env.prod
 .DS_Store

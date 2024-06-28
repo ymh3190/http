@@ -11,16 +11,16 @@ const catchResponseError = async (response) => {
 };
 
 class FetchAPI {
-  // static #url =
-  //   "http://ec2-43-201-83-95.ap-northeast-2.compute.amazonaws.com:8080/api/v1";
-  static #url = "http://127.0.0.1:8080/api/v1";
+  static #url = `${window.location.origin}:8080/api/v1`;
   /**
    *
    * @param {string} path /api/v1 + path
    * @returns
    */
   static async get(path) {
-    const response = await fetch(FetchAPI.#url + path);
+    const response = await fetch(FetchAPI.#url + path, {
+      credentials: "include",
+    });
     if (response?.ok) {
       return response;
     }
@@ -60,6 +60,7 @@ class FetchAPI {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(data),
     });
     if (response?.ok) {
@@ -80,6 +81,7 @@ class FetchAPI {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(data),
     });
     if (response?.ok) {
@@ -96,6 +98,7 @@ class FetchAPI {
   static async delete(path) {
     const response = await fetch(FetchAPI.#url + path, {
       method: "DELETE",
+      credentials: "include",
     });
     if (response?.ok) {
       return response;
