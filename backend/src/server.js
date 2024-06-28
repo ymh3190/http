@@ -34,7 +34,7 @@ class Server {
   }
 
   listen() {
-    const port = process.env.BE_PORT || 4999;
+    const port = process.env.PORT || 4999;
     this.#app.listen(port, () => {
       console.log(`Server is listening port ${port}`);
     });
@@ -45,13 +45,7 @@ class Server {
   }
 
   #useMiddleware() {
-    this.#app.use(
-      helmet({
-        contentSecurityPolicy: false,
-        crossOriginOpenerPolicy: false,
-        originAgentCluster: false,
-      })
-    );
+    this.#app.use(helmet());
     this.#app.use(cors());
     this.#app.use(express.json());
     this.#app.use(cookieParser(process.env.JWT_SECRET));

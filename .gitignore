@@ -4,6 +4,8 @@ build/
 images/
 videos/
 .vscode/
+data/
 
 .env
+.env.test
 .DS_Store

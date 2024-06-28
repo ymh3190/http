@@ -71,8 +71,8 @@ class AuthController {
 
     const refresh_token = util.createToken();
     // postman
-    // const ip = req.ip;
-    const ip = req.headers["x-forwared-for"];
+    // const ip = req.headers["x-forwared-for"];
+    const ip = req.ip;
     const user_agent = req.headers["user-agent"];
     const user_id = user.id;
 
@@ -177,15 +177,15 @@ class ImageController {
     res.status(200).json({ image });
   }
 
-  // async selectById(req, res) {
-  //   const { id } = req.params;
+  async selectById(req, res) {
+    const { id } = req.params;
 
-  //   const image = await Image.selectById(id);
-  //   if (!image) {
-  //     throw new CustomError.NotFoundError("Image not found");
-  //   }
-  //   res.status(200).json({ image });
-  // }
+    const image = await Image.selectById(id);
+    if (!image) {
+      throw new CustomError.NotFoundError("Image not found");
+    }
+    res.status(200).json({ image });
+  }
 
   async update(req, res) {
     const { id } = req.params;
@@ -250,15 +250,15 @@ class VideoController {
     res.status(200).json({ video });
   }
 
-  // async selectById(req, res) {
-  //   const { id } = req.params;
+  async selectById(req, res) {
+    const { id } = req.params;
 
-  //   const video = await Video.selectById(id);
-  //   if (!video) {
-  //     throw new CustomError.NotFoundError("Video not found");
-  //   }
-  //   res.status(200).json({ video });
-  // }
+    const video = await Video.selectById(id);
+    if (!video) {
+      throw new CustomError.NotFoundError("Video not found");
+    }
+    res.status(200).json({ video });
+  }
 
   async update(req, res) {
     const { id } = req.params;

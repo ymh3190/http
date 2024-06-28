@@ -79,6 +79,7 @@ class RootController {
     if (!cookies) {
       return res.status(200).render("tube", data);
     }
+    console.log(cookies, response.headers);
 
     const access_token = cookies.find((el) => el.startsWith("access_token"));
     const refresh_token = cookies.find((el) => el.startsWith("refresh_token"));

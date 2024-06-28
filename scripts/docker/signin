@@ -1,0 +1,7 @@
+#!/bin/bash
+
+URL=localhost:8080/api/v1
+
+curl -i -d '{ "username": "admin", "password": "minhoe" }' \
+-H 'Content-Type: application/json' \
+$URL/auth/signin

@@ -1,9 +1,6 @@
-create database if not exists test default character set utf8mb4 collate utf8mb4_0900_ai_ci;
-create user if not exists admin@'%' identified with mysql_native_password by '';
-grant all privileges on test.* to admin@'%';
-flush privileges;
+create database if not exists http default character set utf8mb4 collate utf8mb4_0900_ai_ci;
 
-use test;
+use http;
 
 drop table if exists user;
 drop table if exists token;

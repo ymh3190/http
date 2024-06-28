@@ -11,13 +11,14 @@ const catchResponseError = async (response) => {
 };
 
 class FetchAPI {
+  static #url = "http://127.0.0.1:8080/api/v1";
   /**
    *
    * @param {string} path /api/v1 + path
    * @returns
    */
   static async get(path) {
-    const response = await fetch("/api/v1" + path);
+    const response = await fetch(FetchAPI.#url + path);
     if (response?.ok) {
       return response;
     }
@@ -31,7 +32,7 @@ class FetchAPI {
    * @returns
    */
   static async post(path, data) {
-    const response = await fetch("/api/v1" + path, {
+    const response = await fetch(FetchAPI.#url + path, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +52,7 @@ class FetchAPI {
    * @returns
    */
   static async patch(path, data) {
-    const response = await fetch("/api/v1" + path, {
+    const response = await fetch(FetchAPI.#url + path, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +72,7 @@ class FetchAPI {
    * @returns
    */
   static async put(path, data) {
-    const response = await fetch("/api/v1" + path, {
+    const response = await fetch(FetchAPI.#url + path, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +91,7 @@ class FetchAPI {
    * @returns
    */
   static async delete(path) {
-    const response = await fetch("/api/v1" + path, {
+    const response = await fetch(FetchAPI.#url + path, {
       method: "DELETE",
     });
     if (response?.ok) {

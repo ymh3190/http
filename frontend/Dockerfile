@@ -17,7 +17,7 @@ COPY babel.config.json .
 # 변경 사항이 적은 것들 위주로 먼저 복사
 # WORKDIR 명령어를 통해서 /app이라는 경로에 들어왔기 때문에
 # ./는 현재 경로, /app 폴더를 의미한다
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
 # package.json에 명시된 모든 모듈을 설치한다
 # npm install보다 ci가 더 좋다.

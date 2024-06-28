@@ -22,7 +22,7 @@ class Server {
   }
 
   listen() {
-    const port = process.env.FE_PORT || 3999;
+    const port = process.env.PORT || 3999;
     const http = this.#app.listen(port, () => {
       console.log(`Server is listening port ${port}`);
     });
@@ -30,6 +30,7 @@ class Server {
   }
 
   #setConfig() {
+    this.#app.set("trust proxy", 1);
     this.#app.set("view engine", "ejs");
     this.#app.set("views", process.cwd() + "/views/layouts");
   }

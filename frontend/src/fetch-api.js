@@ -33,7 +33,7 @@ const catchResponseError = async (response) => {
 };
 
 class FetchAPI {
-  static #url = `http://${process.env.BE_HOST}:${process.env.BE_PORT}/api/v1`;
+  static #url = `http://${process.env.WAS_HOST}:${process.env.WAS_PORT}/api/v1`;
 
   /**
    *
