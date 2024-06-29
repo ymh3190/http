@@ -1,19 +1,3 @@
-create database if not exists http default character set utf8mb4 collate utf8mb4_0900_ai_ci;
-
-use http;
-
-drop table if exists user;
-drop table if exists token;
-drop table if exists image;
-drop table if exists video;
-drop table if exists client;
-drop table if exists item;
-drop table if exists commodity;
-drop table if exists commodity_order_plan;
-drop table if exists commodity_warehouse;
-drop table if exists tank;
-drop table if exists product;
-
 create table user(
     id              int auto_increment comment '유저 아이디',
     password        char(60) not null,

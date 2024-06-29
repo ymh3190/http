@@ -2,15 +2,10 @@
 
 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
-## 프로젝트 구조(On-Premise)
+## 아키텍처 구조(AWS EC2 + Docker)
 
     1. 아키텍처 구조: client <-> nginx <-> frontend
                                     <-> backend <-> db
-                                    <-> middleware <-> PLC
-
-    2. location /: frontend
-    3. location /api: backend
-    4. location ^~ /api/mem: middleware
 
 ## REST API를 위한 데이터베이스 설계 원칙
 

@@ -11,7 +11,7 @@ const catchResponseError = async (response) => {
 };
 
 class FetchAPI {
-  static #url = `${window.location.origin}:8080/api/v1`;
+  static #url = `${window.location.origin}/api/v1`;
   /**
    *
    * @param {string} path /api/v1 + path
