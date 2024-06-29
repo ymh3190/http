@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose rm front -s -f -v \
+docker compose rm front -f -v \
 && docker compose up front -d

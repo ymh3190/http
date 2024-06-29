@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose rm -s -f -v \
+docker compose rm -f -v \
 && docker compose up -d
