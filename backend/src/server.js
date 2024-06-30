@@ -3,6 +3,7 @@ import "./db-sub";
 
 import "./layer";
 import express from "express";
+import rateLimiter from "express-rate-limit";
 import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -45,6 +46,12 @@ class Server {
   }
 
   #useMiddleware() {
+    app.use(
+      rateLimiter({
+        windowMs: 15 * 60 * 1000,
+        max: 60,
+      })
+    );
     this.#app.use(helmet());
     this.#app.use(cors());
     this.#app.use(express.json());
