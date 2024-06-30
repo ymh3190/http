@@ -10,6 +10,8 @@ window.closure = {
   outHtml: "",
   handlers: {},
 
+  videoDOM: "",
+
   clear(clearOutHtml = false) {
     this.client = {};
     this.product = {};

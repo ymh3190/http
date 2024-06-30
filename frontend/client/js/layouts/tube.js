@@ -66,8 +66,9 @@ class Search {
 
     const { pathname } = location;
     if (pathname === "/videos") {
+      // encodeURI(`name=%25${name}%25`)
       const response = await FetchAPI.get(
-        "/videos?" + encodeURI(`name=%25${name}%25`)
+        "/videos?" + encodeURI(`name=%${name}%`)
       );
       if (response) {
         const data = await response.json();
@@ -109,7 +110,7 @@ class Search {
 
     if (pathname === "/images") {
       const response = await FetchAPI.get(
-        "/images?" + encodeURI(`name=%25${name}%25`)
+        "/images?" + encodeURI(`name=%${name}%`)
       );
       if (response) {
         const data = await response.json();

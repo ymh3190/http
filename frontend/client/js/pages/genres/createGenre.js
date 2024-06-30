@@ -22,8 +22,10 @@ class Create {
     const { name } = values;
     if (video_id) {
       const response = await FetchAPI.post("/genres", { name, video_id });
+      console.log(response);
       if (response) {
         const data = await response.json();
+        console.log(data);
       }
       setValues({
         name: "",

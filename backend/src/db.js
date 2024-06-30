@@ -151,14 +151,14 @@ class MySQLAPI {
       return;
     }
 
-    // await MySQLAPI.pool.execute(sql, values);
-    // for (const [key, value] of Object.entries(options)) {
-    //   if (key === "new" && value) {
-    //     const sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE id = ?`;
-    //     const [[result]] = await MySQLAPI.pool.execute(sql, [id]);
-    //     return result;
-    //   }
-    // }
+    const [result] = await MySQLAPI.pool.execute(sql, values);
+    for (const [key, value] of Object.entries(options)) {
+      if (key === "new" && value) {
+        const sql = `SELECT *, ${this.dateFormat} FROM ${this.table} WHERE id = ?`;
+        const [[newObj]] = await MySQLAPI.pool.execute(sql, [result.insertId]);
+        return newObj;
+      }
+    }
   }
 
   /**

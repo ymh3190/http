@@ -7,3 +7,23 @@ import "./videos/drag";
 import "./videos/socket";
 
 import "./genres/createGenre";
+
+document.addEventListener("keydown", (event) => {
+  const { code } = event;
+  console.log(code);
+
+  if (code === "ArrowRight") {
+    closure.videoDOM.currentTime += 10;
+    return;
+  }
+
+  if (code === "ArrowLeft") {
+    closure.videoDOM.currentTime -= 10;
+    return;
+  }
+
+  if (code === "Space") {
+    closure.handlers.playVideo();
+    return;
+  }
+});
