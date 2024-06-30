@@ -29,6 +29,7 @@ services:
       - 3306
     networks:
       - http
+  # back
   test-back:
     build: ./backend
     env_file: ./backend/.env.test
@@ -54,6 +55,7 @@ services:
       - 4000
     networks:
       - http
+  # front    
   test-front:
     build: ./frontend
     env_file: ./frontend/.env.test
@@ -77,6 +79,7 @@ services:
     volumes:
       - ./frontend/static:/app/static
       - ./frontend/views:/app/views
+  # nginx
   dev-nginx:
     image: nginx
     volumes:

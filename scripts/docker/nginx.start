@@ -1,4 +1,0 @@
-#!/bin/bash
-
-docker compose rm dev-nginx -v \
-&& docker compose up dev-nginx -d

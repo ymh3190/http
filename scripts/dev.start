@@ -1,0 +1,8 @@
+#!/bin/bash
+
+docker compose rm test-nginx -s -f -v && \
+docker compose rm test-front -s -f -v && \
+docker compose rm test-back -s -f -v && \
+
+bash ./dev-db.start && \
+bash ./dev-nginx.start

@@ -10,7 +10,6 @@ import "./genres/createGenre";
 
 document.addEventListener("keydown", (event) => {
   const { code } = event;
-  console.log(code);
 
   if (code === "ArrowRight") {
     closure.videoDOM.currentTime += 10;

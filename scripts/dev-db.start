@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker compose rm dev-db -s -f -v && \
+docker compose up dev-db -d
