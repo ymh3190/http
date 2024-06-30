@@ -46,7 +46,7 @@ class Server {
   }
 
   #useMiddleware() {
-    app.use(
+    this.#app.use(
       rateLimiter({
         windowMs: 15 * 60 * 1000,
         max: 60,
