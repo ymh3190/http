@@ -133,7 +133,7 @@ class UserController {
 
 class ImageController {
   async create(req, res) {
-    await Image.createByManualId(req.body);
+    await Image.create(req.body);
     res.status(201).end();
   }
 
@@ -345,6 +345,7 @@ class ClientController {
     }
 
     const clients = await Client.select({}, { company: "desc" });
+    console.log(clients);
     res.status(200).json({ clients });
   }
 

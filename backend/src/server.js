@@ -46,12 +46,12 @@ class Server {
   }
 
   #useMiddleware() {
-    this.#app.use(
-      rateLimiter({
-        windowMs: 15 * 60 * 1000,
-        max: 60,
-      })
-    );
+    // this.#app.use(
+    //   rateLimiter({
+    //     windowMs: 15 * 60 * 1000,
+    //     max: 60,
+    //   })
+    // );
     this.#app.use(helmet());
     this.#app.use(cors());
     this.#app.use(express.json());
