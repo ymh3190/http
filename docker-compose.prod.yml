@@ -6,7 +6,7 @@ services:
       - MYSQL_ROOT_PASSWORD=1
       - MYSQL_USER=admin
       - MYSQL_DATABASE=http
-      - MYSQL_PASSWORD=minhoe
+      - MYSQL_PASSWORD=1
     volumes:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -26,7 +26,7 @@ services:
       - DB_USER=admin
       - DB_DATABASE=http
       - DB_PORT=3306
-      - DB_PASSWORD=minhoe
+      - DB_PASSWORD=1
       - JWT_SECRET=B7ADFBBAFA67DCE3ECCEE5C54E58A
     restart: on-failure
     expose:
