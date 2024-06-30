@@ -11,7 +11,7 @@ services:
     #   - --character-set-server=utf8mb4
     #   - --collation-server=utf8mb4_0900_ai_ci
     ports:
-      - 3308:3306
+      - 3307:3306
     expose:
       - 3306
     networks:
@@ -24,7 +24,7 @@ services:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
-      - 3309:3306
+      - 3308:3306
     expose:
       - 3306
     networks:
