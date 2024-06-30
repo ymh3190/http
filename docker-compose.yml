@@ -41,20 +41,6 @@ services:
   back:
     platform: linux/amd64
     build: ./backend
-    environment:
-      - PORT=4000
-      - WATCH=
-      - DB_HOST=db
-      - DB_USER=admin
-      - DB_DATABASE=http
-      - DB_PORT=3306
-      - DB_PASSWORD=1
-      - JWT_SECRET=B7ADFBBAFA67DCE3ECCEE5C54E58A
-    restart: on-failure
-    expose:
-      - 4000
-    networks:
-      - http
   # front    
   test-front:
     build: ./frontend
@@ -70,15 +56,6 @@ services:
   front:
     platform: linux/amd64
     build: ./frontend
-    environment:
-      - PORT=3000
-      - WATCH=
-      - BE_HOST=back
-      - BE_PORT=4000
-    restart: on-failure
-    volumes:
-      - ./frontend/static:/app/static
-      - ./frontend/views:/app/views
   # nginx
   dev-nginx:
     image: nginx
