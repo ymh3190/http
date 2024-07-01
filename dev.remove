@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose rm dev-db -s -f -v & \
-docker compose rm dev-nginx -s -f -v
+bash ./dev-db.remove && \
+bash ./dev-nginx.remove
