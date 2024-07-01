@@ -7,6 +7,7 @@ services:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     # command로는 한글 깨짐이 해결안되고 마운트로 해결함
+    # 아닐 수도 잇음
     # command: 
     #   - --character-set-server=utf8mb4
     #   - --collation-server=utf8mb4_0900_ai_ci
@@ -21,6 +22,7 @@ services:
     volumes:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/data:/var/lib/mysql
     ports:
       - 3308:3306
     expose:
@@ -71,6 +73,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/default.test.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/log:/var/log/nginx
     ports:
       - 80:80
     networks:

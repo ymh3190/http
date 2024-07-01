@@ -1,0 +1,11 @@
+#!/bin/bash
+
+docker compose rm dev-nginx -s -f -v && \
+
+bash ./test-db.start && \
+sleep 1 && \
+bash ./test-back.start && \
+sleep 1 && \
+bash ./test-front.start && \
+sleep 2 && \
+bash ./test-nginx.start

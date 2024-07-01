@@ -1,11 +1,55 @@
 @media screen and (max-width: $desktop) {
+  .tube {
+    & > .content > .contents {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+
+      & > img,
+      & > video {
+        height: 100%;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $laptop) {
+  .tube {
+    & > .content > .contents {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+
+      & > img,
+      & > video {
+        height: 100%;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $tablet) {
+  .tube {
+    & > .content > .contents {
+      grid-template-columns: none;
+      gap: 1rem;
+
+      & > img,
+      & > video {
+        height: 100%;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: $mobile) {
+  .tube {
+    & > .content > .contents {
+      grid-template-columns: none;
+      gap: 1rem;
+
+      & > img,
+      & > video {
+        height: 100%;
+      }
+    }
+  }
 }

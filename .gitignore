@@ -5,6 +5,7 @@ images/
 videos/
 .vscode/
 data/
+log/
 
 .env
 .env.test

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker compose rm test-nginx -s -f -v && \
+docker compose up test-nginx -d
