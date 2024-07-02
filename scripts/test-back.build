@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker compose rm test-back -s -f -v && \
+docker rmi $(docker images -f reference="http-test-back" -q) && \
+docker compose build test-back

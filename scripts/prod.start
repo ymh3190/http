@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash ./db.start && \
-bash ./back.start && \
-bash ./front.start && \
-bash ./nginx.start
+bash ../db.start && \
+bash ../back.start && \
+bash ../front.start && \
+bash ../nginx.start
