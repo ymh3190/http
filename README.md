@@ -2,6 +2,15 @@
 
 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
+## CORS
+
+- references: https://serverfault.com/questions/928912/how-do-i-remove-a-server-added-header-from-proxied-location
+- references: https://medium.com/@hubian/nginx-easily-solves-cross-domain-issues-009b95a5185e
+
+## DDoS
+
+- 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함
+
 ## 참고 레퍼런스
 
 [Linux]
@@ -556,6 +565,7 @@
   - 302: Found
   - 307: Temperary Redirect
   - 308: Permanent Redirect
+- 429: Too many requests
 
 ## Origin/path?param
 
@@ -565,12 +575,3 @@
   - The encodeURI() function escapes characters by UTF-8 code units, with each octet encoded in the format %XX, left-padded with 0 if necessary.
   - encodeURI와 encodeURIComponent 차이
   - 레퍼런스: https://codingeverybody.kr/자바스크립트-인코딩-함수-비교/
-
-## CORS
-
-- references: https://serverfault.com/questions/928912/how-do-i-remove-a-server-added-header-from-proxied-location
-- references: https://medium.com/@hubian/nginx-easily-solves-cross-domain-issues-009b95a5185e
-
-## DDOS
-
-- 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함
