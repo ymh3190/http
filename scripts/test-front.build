@@ -1,0 +1,5 @@
+#!/bin/bash
+
+docker compose rm test-front -s -f -v && \
+docker rmi $(docker images -f reference="http-test-front" -q) && \
+docker compose build test-front

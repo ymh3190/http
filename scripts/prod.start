@@ -1,9 +1,5 @@
 #!/bin/bash
 
-docker compose rm nginx -s -f -v && \
-docker compose rm front -s -f -v && \
-docker compose rm back -s -f -v && \
-
 bash ./db.start && \
 bash ./back.start && \
 bash ./front.start && \

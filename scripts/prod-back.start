@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose rm back -s -f -v && \
-docker compose up back -d
+docker compose -f docker-compose.prod.yml rm back -s -f -v && \
+docker compose -f docker-compose.prod.yml up back -d

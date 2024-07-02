@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose rm db -s -f -v && \
-docker compose up db -d
+docker compose -f docker-compose.prod.yml rm db -s -f -v && \
+docker compose -f docker-compose.prod.yml up db -d

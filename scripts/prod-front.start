@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker compose rm front -s -f -v && \
-docker compose up front -d
+docker compose -f docker-compose.prod.yml rm front -s -f -v && \
+docker compose -f docker-compose.prod.yml up front -d

@@ -4,9 +4,11 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
 
-      & > img,
-      & > video {
-        height: 100%;
+      & > .container {
+        & > img,
+        & > video {
+          height: 100%;
+        }
       }
     }
   }
@@ -18,9 +20,11 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
 
-      & > img,
-      & > video {
-        height: 100%;
+      & > .container {
+        & > img,
+        & > video {
+          height: 100%;
+        }
       }
     }
   }
@@ -32,9 +36,11 @@
       grid-template-columns: none;
       gap: 1rem;
 
-      & > img,
-      & > video {
-        height: 100%;
+      & > .container {
+        & > img,
+        & > video {
+          height: 100%;
+        }
       }
     }
   }
@@ -46,9 +52,11 @@
       grid-template-columns: none;
       gap: 1rem;
 
-      & > img,
-      & > video {
-        height: 100%;
+      & > .container {
+        & > img,
+        & > video {
+          height: 100%;
+        }
       }
     }
   }
