@@ -1,4 +1,4 @@
 #!/bin/bash
 
-bash ./dev-db.remove && \
+bash ./dev-db.remove & \
 bash ./dev-nginx.remove

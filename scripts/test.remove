@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bash ./test-db.remove && \
-bash ./test-back.remove && \
-bash ./test-front.remove && \
+bash ./test-db.remove & \
+bash ./test-back.remove & \
+bash ./test-front.remove & \
 bash ./test-nginx.remove
