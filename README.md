@@ -570,3 +570,7 @@
 
 - references: https://serverfault.com/questions/928912/how-do-i-remove-a-server-added-header-from-proxied-location
 - references: https://medium.com/@hubian/nginx-easily-solves-cross-domain-issues-009b95a5185e
+
+## DDOS
+
+- 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함
