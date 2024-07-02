@@ -9,7 +9,8 @@
 
 ## DDoS
 
-- 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함
+- 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함(OSI 7 layer)
+- iptables로 2계층 방어(인터페이스 방어니까? 맞나?)
 
 ## 참고 레퍼런스
 
@@ -74,6 +75,8 @@
 - [Sniffing](https://m.blog.naver.com/wnrjsxo/221115871221)
 
 - [mDNS](https://www.ciokorea.com/news/24709)
+
+- [DDoS](https://sata.kr/entry/IPTables-11-IPTables%EB%A1%9C-DDOS-%EA%B3%B5%EA%B2%A9%EC%9D%84-%EB%B0%A9%EC%96%B4%ED%95%B4%EB%B3%B4%EC%9E%90-PREROUTING)
 
 [Backend]
 
