@@ -1,6 +1,9 @@
 #!/bin/bash
 
 bash ./prod-db.start && \
+sleep 1 && \
 bash ./prod-back.start && \
+sleep 1 && \
 bash ./prod-front.start && \
+sleep 2 && \
 bash ./prod-nginx.start
