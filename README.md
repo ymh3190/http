@@ -2,6 +2,141 @@
 
 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
+## 참고 레퍼런스
+
+[Linux]
+
+- [서비스관리 - systemctl](https://fmd1225.tistory.com/93)
+- [부팅](https://ssunw.tistory.com/entry/Linux-%EB%B6%80%ED%8A%B8-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B6%80%ED%8A%B8-%EB%A1%9C%EB%8D%94)
+- [폴더구조](https://inpa.tistory.com/entry/LINUX-%F0%9F%93%9A-%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%94%94%EB%A0%89%ED%86%A0%EB%A6%AC-%EA%B5%AC%EC%A1%B0)
+- [권한](https://danmilife.tistory.com/8#google_vignette)
+- [파일복사 - scp](https://studyingazae.tistory.com/289)
+- [타임존](https://wildeveloperetrain.tistory.com/249)
+- [아이콘](https://reason1241.tistory.com/20)
+- [그룹](https://blog.naver.com/haejoon90/220736406478)
+- [자동로그인](https://ostechnix.com/ubuntu-automatic-login/)
+- [유저생성](https://leftday.tistory.com/92)
+- [메모리사용량](https://zetawiki.com/wiki/%EB%A6%AC%EB%88%85%EC%8A%A4_%EB%AA%85%EB%AA%A9%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%82%AC%EC%9A%A9%EB%A5%A0,_%EC%8B%A4%EC%A7%88%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%82%AC%EC%9A%A9%EB%A5%A0#cite_note-1)
+- [시리얼권한](https://movehoon.tistory.com/115)
+- [그룹에 유저추가](https://syuda.tistory.com/159)
+- [스케쥴링 - crontab](https://www.baeldung.com/linux/schedule-script-execution)
+- [로그 검색 -journalctl](https://server-talk.tistory.com/459)
+
+[Windows]
+
+- [배치파일 동시 실행](https://blog.naver.com/km3957/221494507192)
+- [여러 배치파일 순서대로 실행하는 배치파일 만들기](https://nem0.tistory.com/53)
+
+[Shell]
+
+- [cat <<EOF](https://stackoverflow.com/questions/2500436/how-does-cat-eof-work-in-bash)
+- [입출력 재지정 |](https://inpa.tistory.com/entry/LINUX-%F0%9F%93%9A-%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%9E%AC%EC%A7%80%EC%A0%95-%ED%8C%8C%EC%9D%B4%ED%94%84-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%A0%95%EB%A6%AC)
+- [/dev/null 2>&1](https://inpa.tistory.com/entry/%EB%A6%AC%EB%88%85%EC%8A%A4-devnull-%EB%A6%AC%EB%8B%A4%EC%9D%B4%EB%A0%89%EC%85%98-%EA%B8%B0%ED%98%B8-%EC%A2%85%EB%A5%98)
+- [Date](https://inpa.tistory.com/entry/LINUX-%F0%9F%93%9A-Date-%EB%AA%85%EB%A0%B9%EC%96%B4-%EC%82%AC%EC%9A%A9%EB%B2%95-%EC%99%84%EB%B2%BD-%EC%B4%9D%EC%A0%95%EB%A6%AC-%ED%8F%AC%EB%A7%B7)
+- [특수변수 - $?](https://sa2da-sac.tistory.com/18)
+- [이름변경 - rename](https://biology-statistics-programming.tistory.com/117)
+- [if - else](https://ko.linux-console.net/?p=5874)
+- [매개변수 순회 - for arg in $\*](https://seorenn.tistory.com/595)
+
+[curl]
+
+- [응답시간 체크](https://webruden.tistory.com/874)
+- [POST Method](https://catonmat.net/cookbooks/curl/make-post-request)
+
+[network]
+
+- [패킷 제어 - iptables](https://linuxstory1.tistory.com/entry/iptables-%EA%B8%B0%EB%B3%B8-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%B0%8F-%EC%98%B5%EC%85%98-%EB%AA%85%EB%A0%B9%EC%96%B4)
+- [3-Way / 4-Way Handshake](https://bangu4.tistory.com/74)
+- [DNS](https://blog.naver.com/happy_jhyo/222668305324)
+- [Static IP](https://tigercoin.tistory.com/63)
+- [NAT](https://aws-hyoh.tistory.com/m/145)
+- [패킷 분석 - tcpdump](https://run-it.tistory.com/48)
+- [Multicast](https://blog.naver.com/on21life/221415820802)
+- [TCP Flag](https://ohcodingdiary.tistory.com/12)
+- [ARP](https://aws-hyoh.tistory.com/70)
+- [Who responds to ARP requests?](https://www.quora.com/Who-responds-to-ARP-requests)
+- [RARP](https://velog.io/@hayeon/ARP%EC%99%80-RARP-protocol-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+
+[Security]
+
+- [OSI 7 Layer - Helmet](https://inpa.tistory.com/entry/NODE-%EB%B3%B4%EC%95%88-%F0%9F%93%9A-helmet-%EB%AA%A8%EB%93%88-%EC%82%AC%EC%9A%A9%EB%B2%95-%EC%9B%B9-%EB%B3%B4%EC%95%88%EC%9D%80-%EB%82%B4%EA%B0%80-%F0%9F%91%AE)
+
+- [Sniffing](https://m.blog.naver.com/wnrjsxo/221115871221)
+
+- [mDNS](https://www.ciokorea.com/news/24709)
+
+[Backend]
+
+- [3-Tier Architecture](https://www.stevenjlee.net/2020/05/08/%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-3%EA%B3%84%EC%B8%B5-%EA%B5%AC%EC%A1%B0-3-tier-architecture/)
+- [견고한 프로젝트 설계](https://charming-kyu.tistory.com/16)
+- [상태코드](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_server_errors)
+- [WebSocket](https://inpa.tistory.com/entry/SOCKET-%F0%9F%93%9A-WS-%EC%9B%B9%EC%86%8C%EC%BC%93-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EA%B8%B0)
+- [Monitoring](https://grafana.com/)
+- [Fetch 진행률](https://jeonghwan-kim.github.io/2023/12/31/fetch-progress)
+- [REST API](https://www.ibm.com/kr-ko/topics/rest-apis)
+- [Transaction](https://tlqckd0.tistory.com/53)
+- [Typescript + Node Intellisense Tip](https://stackoverflow.com/questions/37377731/extend-express-request-object-using-typescript?page=1&tab=scoredesc#tab-top)
+- [CORS](https://medium.com/@hubian/nginx-easily-solves-cross-domain-issues-009b95a5185e)
+- [Proxy Hide Header](https://serverfault.com/questions/928912/how-do-i-remove-a-server-added-header-from-proxied-location)
+- [도커 컨테이너 -> 로컬호스트](https://kimjingo.tistory.com/239)
+
+[DB]
+
+- [B+Tree](https://product.kyobobook.co.kr/detail/S000200383533)
+- [ORM](https://gmlwjd9405.github.io/2019/02/01/orm.html#google_vignette)
+- [칼럼 변경 명령어](https://jadunara.tistory.com/159)
+- [PK, Unique 지정](https://velog.io/@inhwa1025/MySQL-PRIMARY-KEY-UNIQUE-KEY-%EC%A7%80%EC%A0%95)
+- [uuid](https://blogs.oracle.com/mysql/post/mysql-uuids)
+- [uuid](https://velog.io/@wndbsgkr/MySQL%EC%97%90%EC%84%A0-UUID%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A3%A0)
+- [uuid](https://www.uuidtools.com/uuid-versions-explained)
+- [uuid 문제점](https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql#uuidv4)
+- [uuid 해외 의견](https://www.reddit.com/r/mysql/comments/vgnyww/uuid_as_primary_key/)
+- [npm uuid](https://www.npmjs.com/package/uuid)
+- [모델링](https://yeongunheo.tistory.com/entry/DB-%EC%84%A4%EA%B3%84%ED%95%98%EB%8A%94-%EB%B2%95-feat-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EB%8D%B8%EB%A7%81)
+- [서브쿼리](https://inpa.tistory.com/entry/MYSQL-%F0%9F%93%9A-%EC%84%9C%EB%B8%8C%EC%BF%BC%EB%A6%AC-%EC%A0%95%EB%A6%AC)
+- [날짜타입 datetime](https://stackoverflow.com/questions/409286/should-i-use-the-datetime-or-timestamp-data-type-in-mysql)
+- [엔터티 분류](https://anodos.tistory.com/entry/4-%EC%97%94%ED%84%B0%ED%8B%B0%EC%9D%98-%EB%B6%84%EB%A5%98)
+- [백업](https://steady-snail.tistory.com/154)
+
+[Frontend]
+
+- [iframe](https://www.techtarget.com/whatis/definition/IFrame-Inline-Frame)
+- [localStorage](https://eomtttttt-develop.tistory.com/204)
+- [Electron](https://tech.kakao.com/posts/453)
+- [특정 영역 외 클릭](https://velog.io/@sa833591/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%9C%84%EC%9E%84-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%B2%84%EB%B8%94%EB%A7%81-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%BA%A1%EC%B2%98-%EB%93%B1)
+- [DOMContentLoaded, load, beforeunload, unload](https://ko.javascript.info/onload-ondomcontentloaded)
+- [textContent](https://developer.mozilla.org/ko/docs/Web/API/Node/textContent)
+- [insertAdjacentHTML](https://developer.mozilla.org/ko/docs/Web/API/Element/insertAdjacentHTML)
+- [시맨틱 태그](https://seo.tbwakorea.com/blog/what-is-semantic-tag/)
+- [테이블 태그를 사용하지 않는 이유](https://www.youtube.com/watch?v=T7h8O7dpJIg&t=212s)
+- [aria-label](https://velog.io/@a_in/WAI-ARIA-role-aria-label)
+- [코도바](https://voidfunction-e.tistory.com/entry/%EC%9C%88%EB%8F%84%EC%9A%B0%EC%97%90-cordova-%EC%84%A4%EC%B9%98-%EC%8B%A4%ED%96%89)
+- [tBody 스크롤](http://sejin7940.co.kr/xe_tips/152391)
+- [chartjs](https://itwithruilan.tistory.com/77)
+
+[Git]
+
+- [커밋 메시지 규칙](https://velog.io/@chojs28/Git-%EC%BB%A4%EB%B0%8B-%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B7%9C%EC%B9%99)
+- [캐시 삭제](https://tychejin.tistory.com/231)
+- [커밋 시점 이동](https://velog.io/@janeljs/git-2)
+- [원격 브랜치 가져오기](https://cjh5414.github.io/get-git-remote-branch/)
+- [병합](https://medium.com/depayse/git-github-git-%EA%B8%B0%EB%B3%B8-%EB%AA%85%EB%A0%B9%EC%96%B44-merge-%EB%B8%8C%EB%9E%9C%EC%B9%98-%EB%B3%91%ED%95%A9%ED%95%98%EA%B8%B0-e6150f1d3f82)
+
+[Node]
+
+- [Object.defineProperty](https://blog.woolta.com/categories/3/posts/143)
+- [비트 연산](https://velog.io/@kangyul/JS-%EB%B9%84%ED%8A%B8-%EC%97%B0%EC%82%B0%EC%9E%90)
+- [event-loop](https://dkrnfls.tistory.com/362)
+- [event-loop](https://www.youtube.com/watch?v=8aGhZQkoFbQ&t=192s)
+- [SOLID](https://inpa.tistory.com/entry/OOP-%F0%9F%92%A0-%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5-%EC%84%A4%EA%B3%84%EC%9D%98-5%EA%B0%80%EC%A7%80-%EC%9B%90%EC%B9%99-SOLID)
+- [Circular Queue](https://www.geeksforgeeks.org/introduction-to-circular-queue/)
+- [Nullish - ??](https://javascript.info/nullish-coalescing-operator)
+- [Prototype](https://www.nextree.co.kr/p7323/amp/)
+
+[CodingTest]
+
+- [현황](https://www.acmicpc.net/user/ymh3190)
+
 ## 아키텍처 구조(AWS EC2 + Docker)
 
     1. 아키텍처 구조: client <-> nginx <-> frontend
