@@ -19,6 +19,7 @@ services:
       - http
   back:
     image: ymh3190/http-back
+    restart: on-failure
     environment:
       - PORT=4000
       - WATCH=
@@ -28,19 +29,18 @@ services:
       - DB_PORT=3306
       - DB_PASSWORD=1
       - JWT_SECRET=B7ADFBBAFA67DCE3ECCEE5C54E58A
-    restart: on-failure
     expose:
       - 4000
     networks:
       - http
   front:
     image: ymh3190/http-front
+    restart: on-failure
     environment:
       - PORT=3000
       - WATCH=
       - BE_HOST=back
       - BE_PORT=4000
-    restart: on-failure
     volumes:
       - ./frontend/static:/app/static
       - ./frontend/views:/app/views

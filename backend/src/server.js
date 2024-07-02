@@ -3,7 +3,7 @@ import "./db-sub";
 
 import "./layer";
 import express from "express";
-import rateLimiter from "express-rate-limit";
+import { rateLimit } from "express-rate-limit";
 import helmet from "helmet";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -47,9 +47,11 @@ class Server {
 
   #useMiddleware() {
     // this.#app.use(
-    //   rateLimiter({
-    //     windowMs: 15 * 60 * 1000,
-    //     max: 60,
+    //   rateLimit({
+    //     windowMs: 15 * 1000 * 60,
+    //     limit: 100,
+    //     standardHeaders: "draft-7",
+    //     legacyHeaders: false,
     //   })
     // );
     this.#app.use(helmet());

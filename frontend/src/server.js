@@ -3,7 +3,7 @@ import "./layer";
 import express from "express";
 import helmet from "helmet";
 import cors from "cors";
-
+import { rateLimit } from "express-rate-limit";
 import { rootRouter } from "./router";
 import middleware from "./middleware";
 
@@ -36,6 +36,14 @@ class Server {
   }
 
   #useMiddleware() {
+    this.#app.use(
+      rateLimit({
+        windowMs: 15 * 1000 * 60,
+        limit: 100,
+        standardHeaders: "draft-7",
+        legacyHeaders: false,
+      })
+    );
     this.#app.use(
       helmet({
         contentSecurityPolicy: false,

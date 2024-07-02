@@ -86,7 +86,6 @@
 - [B+Tree](https://product.kyobobook.co.kr/detail/S000200383533)
 - [ORM](https://gmlwjd9405.github.io/2019/02/01/orm.html#google_vignette)
 - [칼럼 변경 명령어](https://jadunara.tistory.com/159)
-- [PK, Unique 지정](https://velog.io/@inhwa1025/MySQL-PRIMARY-KEY-UNIQUE-KEY-%EC%A7%80%EC%A0%95)
 - [uuid](https://blogs.oracle.com/mysql/post/mysql-uuids)
 - [uuid](https://velog.io/@wndbsgkr/MySQL%EC%97%90%EC%84%A0-UUID%EB%A5%BC-%EC%96%B4%EB%96%BB%EA%B2%8C-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A3%A0)
 - [uuid](https://www.uuidtools.com/uuid-versions-explained)
