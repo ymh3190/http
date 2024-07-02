@@ -56,6 +56,7 @@
 - [ARP](https://aws-hyoh.tistory.com/70)
 - [Who responds to ARP requests?](https://www.quora.com/Who-responds-to-ARP-requests)
 - [RARP](https://velog.io/@hayeon/ARP%EC%99%80-RARP-protocol-%EC%B0%A8%EC%9D%B4%EC%A0%90)
+- [HTTP/1.1](https://inpa.tistory.com/entry/WEB-%F0%9F%8C%90-HTTP-09-HTTP-30-%EA%B9%8C%EC%A7%80-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-%ED%86%B5%EC%8B%A0-%EA%B8%B0%EC%88%A0)
 
 [Security]
 
