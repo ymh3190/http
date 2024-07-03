@@ -1,0 +1,10 @@
+[Unit]
+Description=DDoS Protection
+After=multi-user.target
+
+[Service]
+ExecStart=bash ./ddos
+WorkingDirectory=$PWD
+
+[Install]
+WantedBy=multi-user.target
