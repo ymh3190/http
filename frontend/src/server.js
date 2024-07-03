@@ -36,14 +36,14 @@ class Server {
   }
 
   #useMiddleware() {
-    this.#app.use(
-      rateLimit({
-        windowMs: 15 * 1000 * 60,
-        limit: 100,
-        standardHeaders: "draft-7",
-        legacyHeaders: false,
-      })
-    );
+    // this.#app.use(
+    //   rateLimit({
+    //     windowMs: 15 * 1000 * 60,
+    //     limit: 100,
+    //     standardHeaders: "draft-7",
+    //     legacyHeaders: false,
+    //   })
+    // );
     this.#app.use(
       helmet({
         contentSecurityPolicy: false,
