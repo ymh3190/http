@@ -9,13 +9,15 @@
 
 ## DDoS
 
+- 원리: SYC Flag를 보내고 ACK를 보내지 않는 방식으로 서버의 메모리 과부하를 야기시키는 것
+
 - 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함(OSI 7 layer)
 
   [x] 6번의 공격을 막고 결국 뚫림 - 판단 근거는 CPU 사용량
 
 - iptables
 
-  - mangle table, PREROUTING Chain
+  - []
 
 ## 참고 레퍼런스
 
@@ -81,7 +83,7 @@
 
 - [mDNS](https://www.ciokorea.com/news/24709)
 
-- [DDoS](https://sata.kr/entry/IPTables-11-IPTables%EB%A1%9C-DDOS-%EA%B3%B5%EA%B2%A9%EC%9D%84-%EB%B0%A9%EC%96%B4%ED%95%B4%EB%B3%B4%EC%9E%90-PREROUTING)
+- [DDoS](https://tdoodle.tistory.com/entry/IPtables%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-DDoS-%EB%B0%A9%EC%96%B4-%EA%B6%81%EA%B7%B9%EC%9D%98-%EA%B0%80%EC%9D%B4%EB%93%9C)
 
 [Backend]
 
