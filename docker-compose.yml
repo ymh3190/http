@@ -48,7 +48,6 @@ services:
     restart: on-failure
     volumes:
       - ./frontend/static:/app/static
-      - ./frontend/views:/app/views
     expose:
       - 3000
     networks:
