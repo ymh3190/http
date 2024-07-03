@@ -1,0 +1,10 @@
+build/
+node_modules/
+public/
+images/
+videos/
+
+.env
+.env.test
+.dockerignore
+Dockerfile

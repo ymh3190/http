@@ -9,15 +9,14 @@ FROM node:18.17.0-alpine
 # app 디렉토리에 들어왔다
 WORKDIR /app
 
-COPY babel.config.json .
-
 # Dockerfile에서 복사하거나 명령어를 수행하는 것은
 # 레이어 시스템으로 구성되어 있기 때문에
 # 빈번하게 변경되는 파일일수록 마지막에 복사
 # 변경 사항이 적은 것들 위주로 먼저 복사
 # WORKDIR 명령어를 통해서 /app이라는 경로에 들어왔기 때문에
 # ./는 현재 경로, /app 폴더를 의미한다
-COPY package.json package-lock.json ./
+# COPY package.json package-lock.json ./
+COPY . .
 
 # package.json에 명시된 모든 모듈을 설치한다
 # npm install보다 ci가 더 좋다.
@@ -28,9 +27,9 @@ COPY package.json package-lock.json ./
 # 이름이 왜 ci냐? CI/CD를 세팅할 때 사용. continuous integration의 약자
 RUN npm ci
 
-COPY webpack.config.js .
-COPY client ./client
-COPY src ./src
+# COPY webpack.config.js .
+# COPY client ./client
+# COPY src ./src
 RUN npm run build
 CMD [ "npm", "start" ]
 # ENTRYPOINT ["node", "index.js"]

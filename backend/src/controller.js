@@ -14,6 +14,7 @@ import {
 import * as CustomError from "./error";
 import util from "./util";
 
+// @ts-check
 class AuthController {
   async signup(req, res) {
     const { username, password } = req.body;

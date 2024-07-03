@@ -1,0 +1,8 @@
+node_modules/
+build/
+
+.env
+.env.test
+.dockerignore
+Dockerfile
+back.service
