@@ -10,7 +10,12 @@
 ## DDoS
 
 - 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함(OSI 7 layer)
-- iptables로 2계층 방어(인터페이스 방어니까? 맞나?)
+
+  [x] 6번의 공격을 막고 결국 뚫림 - 판단 근거는 CPU 사용량
+
+- iptables
+
+  - mangle table, PREROUTING Chain
 
 ## 참고 레퍼런스
 
@@ -431,14 +436,12 @@
         #/bin/bash
 
         ls dataset/cookies > /dev/null 2>&1
-        if [ $? = 1 ]
-        then
-        curl -i -d '{"username": "admin", "password": "1"}' \
+        if [ $? = 1 ]; then
+        curl -c cookies -d '{"username": "admin", "password": "1"}' \
         -H 'Content-Type: application/json' \
-        192.168.0.90:8081/api/v1/auth/signin \
-        | grep -i set-cookie > data/cookies 2> /dev/null
+        192.168.0.90:8081/api/v1/auth/signin
         fi
-        curl -s -o /dev/null -w %{time_total}\\n -b data/cookies 192.168.0.90:8081/
+        curl -s -o /dev/null -w %{time_total}\\n -b dataset/cookies 192.168.0.90:8081
 
   - mysqldump
 
