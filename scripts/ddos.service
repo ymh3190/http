@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 ExecStart=bash ./ddos
-WorkingDirectory=$PWD
+WorkingDirectory=/app/http/scripts
 
 [Install]
 WantedBy=multi-user.target
