@@ -7,7 +7,7 @@ import cors from "cors";
 import { rootRouter } from "./router";
 import middleware from "./middleware";
 
-import socket from "./socket";
+// import socket from "./socket";
 
 class Server {
   #app;
@@ -23,10 +23,11 @@ class Server {
 
   listen() {
     const port = process.env.PORT || 3999;
-    const http = this.#app.listen(port, () => {
+    this.#app.listen(port, () => {
       console.log(`Server is listening port ${port}`);
     });
-    socket.connect(http);
+    /* const http = this.#app.listen() */
+    // socket.connect(http);
   }
 
   #setConfig() {

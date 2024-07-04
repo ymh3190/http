@@ -1,8 +1,7 @@
 build/
 node_modules/
 public/
-images/
-videos/
+static/
 
 .env
 .env.test
