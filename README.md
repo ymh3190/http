@@ -15,11 +15,17 @@
 
 - 원리: SYC Flag를 보내고 ACK를 보내지 않는 방식으로 서버의 메모리 과부하를 야기시키는 것
 
-- 06:40분만 되면 공격 받아서 express-rate-limiter로 요청 수를 제한함(OSI 7 layer)
-
 - iptables
 
   - mangle table, PREROUTING Chain Rules
+  - sysctl.conf configuration => 설정값 공부가 필요함
+    - 일단 아는 건
+    - net.ipv4.ip_forward: 0 혹은 1인데, 로컬호스트가 포워드를 하면 1 값을 부여
+    - 도커 컨테이너에서 앱들이 돌아가므로 로컬호스트는 포워드를 해야하기에 0이 되면 안됨
+    - client => localhost machine => nginx(container) => front(container), back(container) => db(container)
+    - localhost 80으로 요청이 들어오면 nat 테이블, DOCKER Chain에서 정의한 대로
+    - 172.18.0.0/16으로 목적지 주소 및 포트를 변경함
+    - ex) iptables -i docker0 --dport 3306 -j DNAT --to-destination 172.18.0.2:3306
 
 ## 참고 레퍼런스
 
@@ -305,33 +311,29 @@
           - html
           - proxy_pass
 
-        - upstream ws {
+        - upstream front {
           server 127.0.0.1:3000;
           server 127.0.0.1:3001;
           server 127.0.0.1:3002;
         }
 
-        - upstream was {
+        - upstream back {
           server 127.0.0.1:4000;
           server 127.0.0.1:4001;
           server 127.0.0.1:4002;
         }
 
         server {
-          listen 8080;
+          listen 80;
+          server_name localhost;
 
           location / {
-            proxy_pass http://ws/;
+            proxy_pass http://front/;
           }
-        }
-
-        server {
-          listen 9090;
 
           location /api {
-            proxy_pass http://was/;
+            proxy_pass http://back/;
           }
-
         }
 
       - command:
@@ -567,8 +569,8 @@
 - 204:
   - No Content, ex) save and continue editing, ex) put, delete
   - reference: https://stackoverflow.com/questions/2342579/http-status-code-for-update-and-delete
-- 206
-- 304
+- 206: 리소스 중 일부만 받음
+- 304: ETag 기반 캐싱
 - 리다이렉트:
   - 301과 302는 리다이렉트할 때 GET Method로 변경해서 전송. 301대신에 308, 302대신에 307을 쓰면 더 안전
   - 301: Moved Permanently
