@@ -13,6 +13,10 @@
 
 - references: https://sata.kr/entry/IPTables-11-IPTables%EB%A1%9C-DDOS-%EA%B3%B5%EA%B2%A9%EC%9D%84-%EB%B0%A9%EC%96%B4%ED%95%B4%EB%B3%B4%EC%9E%90-PREROUTING
 
+- url: http://ec2-3-35-206-160.ap-northeast-2.compute.amazonaws.com/
+- DDoS로 하루에도 몇 번씩 죽던 서버가 죽지 않음. CPU 사용률이 99%까지 찍던게 없어지긴 함
+- iptables + sysctl.conf 같이 적용해야 효과가 있는 것으로 판단됨
+
 - 원리: SYC Flag를 보내고 ACK를 보내지 않는 방식으로 서버의 메모리 과부하를 야기시키는 것
 
 - iptables
@@ -172,7 +176,7 @@
 ## REST API를 위한 데이터베이스 설계 원칙
 
 - PK, FK 설계: https://www.youtube.com/watch?v=B5r8CcTUs5Y / https://www.youtube.com/watch?v=tN6oJu2DqCM&t=491s 4:55
-  - PK: auto_increment, bigint: 2^64, int: 2^32
+  - PK: auto_increment, bigint: 2^64, int: 2^32, JS는 2^53이 최대값
   - FK: table_id
   - Composite PK: Unique(column, column2, ...)로 고유성을 보장
 - auto_increment 이점: https://www.quora.com/What-are-the-advantages-of-using-an-auto-increment-column-as-a-primary-key-in-MySQL
@@ -183,6 +187,7 @@
   - 테이블 join시 성능 저하 이슈를 해결하기 위한 것
 - url
   - ex) ?sort=-id&limit=1 -> full scan 발생. sort=id:desc 혹은 sort=id:asc로 변경
+  - explain으로 인덱스를 타는지 확인, 인덱스를 안타는 쿼리로는 like '%query'와 같이 문자앞에 %가 붙는 경우
   - ex) ?filter=color:blue
 
 ## REST API
