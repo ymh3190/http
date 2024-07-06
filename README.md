@@ -13,7 +13,6 @@
 
 - references: https://sata.kr/entry/IPTables-11-IPTables%EB%A1%9C-DDOS-%EA%B3%B5%EA%B2%A9%EC%9D%84-%EB%B0%A9%EC%96%B4%ED%95%B4%EB%B3%B4%EC%9E%90-PREROUTING
 
-- url: http://ec2-3-35-206-160.ap-northeast-2.compute.amazonaws.com/
 - DDoS로 하루에도 몇 번씩 죽던 서버가 죽지 않음. CPU 사용률이 99%까지 찍던게 없어지긴 함
 - iptables + sysctl.conf 같이 적용해야 효과가 있는 것으로 판단됨
 
