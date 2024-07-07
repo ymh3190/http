@@ -1,0 +1,10 @@
+[Unit]
+Description=sysctl Apply
+After=multi-user.target
+
+[Service]
+ExecStart=bash ./sysctl
+WorkingDirectory=/app/http/scripts
+
+[Install]
+WantedBy=multi-user.target
