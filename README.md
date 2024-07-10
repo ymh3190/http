@@ -23,7 +23,7 @@
   - mangle table, PREROUTING Chain Rules
 
 - sysctl.conf
-  - `ipcs -s`: 하드웨어 스펙 확인
+  - `ipcs -s`: 프로세스간 통신 상태 보고
   - `kernel.printk`: 커널 메시지 로그 레벨 설정
   - `kernel.panic`: 커널 패닉 발생 시 시스템이 재부팅되기까지의 시간(초)
   - `kernel.sysrq`: SysRq 키의 사용을 비활성화. 이 키는 디버깅과 시스템 복구에 사용됨.
