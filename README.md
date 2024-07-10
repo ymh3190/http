@@ -2,6 +2,14 @@
 
 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
+## Subnetting
+
+    - 172.31.3.166
+    - netmask: 255.255.240.0 -> /20
+    - 172.31.0.0: 네트워크 주소
+    - 172.31.15.255: 브로드캐스트
+    - 172.31.0.1 ~ 172.31.15.254: 호스트 범위
+
 ## CORS
 
 - references: https://serverfault.com/questions/928912/how-do-i-remove-a-server-added-header-from-proxied-location
@@ -27,8 +35,8 @@
   - `kernel.printk`: 커널 메시지 로그 레벨 설정
   - `kernel.panic`: 커널 패닉 발생 시 시스템이 재부팅되기까지의 시간(초)
   - `kernel.sysrq`: SysRq 키의 사용을 비활성화. 이 키는 디버깅과 시스템 복구에 사용됨.
-  - `kernel.shmmax`: 하나의 공유 메모리 세그먼트에 할당할 수 있는 최대 바이트 수 (4GB)
-  - `kernel.shmall`: 시스템에 할당할 수 있는 가상 공유 메모리의 전체 양을 제한합니다
+  - `kernel.shmmax`: 하나의 공유 메모리 세그먼트에 할당할 수 있는 최대 바이트 수. 메모리 용량의 절반
+  - `kernel.shmall`: 시스템에 할당할 수 있는 가상 공유 메모리의 전체 양을 제한합니다. 메모리 용량을 4096로 나눈 값
 
 ## 참고 레퍼런스
 
