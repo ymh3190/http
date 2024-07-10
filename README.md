@@ -21,14 +21,14 @@
 - iptables
 
   - mangle table, PREROUTING Chain Rules
-  - sysctl.conf configuration => 설정값 공부가 필요함
-    - 일단 아는 건
-    - net.ipv4.ip_forward: 0 혹은 1인데, 로컬호스트가 포워드를 하면 1 값을 부여
-    - 도커 컨테이너에서 앱들이 돌아가므로 로컬호스트는 포워드를 해야하기에 0이 되면 안됨
-    - client => localhost machine => nginx(container) => front(container), back(container) => db(container)
-    - localhost 80으로 요청이 들어오면 nat 테이블, DOCKER Chain에서 정의한 대로
-    - 172.18.0.0/16으로 목적지 주소 및 포트를 변경함
-    - ex) iptables -i docker0 --dport 3306 -j DNAT --to-destination 172.18.0.2:3306
+
+- sysctl.conf
+  - `ipcs -s`: 하드웨어 스펙 확인
+  - `kernel.printk`: 커널 메시지 로그 레벨 설정
+  - `kernel.panic`: 커널 패닉 발생 시 시스템이 재부팅되기까지의 시간(초)
+  - `kernel.sysrq`: SysRq 키의 사용을 비활성화. 이 키는 디버깅과 시스템 복구에 사용됨.
+  - `kernel.shmmax`: 하나의 공유 메모리 세그먼트에 할당할 수 있는 최대 바이트 수 (4GB)
+  - `kernel.shmall`: 시스템에 할당할 수 있는 가상 공유 메모리의 전체 양을 제한합니다
 
 ## 참고 레퍼런스
 
