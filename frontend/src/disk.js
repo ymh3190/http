@@ -21,7 +21,8 @@ import FetchAPI from "./fetch-api";
       await FetchAPI.get(`/videos/${file}`);
     } catch (error) {
       const path = `/static/videos/${file}.${ext}`;
-      await FetchAPI.post("/videos", { file, path });
+      const poster = `/static/posters/${file}.png`;
+      await FetchAPI.post("/videos", { file, path, poster });
       // await FetchAPI.post("/videos", { path });
       // const id = createId();
       // const path = `/static/videos/${id}.${ext}`;

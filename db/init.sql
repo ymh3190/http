@@ -31,6 +31,16 @@ create table video(
     id              int auto_increment,
     file            varchar(16) not null unique,
     path            varchar(51) not null,
+    poster          varchar(51) not null,
+    created_at      datetime not null default current_timestamp,
+    primary key (id)
+);
+
+create table short(
+    id              int auto_increment,
+    file            varchar(16) not null unique,
+    path            varchar(51) not null,
+    poster          varchar(51) not null,
     created_at      datetime not null default current_timestamp,
     primary key (id)
 );
