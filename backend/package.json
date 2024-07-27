@@ -1,35 +1,33 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "build/app.js",
-  "private": true,
+  "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "build": "babel -d build src",
-    "dev": "nodemon -i db-sub.js -x babel-node src/app.js"
+    "start": "node dist/app.js",
+    "build": "babel -d dist src",
+    "dev": "nodemon -x babel-node src/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
-    "bcrypt": "^5.1.1",
+    "argon2": "^0.40.3",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "express-rate-limit": "^7.3.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
     "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.6.5",
-    "ssh2": "^1.15.0",
-    "uuid": "^9.0.1"
+    "mysql2": "^3.10.3",
+    "sequelize": "^6.37.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.4",
-    "@babel/core": "^7.23.6",
-    "@babel/node": "^7.22.19",
-    "@babel/preset-env": "^7.23.6",
-    "nodemon": "^3.0.2"
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.24.9",
+    "@babel/node": "^7.24.8",
+    "@babel/preset-env": "^7.24.8",
+    "nodemon": "^3.1.4"
   }
 }

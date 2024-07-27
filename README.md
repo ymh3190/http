@@ -2,6 +2,8 @@
 
 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
+## Sequelize
+
 ## Subnetting
 
     - 172.31.3.166
@@ -314,39 +316,14 @@
         - key-value pair
 
       - context(block):
-        - http {
-          include mime.types;
-        }
+        - http {}
 
         - location:
           - path
           - html
           - proxy_pass
 
-        - upstream front {
-          server 127.0.0.1:3000;
-          server 127.0.0.1:3001;
-          server 127.0.0.1:3002;
-        }
-
-        - upstream back {
-          server 127.0.0.1:4000;
-          server 127.0.0.1:4001;
-          server 127.0.0.1:4002;
-        }
-
-        server {
-          listen 80;
-          server_name localhost;
-
-          location / {
-            proxy_pass http://front/;
-          }
-
-          location /api {
-            proxy_pass http://back/;
-          }
-        }
+        - upstream {}
 
       - command:
         - nginx -s reload|stop|quit|reopen: send signal to a master process
