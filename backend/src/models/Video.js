@@ -1,8 +1,8 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../db/sequelize";
+import { DataTypes } from 'sequelize';
+import sequelize from '../db/sequelize';
 
 export const Video = sequelize.define(
-  "Video",
+  'Video',
   {
     file: {
       type: DataTypes.STRING,
@@ -14,5 +14,5 @@ export const Video = sequelize.define(
       allowNull: false,
     },
   },
-  { tableName: "video" }
+  { tableName: 'video' },
 );

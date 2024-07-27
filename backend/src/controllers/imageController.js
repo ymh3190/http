@@ -1,5 +1,5 @@
-import { NotFoundError } from "../errors";
-import { Image } from "../models";
+import { NotFoundError } from '../errors';
+import { Image } from '../models';
 
 export const createImage = async (req, res) => {
   const image = await Image.create(req.body);
@@ -15,7 +15,7 @@ export const getImage = async (req, res) => {
   const { id } = req.params;
   const image = await Image.findByPk(id);
   if (!image) {
-    throw new NotFoundError("Image not found");
+    throw new NotFoundError('Image not found');
   }
   res.status(200).json({ image });
 };

@@ -1,9 +1,9 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../db/sequelize";
-import * as argon from "argon2";
+import { DataTypes } from 'sequelize';
+import sequelize from '../db/sequelize';
+import * as argon from 'argon2';
 
 export const User = sequelize.define(
-  "User",
+  'User',
   {
     username: {
       type: DataTypes.STRING,
@@ -22,24 +22,24 @@ export const User = sequelize.define(
       },
     },
     role: {
-      type: DataTypes.ENUM("admin", "user"),
+      type: DataTypes.ENUM('admin', 'user'),
       allowNull: false,
-      defaultValue: "user",
+      defaultValue: 'user',
     },
   },
   {
-    tableName: "user",
+    tableName: 'user',
     // hooks: {
     //   async beforeCreate(user) {
     //     return (user.password = await argon.hash(user.password));
     //   },
     // },
-  }
+  },
 );
 
 User.addHook(
-  "beforeCreate",
-  async (user) => (user.password = await argon.hash(user.password))
+  'beforeCreate',
+  async (user) => (user.password = await argon.hash(user.password)),
 );
 
 User.prototype.comparePassword = async function (plainPassword) {

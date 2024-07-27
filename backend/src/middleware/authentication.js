@@ -1,6 +1,6 @@
-import { UnauthenticatedError, UnauthorizedError } from "../errors";
-import { Token } from "../models";
-import { isTokenValid, attachCookiesToResponse } from "../utils";
+import { UnauthenticatedError, UnauthorizedError } from '../errors';
+import { Token } from '../models';
+import { isTokenValid, attachCookiesToResponse } from '../utils';
 
 export const authenticateUser = async (req, res, next) => {
   const { refreshToken, accessToken } = req.signedCookies;
@@ -19,7 +19,7 @@ export const authenticateUser = async (req, res, next) => {
     });
 
     if (!existingToken || !existingToken?.isValid) {
-      throw new UnauthenticatedError("Authentication Invalid");
+      throw new UnauthenticatedError('Authentication Invalid');
     }
 
     attachCookiesToResponse({
@@ -31,14 +31,14 @@ export const authenticateUser = async (req, res, next) => {
     req.user = payload.user;
     next();
   } catch (error) {
-    throw new UnauthenticatedError("Authentication Invalid");
+    throw new UnauthenticatedError('Authentication Invalid');
   }
 };
 
 export const authorizePermissions = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      throw new UnauthorizedError("Unauthorized to access this route");
+      throw new UnauthorizedError('Unauthorized to access this route');
     }
     next();
   };

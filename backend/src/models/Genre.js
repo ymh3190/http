@@ -1,8 +1,8 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../db/sequelize";
+import { DataTypes } from 'sequelize';
+import sequelize from '../db/sequelize';
 
 export const Genre = sequelize.define(
-  "Genre",
+  'Genre',
   {
     name: {
       type: DataTypes.STRING,
@@ -12,28 +12,28 @@ export const Genre = sequelize.define(
       type: DataTypes.INTEGER,
       references: {
         model: sequelize.models.Video,
-        key: "id",
+        key: 'id',
       },
     },
     imageId: {
       type: DataTypes.INTEGER,
       references: {
         model: sequelize.models.Image,
-        key: "id",
+        key: 'id',
       },
     },
   },
   {
-    tableName: "genre",
+    tableName: 'genre',
     indexes: [
       {
         unique: true,
-        fields: ["name", "videoId"],
+        fields: ['name', 'videoId'],
       },
       {
         unique: true,
-        fields: ["name", "imageId"],
+        fields: ['name', 'imageId'],
       },
     ],
-  }
+  },
 );

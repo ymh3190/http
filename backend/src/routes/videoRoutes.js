@@ -1,13 +1,13 @@
-import express from "express";
+import express from 'express';
 import {
   createVideo,
   getVideo,
   getVideos,
-} from "../controllers/videoController";
+} from '../controllers/videoController';
 
 const router = express.Router();
 
-router.route("/").post(createVideo).get(getVideos);
-router.route("/:id").get(getVideo);
+router.route('/').post(createVideo).get(getVideos);
+router.route('/:id').get(getVideo);
 
 export default router;

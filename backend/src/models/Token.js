@@ -1,14 +1,14 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../db/sequelize";
+import { DataTypes } from 'sequelize';
+import sequelize from '../db/sequelize';
 
 export const Token = sequelize.define(
-  "Token",
+  'Token',
   {
     userId: {
       type: DataTypes.INTEGER,
       references: {
         model: sequelize.models.User,
-        key: "id",
+        key: 'id',
       },
       allowNull: false,
     },
@@ -30,5 +30,5 @@ export const Token = sequelize.define(
       allowNull: false,
     },
   },
-  { tableName: "token" }
+  { tableName: 'token' },
 );

@@ -4,6 +4,8 @@
 
 ## Sequelize
 
+    - 오픈소스 ORM을 사용하여 생산성 향상에 목적
+
 ## Subnetting
 
     - 172.31.3.166

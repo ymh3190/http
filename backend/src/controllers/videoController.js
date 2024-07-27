@@ -1,5 +1,5 @@
-import { NotFoundError } from "../errors";
-import { Video } from "../models";
+import { NotFoundError } from '../errors';
+import { Video } from '../models';
 
 export const createVideo = async (req, res) => {
   const video = await Video.create(req.body);
@@ -15,7 +15,7 @@ export const getVideo = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findByPk(id);
   if (!video) {
-    throw new NotFoundError("Video not found");
+    throw new NotFoundError('Video not found');
   }
   res.status(200).json({ video });
 };
