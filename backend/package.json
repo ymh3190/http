@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "db:rm": "docker compose -f ../docker-compose.yml rm dev-db -s -f -v",
-    "db:up": "docker compose -f ../docker-compose.yml up dev-db -d",
-    "db": "npm run db:rm && npm run db:up",
-    "nginx:rm": "docker compose -f ../docker-compose.yml rm dev-nginx -s -f -v",
-    "nginx:up": "docker compose -f ../docker-compose.yml up dev-nginx -d",
-    "nginx": "npm run nginx:rm && npm run nginx:up",
     "start": "node dist/app.js",
     "build": "babel -d dist src",
     "dev": "nodemon -x babel-node src/app.js"
