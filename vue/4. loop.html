@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <login-form />
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp();
+      app.component('login-form', {
+        // loop, example
+        // <p v-for="str in inputs">{{ str }}</p>
+        // <p v-for="str in inputs" :key="str">{{ str }}</p>
+        // <p v-for="(str, i) in inputs" :key="i">{{ i }}</p>
+        template: `
+          <form @submit.prevent="handleSubmit">
+            <h1>{{ title }}</h1>
+            <custom-input
+              v-for="(input, i) in inputs"
+              :key="i"
+              v-model="input.value"
+              :label="input.label"
+              :type="input.type"
+            />
+            <button>Log in</button>
+          </form>
+        `,
+        components: ['custom-input'],
+        data() {
+          return {
+            title: 'Login Form',
+            // inputs: ['email', 'password', 'name'],
+            inputs: [
+              {
+                label: 'Email',
+                value: '',
+                type: 'email',
+              },
+              {
+                label: 'Password',
+                value: '',
+                type: 'password',
+              },
+            ],
+          };
+        },
+        methods: {
+          handleSubmit() {
+            console.log(this.inputs[0].value, this.inputs[1].value);
+          },
+        },
+      });
+      app.component('custom-input', {
+        template: `
+          <label>
+            {{ label }}
+            <input :type="type" v-model="inputValue" />
+          </label>
+        `,
+        // add type prop
+        props: ['label', 'type', 'modelValue'],
+        computed: {
+          inputValue: {
+            get() {
+              return this.modelValue;
+            },
+            set(value) {
+              this.$emit('update:modelValue', value);
+            },
+          },
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

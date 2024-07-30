@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vue</title>
+  </head>
+  <body>
+    <div id="app">
+      <login-form />
+      <hr />
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp();
+      app.component('login-form', {
+        // "custom-input", it is registering the component
+        // v-bind:label is basically turn this regular HTML attiribyte label
+        // into something that can be parsed as Javascript
+        // :label, shorthand & immutable in the child
+        // label="Enter Email", string type
+        // you will see that 95% of the time, you want to pass
+        // a variable in when you're passing a prop down to a child component,
+        // either a data variable or some kind of a function
+        // So you'll almost always be using this v-bind syntax here -> :label
+        // what v-modeling does on a child component is under the hood
+        // v-model="email", :modelValue="email" shorthand & listen for update
+        template: `
+            <form @submit.prevent="handleSubmit">
+                <h1>{{ title }}</h1>
+                <custom-input v-model="email" :label="emailLabel" />
+                <custom-input v-model="password" v-bind:label="passwordLabel" />
+                <button>Log in</button>
+            </form>
+        `,
+        // i can do that here by createing components
+        components: ['custom-input'],
+        // data here can only be changed in the same component
+        data() {
+          return {
+            title: 'Log in',
+            email: '',
+            password: '',
+            emailLabel: 'Email',
+            passwordLabel: 'Password',
+          };
+        },
+        methods: {
+          handleSubmit() {
+            console.log(this.email, this.password);
+          },
+        },
+      });
+      app.component('custom-input', {
+        template: `
+            <label>
+              {{ label }}
+               <input type="text" v-model="inputValue" />
+            </label>
+        `,
+        // these props are basically just a list of all of the
+        // names of the information that I'm passing down from
+        // the parent to this child
+        // I'm defining label in props, I will have access to use
+        // the label variable here inside my template -> {{ label }}
+        props: ['label', 'modelValue'],
+        // computed is an object where you can put variable names
+        // in here as keys and whenever this value changes,
+        // I can actually get it to run getter and setter function
+        computed: {
+          inputValue: {
+            get() {
+              return this.modelValue;
+            },
+            set(value) {
+              // What emit does is allow me to emit
+              // events that other components can listen to
+              this.$emit('update:modelValue', value);
+            },
+          },
+        },
+        // data() {
+        //   return {
+        //     inputValue: '',
+        //   };
+        // },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>

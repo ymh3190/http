@@ -1,91 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Vue</title>
-    <style>
-      .box {
-        background-color: purple;
-        width: 200px;
-        height: 200px;
-      }
-      .box.two {
-        background-color: red;
-      }
-      .box.three {
-        background-color: blue;
-      }
-      /* v-cloak. which is a convenient utility that will hide anything from rendering */
-      /* until the whole Vue application is ready */
-      [v-cloak] {
-        display: none;
-      }
-    </style>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
   </head>
   <body>
-    <!-- frontend framework basic root id #app -->
-    <div id="app" v-cloak>
-      <!-- double curly braces. syntax in template language -->
-      <!-- "msg" will be parsed as javascript by Vue -->
-      {{ msg }}
-      <!-- get the value out of this input -->
-      <!-- Vue has a built in way. v-model directive -->
-      <!-- these directives in Vue are used just like an HTML attribute -->
-      <!-- bind it to whatever variable we pass in as an argument to the model -->
-      <!-- two way data binding -->
-      <!-- 1. v-model -->
-      <!-- 2. v-if -->
-      <!-- keyboard event -->
-      <!-- <input @keyup.enter="greeting" v-model="msg" type="text" /> -->
-      <!-- pass something into a function -->
-      <input @keyup.event="greeting(msg + '!!!!!')" v-model="msg" type="text" />
-
-      <hr />
-      <!-- v-if directive. if statement in javascript -->
-      <div v-if="isVisible" class="box"></div>
-      <!-- most cases, you would just use v-if. -->
-      <!-- toggle case, v-show -->
-      <div v-else-if="isVisible2" class="box two"></div>
-      <div v-else class="box three"></div>
-
-      <!-- v-show directive. it's similar to v-if -->
-      <!-- style="display: none;" -->
-      <div v-show="isShow" class="box"></div>
-
-      <!-- v-on directive. or @ symbol. it's specific for events -->
-      <!-- v-on:click or @click -->
-      <!-- <button v-on:click="isVisible=!isVisible">Toggle box</button> -->
-      <button @click="toggleBox">Toggle box</button>
-    </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script>
-      // Vue app
-      const app = Vue.createApp({
-        // any variables or functions that i'm going to use in my application
-        // will live on this object here
-        data: function () {
-          return {
-            msg: 'Hello',
-            isShow: false,
-            isVisible: false,
-            isVisible2: false,
-          };
-        },
-        // object of functions. i can put as many functions in Vue application
-        methods: {
-          // toggleBox: function () {} =>(shorthand)=> toggleBox() {},
-          toggleBox() {
-            this.isVisible = !this.isVisible;
-          },
-          //   greeting() {
-          //    console.log(this.msg);
-          //   },
-          greeting(msg) {
-            console.log(msg);
-          },
-        },
-      });
-      // connect js for vue html
-      app.mount('#app');
-    </script>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

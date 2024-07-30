@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Vue</title>
+    <style>
+      .box {
+        background-color: blue;
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="toggleBox">Toggle Box</button>
+      <test-box v-if="isVisible" />
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        // Lifecycle hooks
+        // what is lifecycle? whole process of coming into the DOM
+        // what is hook? a hook is just a function that will be triggered to run
+        // at a specific point in the lifecycle of a component
+        data() {
+          return {
+            isVisible: false,
+          };
+        },
+        methods: {
+          toggleBox() {
+            this.isVisible = !this.isVisible;
+          },
+        },
+        updated() {
+          console.log('updated');
+        },
+      });
+      app.component('test-box', {
+        template: `
+          <div class="box"></div>
+        `,
+        // lifecycle hooks
+        // why might you want to use a lifecycle hook
+        // some of the most common use cases are checking
+        // whether someone is authorzied to Vue a certain page or component
+        // A lot of people use the created and mounted hooks as well to pull
+        // data into their application from a back end or from in browser storage
+        // Sometimes they are alse used to initialize events
+        // * Check if user is authorized
+        // * API Calls
+        // * Creating or removing events
+        // * Getting or cleaning up data
+        created() {
+          console.log('created');
+        },
+        mounted() {
+          console.log('mounted');
+        },
+        unmounted() {
+          console.log('unmounted');
+        },
+      });
+      app.mount('#app');
+    </script>
+  </body>
+</html>
