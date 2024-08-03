@@ -1,5 +1,0 @@
-1. 사이드바 토글
-2. 데이터 패치 - lifecycle hook
-3. .card -> v-for
-4. delete cart item
-5. calculate price
