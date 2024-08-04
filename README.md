@@ -389,6 +389,10 @@
           - docker-compose up -d: yml파일을 읽어 데몬으로 컨테이너 실행
           - docker-compose down: stop and remove containers, networks
 
+      - docker cp: 컨테이너와 로컬간 파일 전송
+      - docker run -d --name nginx -p 80:80 nginx:latest
+      - docker commit: 컨테이너의 변화를 새 이미지로 만듦
+
 ## AWS
 
     - ec2 docker compose 배포

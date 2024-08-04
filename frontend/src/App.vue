@@ -1,25 +1,27 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router';
-</script>
-
 <template>
   <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-      </nav>
-    </div>
+    <nav>
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/videos">Videos</RouterLink>
+    </nav>
   </header>
 
-  <RouterView />
+  <RouterView :videos="videos" />
 </template>
 
 <script>
-(async () => {
-  const res = await fetch('http://localhost/api/v1/videos');
-  const data = await res.json();
-  console.log(data);
-})();
+import { RouterLink, RouterView } from 'vue-router';
+import videos from './video.json';
 
-export default {};
+export default {
+  components: {
+    RouterLink,
+    RouterView,
+  },
+  data() {
+    return {
+      videos,
+    };
+  },
+};
 </script>
