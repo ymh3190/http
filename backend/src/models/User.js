@@ -29,18 +29,12 @@ export const User = sequelize.define(
   },
   {
     tableName: 'user',
-    // hooks: {
-    //   async beforeCreate(user) {
-    //     return (user.password = await argon.hash(user.password));
-    //   },
-    // },
   },
 );
 
-User.addHook(
-  'beforeCreate',
-  async (user) => (user.password = await argon.hash(user.password)),
-);
+User.addHook('beforeCreate', async (user) => {
+  user.password = await argon.hash(user.password);
+});
 
 User.prototype.comparePassword = async function (plainPassword) {
   const isMatch = await argon.verify(this.password, plainPassword);

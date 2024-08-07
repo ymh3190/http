@@ -1,7 +1,0 @@
-[
-  { "id": 1, "path": "/videos/sample.mp4", "poster": "/posters/sample.png" },
-  { "id": 2, "path": "/videos/sample.mp4", "poster": "/posters/sample.png" },
-  { "id": 3, "path": "/videos/sample.mp4", "poster": "/posters/sample.png" },
-  { "id": 4, "path": "/videos/sample.mp4", "poster": "/posters/sample.png" },
-  { "id": 5, "path": "/videos/sample.mp4", "poster": "/posters/sample.png" }
-]

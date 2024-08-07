@@ -1,5 +1,5 @@
 <template>
-  <video :src="video.path" :poster="video.poster" controls></video>
+  <img :src="video.poster" />
 </template>
 
 <script>
@@ -8,8 +8,8 @@ export default {
 };
 </script>
 
-<style>
-video {
+<style scoped>
+img {
   width: 100%;
 }
 </style>
