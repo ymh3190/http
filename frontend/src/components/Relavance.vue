@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router';
 
 <template>
   <RouterLink
+    @click="scrollTo"
     :to="{ name: 'ai', query: { v: relavance.file } }"
     v-for="relavance in relavances"
     :key="relavance.id"
@@ -16,7 +17,7 @@ import { RouterLink } from 'vue-router';
 import AI from './AI.vue';
 
 export default {
-  props: ['relavances'],
+  props: ['relavances', 'scrollTo'],
   components: {
     AI,
   },

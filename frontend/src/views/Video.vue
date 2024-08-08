@@ -33,4 +33,11 @@ export default {
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
+@media screen and (max-width: 400px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
 </style>

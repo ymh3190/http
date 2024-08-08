@@ -6,7 +6,7 @@
     </div>
     <div class="ais">
       <h1>AIs</h1>
-      <AIs :ais="previews.ais" />
+      <AIs :ais="previews.ais" :scrollTo="scrollTo" />
     </div>
   </main>
 </template>
@@ -16,7 +16,7 @@ import Video from './Video.vue';
 import AIs from './AIs.vue';
 
 export default {
-  props: ['videos', 'ais'],
+  props: ['videos', 'ais', 'scrollTo'],
   components: {
     Video,
     AIs,

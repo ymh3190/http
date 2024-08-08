@@ -10,7 +10,7 @@ export default {
 
 <style scoped>
 img {
-  border-radius: 20px;
+  border-radius: 10px;
   justify-self: center;
   height: 40vh;
 }

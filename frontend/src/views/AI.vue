@@ -5,7 +5,7 @@
         <AI :ai="getAI()" />
       </div>
       <div class="relavances">
-        <Relavance :relavances="getRelavances()" />
+        <Relavance :relavances="getRelavances()" :scrollTo="scrollTo" />
       </div>
     </div>
   </main>
@@ -16,7 +16,7 @@ import AI from '@/components/AI.vue';
 import Relavance from '@/components/Relavance.vue';
 
 export default {
-  props: ['ais'],
+  props: ['ais', 'scrollTo'],
   components: {
     AI,
     Relavance,

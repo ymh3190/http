@@ -4,14 +4,30 @@ import { RouterLink, RouterView } from 'vue-router';
 
 <template>
   <header>
+    <div class="logo">
+      <a href="/">
+        <img class="logo" src="/logo.png" alt="" />
+      </a>
+    </div>
     <nav>
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/videos">Videos</RouterLink>
       <RouterLink to="/ais">AIs</RouterLink>
     </nav>
+    <div class="container">
+      <div></div>
+      <RouterLink to="/signup">Sign up</RouterLink>
+      <RouterLink to="/signin">Sign in</RouterLink>
+    </div>
   </header>
 
-  <RouterView :videos="videos" :subjects="subjects" :ais="ais" />
+  <RouterView
+    :videos="videos"
+    :subjects="subjects"
+    :ais="ais"
+    :scrollTo="scrollTo"
+    v-model="user"
+  />
 </template>
 
 <script>
@@ -25,28 +41,40 @@ export default {
       videos,
       subjects,
       ais,
+      user: {},
     };
   },
-  async beforeCreate() {
-    try {
-      const response = await fetch('http://localhost:4000/api/v1/videos');
-      const data = await response.json();
-    } catch (error) {
-      console.log(error);
-    }
+  methods: {
+    scrollTo() {
+      scrollTo(0, 0);
+    },
   },
 };
 </script>
 
-<style>
+<style scoped>
 header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
   height: 10vh;
 
-  nav > a:not(:last-child) {
-    margin-right: 20px;
+  nav,
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
   }
-}
-a {
-  text-decoration: none;
+
+  a {
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .logo {
+    justify-self: center;
+    height: 10vh;
+  }
 }
 </style>

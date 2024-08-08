@@ -2,10 +2,13 @@
   <main>
     <div class="content">
       <div class="container">
-        <Video :video="getVideo()" />
+        <Video :video="getVideo()" :auto="true" />
       </div>
       <div class="recommendations">
-        <Recommendation :recommendations="getRecommendations()" />
+        <Recommendation
+          :recommendations="getRecommendations()"
+          :scrollTo="scrollTo"
+        />
       </div>
     </div>
   </main>
@@ -16,7 +19,7 @@ import Video from '@/components/Video.vue';
 import Recommendation from '@/components/Recommendation.vue';
 
 export default {
-  props: ['videos'],
+  props: ['videos', 'scrollTo'],
   components: {
     Video,
     Recommendation,

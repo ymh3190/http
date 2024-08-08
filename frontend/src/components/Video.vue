@@ -1,10 +1,15 @@
 <template>
-  <video :src="video.path" :poster="video.poster" controls></video>
+  <video
+    :src="video.path"
+    :poster="video.poster"
+    controls
+    :autoplay="auto"
+  ></video>
 </template>
 
 <script>
 export default {
-  props: ['video'],
+  props: ['video', 'auto'],
 };
 </script>
 

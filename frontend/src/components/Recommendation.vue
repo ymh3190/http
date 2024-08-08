@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router';
 
 <template>
   <RouterLink
+    @click="scrollTo"
     :to="{ name: 'watch', query: { v: recommendation.file } }"
     v-for="recommendation in recommendations"
     :key="recommendation.id"
@@ -16,7 +17,7 @@ import { RouterLink } from 'vue-router';
 import Poster from './Poster.vue';
 
 export default {
-  props: ['recommendations'],
+  props: ['recommendations', 'scrollTo'],
 };
 </script>
 

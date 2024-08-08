@@ -5,6 +5,8 @@ import Watch from '../views/Watch.vue';
 import Subject from '../views/Subject.vue';
 import AIs from '../views/AIs.vue';
 import AI from '../views/AI.vue';
+import Signin from '../views/Signin.vue';
+import Signup from '../views/Signup.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +15,16 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: Signin,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: Signup,
     },
     {
       path: '/videos',
