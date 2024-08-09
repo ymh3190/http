@@ -37,7 +37,7 @@ export const signin = async (req, res) => {
 
   const isCorrectPassword = await user.comparePassword(password);
   if (!isCorrectPassword) {
-    throw new UnauthenticatedError('Invalid Credentials');
+    throw new UnauthenticatedError('Password not match');
   }
 
   // token already exist

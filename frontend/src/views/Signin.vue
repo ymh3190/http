@@ -17,7 +17,6 @@
 import Input from '@/components/Input.vue';
 
 export default {
-  props: ['user'],
   components: {
     Input,
   },

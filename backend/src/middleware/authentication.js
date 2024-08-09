@@ -30,7 +30,7 @@ export const authenticateUser = async (req, res, next) => {
 
     req.user = payload.user;
     next();
-  } catch (error) {
+  } catch {
     throw new UnauthenticatedError('Authentication Invalid');
   }
 };

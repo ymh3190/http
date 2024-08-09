@@ -16,23 +16,10 @@ import Video from './Video.vue';
 import AIs from './AIs.vue';
 
 export default {
-  props: ['videos', 'ais', 'scrollTo'],
+  props: ['scrollTo', 'previews'],
   components: {
     Video,
     AIs,
-  },
-  data() {
-    return {
-      previews: { videos: [], ais: [] },
-    };
-  },
-  beforeMount() {
-    this.previews.videos = this.videos.filter(() => {
-      if (Math.random() < 0.2) return true;
-    });
-    this.previews.ais = this.ais.filter(() => {
-      if (Math.random() < 0.2) return true;
-    });
   },
 };
 </script>

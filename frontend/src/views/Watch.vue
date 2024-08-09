@@ -2,7 +2,7 @@
   <main>
     <div class="content">
       <div class="container">
-        <Video :video="getVideo()" :auto="true" />
+        <Video :video="getVideo()" />
       </div>
       <div class="recommendations">
         <Recommendation

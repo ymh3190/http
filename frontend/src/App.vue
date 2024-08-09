@@ -26,7 +26,7 @@ import { RouterLink, RouterView } from 'vue-router';
     :subjects="subjects"
     :ais="ais"
     :scrollTo="scrollTo"
-    v-model="user"
+    :previews="previews"
   />
 </template>
 
@@ -41,7 +41,7 @@ export default {
       videos,
       subjects,
       ais,
-      user: {},
+      previews: { videos: [], ais: [] },
     };
   },
   methods: {
@@ -49,13 +49,21 @@ export default {
       scrollTo(0, 0);
     },
   },
+  mounted() {
+    this.previews.videos = this.videos.filter(() => {
+      if (Math.random() < 0.2) return true;
+    });
+    this.previews.ais = this.ais.filter(() => {
+      if (Math.random() < 0.5) return true;
+    });
+  },
 };
 </script>
 
 <style scoped>
 header {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr 2fr;
   height: 10vh;
 
   nav,

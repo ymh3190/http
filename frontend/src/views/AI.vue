@@ -59,4 +59,10 @@ export default {
 .relavances {
   display: grid;
 }
+
+@media screen and (max-width: 400px) {
+  .content {
+    gap: 10px;
+  }
+}
 </style>
