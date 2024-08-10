@@ -13,6 +13,8 @@ import { RouterLink, RouterView } from 'vue-router';
       <RouterLink to="/">Home</RouterLink>
       <RouterLink to="/videos">Videos</RouterLink>
       <RouterLink to="/ais">AIs</RouterLink>
+      <RouterLink to="/subjects">Subjects</RouterLink>
+      <RouterLink to="/photos">Photos</RouterLink>
     </nav>
     <div class="container">
       <div></div>
@@ -27,6 +29,7 @@ import { RouterLink, RouterView } from 'vue-router';
     :ais="ais"
     :scrollTo="scrollTo"
     :previews="previews"
+    :photos="photos"
   />
 </template>
 
@@ -34,6 +37,7 @@ import { RouterLink, RouterView } from 'vue-router';
 import videos from '../mockData/video.json';
 import subjects from '../mockData/subject.json';
 import ais from '../mockData/ai.json';
+import photos from '../mockData/photo.json';
 
 export default {
   data() {
@@ -42,6 +46,7 @@ export default {
       subjects,
       ais,
       previews: { videos: [], ais: [] },
+      photos,
     };
   },
   methods: {
@@ -63,26 +68,31 @@ export default {
 <style scoped>
 header {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-columns: auto 1fr auto;
   height: 10vh;
+}
 
-  nav,
-  .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    align-items: center;
-  }
+nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+}
 
-  a {
-    font-size: 20px;
-    color: black;
-    text-decoration: none;
-    text-align: center;
-  }
+a {
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
 
-  .logo {
-    justify-self: center;
-    height: 10vh;
-  }
+.logo {
+  justify-self: center;
+  height: 10vh;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
 }
 </style>

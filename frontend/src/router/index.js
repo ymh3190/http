@@ -1,10 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
 import Home from '../views/Home.vue';
 import Video from '../views/Video.vue';
 import Watch from '../views/Watch.vue';
 import Subject from '../views/Subject.vue';
 import AIs from '../views/AIs.vue';
 import AI from '../views/AI.vue';
+import Photos from '../views/Photos.vue';
+import Photo from '../views/Photo.vue';
+
 import Signin from '../views/Signin.vue';
 import Signup from '../views/Signup.vue';
 
@@ -50,6 +54,16 @@ const router = createRouter({
       path: '/ais',
       name: 'ai',
       component: AI,
+    },
+    {
+      path: '/photos',
+      name: 'photos',
+      component: Photos,
+    },
+    {
+      path: '/photos',
+      name: 'photo',
+      component: Photo,
     },
   ],
 });
