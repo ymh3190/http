@@ -4,8 +4,6 @@
 
 ## Raspberry pi Projects
 
-- OS: Raspberry Pi lite(서버용)로 Desktop에 비해 메모리 사용률을 낮출 수 있음
-
 - references:
   - 망분리: https://www.youtube.com/watch?v=25xYwTFJQxw
   - NAS: https://www.youtube.com/watch?v=l30sADfDiM8
