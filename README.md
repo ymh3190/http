@@ -2,7 +2,18 @@
 
 개발자로 근무하면서 정리한 내용에 대한 프로젝트
 
+## Raspberry pi Projects
+
+- OS: Raspberry Pi lite(서버용)로 Desktop에 비해 메모리 사용률을 낮출 수 있음
+
+- references:
+  - 망분리: https://www.youtube.com/watch?v=25xYwTFJQxw
+  - NAS: https://www.youtube.com/watch?v=l30sADfDiM8
+
 ## Vue
+
+    - View engine ejs와 비교하면 매우 빠른 개발 속도
+    - 상태관리(pinia / vuex) 학습 필요
 
 ## Sequelize
 

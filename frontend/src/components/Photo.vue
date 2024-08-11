@@ -1,6 +1,5 @@
 <template>
-  <img v-if="!photo.type" :src="photo.path" />
-  <video v-if="photo.type" :src="photo.path" autoplay muted loop></video>
+  <img :src="photo.path" />
 </template>
 
 <script>
@@ -10,11 +9,10 @@ export default {
 </script>
 
 <style scoped>
-img,
-video {
+img {
   border-radius: 10px;
   justify-self: center;
-  height: 90vh;
+  height: 40vh;
 }
 
 @media screen and (max-width: 400px) {

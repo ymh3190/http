@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router';
   <main>
     <div class="container">
       <RouterLink
+        @click="scrollTo"
         :to="{ name: 'watch', query: { v: video.file } }"
         v-for="video in videos"
         :key="video.id"
@@ -20,7 +21,7 @@ import { RouterLink } from 'vue-router';
 import Poster from '@/components/Poster.vue';
 
 export default {
-  props: ['videos'],
+  props: ['videos', 'scrollTo'],
   components: {
     Poster,
   },

@@ -5,7 +5,7 @@
         <Photo :photo="getPhoto()" />
       </div>
       <div class="relavances">
-        <Relavance :relavances="getRelavances()" :scrollTo="scrollTo" />
+        <RelavancePhoto :relavances="getRelavances()" :scrollTo="scrollTo" />
       </div>
     </div>
   </main>
@@ -13,13 +13,13 @@
 
 <script>
 import Photo from '@/components/Photo.vue';
-import Relavance from '@/components/Relavance.vue';
+import RelavancePhoto from '@/components/RelavancePhoto.vue';
 
 export default {
   props: ['photos', 'scrollTo'],
   components: {
     Photo,
-    Relavance,
+    RelavancePhoto,
   },
   data() {
     return {
@@ -55,7 +55,7 @@ export default {
   display: grid;
 
   img {
-    height: 40vh;
+    height: 90vh;
   }
 }
 .relavances {

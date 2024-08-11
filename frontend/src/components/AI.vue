@@ -14,6 +14,7 @@ img {
   justify-self: center;
   height: 40vh;
 }
+
 @media screen and (max-width: 400px) {
   img {
     width: 100%;

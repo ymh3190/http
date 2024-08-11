@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Video from '../views/Video.vue';
 import Watch from '../views/Watch.vue';
+import Subjects from '../views/Subjects.vue';
 import Subject from '../views/Subject.vue';
 import AIs from '../views/AIs.vue';
 import AI from '../views/AI.vue';
@@ -41,9 +42,14 @@ const router = createRouter({
       component: Watch,
     },
     {
+      path: '/subject',
+      name: 'subject',
+      component: Subject,
+    },
+    {
       path: '/subjects',
       name: 'subjects',
-      component: Subject,
+      component: Subjects,
     },
     {
       path: '/ais',

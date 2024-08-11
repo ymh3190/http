@@ -45,7 +45,7 @@ export default {
       videos,
       subjects,
       ais,
-      previews: { videos: [], ais: [] },
+      previews: { videos: [], ais: [], subjects: [], photos: [] },
       photos,
     };
   },
@@ -59,6 +59,12 @@ export default {
       if (Math.random() < 0.2) return true;
     });
     this.previews.ais = this.ais.filter(() => {
+      if (Math.random() < 0.5) return true;
+    });
+    this.previews.subjects = this.subjects.filter(() => {
+      if (Math.random() < 0.5) return true;
+    });
+    this.previews.photos = this.photos.filter(() => {
       if (Math.random() < 0.5) return true;
     });
   },
