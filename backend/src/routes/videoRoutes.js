@@ -11,7 +11,12 @@ import {
 
 const router = express.Router();
 
-router.route('/').post(createVideo).get(getVideos);
-router.route('/:id').get(getVideo);
+router
+  .route('/')
+  .post(authenticateUser, authorizePermissions('admin'), createVideo)
+  .get(authenticateUser, authorizePermissions('admin'), getVideos);
+router
+  .route('/:id')
+  .get(authenticateUser, authorizePermissions('admin'), getVideo);
 
 export default router;

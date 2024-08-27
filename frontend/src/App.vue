@@ -9,64 +9,102 @@ import { RouterLink, RouterView } from 'vue-router';
         <img class="logo" src="/logo.png" alt="" />
       </a>
     </div>
-    <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/videos">Videos</RouterLink>
-      <RouterLink to="/ais">AIs</RouterLink>
-      <RouterLink to="/subjects">Subjects</RouterLink>
-      <RouterLink to="/photos">Photos</RouterLink>
-    </nav>
+    <div>
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/videos">Videos</RouterLink>
+        <RouterLink to="/images">Images</RouterLink>
+      </nav>
+    </div>
     <div class="container">
-      <div></div>
-      <RouterLink to="/signup">Sign up</RouterLink>
-      <RouterLink to="/signin">Sign in</RouterLink>
+      <form v-if="user" @submit.prevent="handleSubmit">
+        <Input v-model="query" />
+        <button>Search</button>
+      </form>
+      <RouterLink v-if="user" to="/upload">Upload</RouterLink>
+      <RouterLink v-if="user" to="/edit">Edit</RouterLink>
+      <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
+      <RouterLink v-if="!user" to="/signin">Sign in</RouterLink>
     </div>
   </header>
 
   <RouterView
     :videos="videos"
-    :subjects="subjects"
-    :ais="ais"
+    :images="images"
     :scrollTo="scrollTo"
     :previews="previews"
-    :photos="photos"
   />
 </template>
 
 <script>
-import videos from '../mockData/video.json';
-import subjects from '../mockData/subject.json';
-import ais from '../mockData/ai.json';
-import photos from '../mockData/photo.json';
+import Input from './components/Input.vue';
 
 export default {
+  components: {
+    Input,
+  },
   data() {
     return {
-      videos,
-      subjects,
-      ais,
-      previews: { videos: [], ais: [], subjects: [], photos: [] },
-      photos,
+      videos: [],
+      images: [],
+      previews: { videos: [], images: [] },
+      user: null,
+      query: '',
     };
   },
   methods: {
     scrollTo() {
       scrollTo(0, 0);
     },
+    async handleSubmit() {
+      const query = this.query;
+      if (!query) return;
+
+      this.previews.videos = [];
+
+      const res = await fetch(
+        `http://${location.hostname}:4000/api/v1/genres?name=${query}`,
+        {
+          credentials: 'include',
+        },
+      );
+      if (res.ok) {
+        const data = await res.json();
+        const genres = data.genres;
+        for (const genre of genres) {
+          const res = await fetch(
+            `http://${location.hostname}:4000/api/v1/videos/${genre.videoId}`,
+            {
+              credentials: 'include',
+            },
+          );
+          if (res.ok) {
+            const data = await res.json();
+            const video = data.video;
+            this.previews.videos.push(video);
+          }
+        }
+      }
+    },
   },
-  mounted() {
-    this.previews.videos = this.videos.filter(() => {
-      if (Math.random() < 0.2) return true;
-    });
-    this.previews.ais = this.ais.filter(() => {
-      if (Math.random() < 0.5) return true;
-    });
-    this.previews.subjects = this.subjects.filter(() => {
-      if (Math.random() < 0.5) return true;
-    });
-    this.previews.photos = this.photos.filter(() => {
-      if (Math.random() < 0.5) return true;
-    });
+  async mounted() {
+    const [res, res_] = await Promise.all([
+      fetch(`http://${location.hostname}:4000/api/v1/videos`, {
+        credentials: 'include',
+      }),
+      fetch(`http://${location.hostname}:4000/api/v1/images`, {
+        credentials: 'include',
+      }),
+    ]);
+    if (res.ok && res_.ok) {
+      this.user = {};
+
+      const [data, data_] = await Promise.all([res.json(), res_.json()]);
+      this.videos = data.videos;
+      this.previews.videos = data.videos;
+      this.images = data_.images;
+      this.previews.images = data_.images;
+    }
   },
 };
 </script>
@@ -75,13 +113,14 @@ export default {
 header {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  height: 10vh;
+  height: 100%;
 }
 
 nav {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
+  height: 100%;
 }
 
 a {

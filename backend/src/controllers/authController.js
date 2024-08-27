@@ -32,7 +32,7 @@ export const signin = async (req, res) => {
   // user exist
   const user = await User.findOne({ where: { username } });
   if (!user) {
-    throw new UnauthenticatedError('Invalid Credentials');
+    throw new UnauthenticatedError('User not found');
   }
 
   const isCorrectPassword = await user.comparePassword(password);

@@ -5,24 +5,27 @@ import { RouterLink } from 'vue-router';
 <template>
   <RouterLink
     @click="scrollTo"
-    :to="{ name: 'watch', query: { v: recommendation.file } }"
-    v-for="recommendation in recommendations"
-    :key="recommendation.id"
+    :to="{ name: 'watch', query: { v: recommendation.title } }"
+    v-for="(recommendation, i) in recommendations"
+    :key="i"
   >
-    <Poster :video="recommendation" />
+    <Image :src="recommendation.poster" />
   </RouterLink>
 </template>
 
 <script>
-import Poster from './Poster.vue';
+import Image from './Image.vue';
 
 export default {
   props: ['recommendations', 'scrollTo'],
+  components: {
+    Image,
+  },
 };
 </script>
 
 <style scoped>
 img {
-  width: 100%;
+  height: 30vh;
 }
 </style>

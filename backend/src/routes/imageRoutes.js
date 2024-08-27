@@ -13,7 +13,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .post(createImage)
+  .post(authenticateUser, authorizePermissions('admin'), createImage)
   .get(authenticateUser, authorizePermissions('admin'), getImages);
 router.route('/:id').get(getImage);
 

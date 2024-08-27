@@ -73,7 +73,7 @@
 - DDoS로 ~~하루에도 몇 번씩 죽던 서버가 죽지 않음. CPU 사용률이 99%까지 찍던게 없어지긴 함~~
 - iptables + sysctl.conf 같이 적용해야 효과가 있는 것으로 판단됨 ![CPU Utilization](./screenshots/cpu-utilization.png)
 
-- 원리: SYC Flag를 보내고 ACK를 보내지 않는 방식으로 서버의 메모리 과부하를 야기시키는 것
+- 원리: SYN Flag를 보내고 ACK를 보내지 않는 방식으로 서버의 메모리 과부하를 야기시키는 것
 
 - iptables
 

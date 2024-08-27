@@ -29,6 +29,11 @@ export default {
           type: 'email',
         },
         {
+          label: 'Username',
+          value: '',
+          type: 'text',
+        },
+        {
           label: 'Password',
           value: '',
           type: 'password',
@@ -39,23 +44,25 @@ export default {
   methods: {
     async handleSubmit() {
       const email = this.inputs[0].value;
-      const password = this.inputs[1].value;
-      const res = await fetch('http://localhost:4000/api/v1/auth/signin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const username = this.inputs[1].value;
+      const password = this.inputs[2].value;
+
+      const res = await fetch(
+        `http://${location.hostname}:4000/api/v1/auth/signin`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify({
+            username,
+            password,
+            email,
+          }),
         },
-        credentials: 'include',
-        body: JSON.stringify({
-          username: 'admin',
-          password,
-        }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        console.log(data);
-        return;
-      }
+      );
+      if (res.ok) location.href = '/';
     },
   },
 };

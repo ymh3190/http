@@ -1,10 +1,10 @@
 <template>
-  <img :src="video.poster" />
+  <img :src="src" alt="" />
 </template>
 
 <script>
 export default {
-  props: ['video'],
+  props: ['src'],
 };
 </script>
 

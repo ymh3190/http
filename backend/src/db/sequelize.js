@@ -1,11 +1,9 @@
 import { Sequelize } from 'sequelize';
 
-const sequelize = new Sequelize(process.env.DB_URI, {
+export const sequelize = new Sequelize(process.env.DB_URI, {
   dialect: 'mysql',
 
   pool: {
-    max: 5,
+    max: 10,
   },
 });
-
-export default sequelize;

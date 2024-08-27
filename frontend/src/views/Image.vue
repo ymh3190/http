@@ -1,18 +1,7 @@
-<script setup>
-import { RouterLink } from 'vue-router';
-</script>
-
 <template>
   <main>
     <div class="container">
-      <RouterLink
-        @click="scrollTo"
-        :to="{ name: 'watch', query: { v: video.title } }"
-        v-for="video in videos"
-        :key="video.id"
-      >
-        <Image :src="video.poster" />
-      </RouterLink>
+      <Image v-for="image in images" :key="image.id" :src="image.path" />
     </div>
   </main>
 </template>
@@ -21,7 +10,7 @@ import { RouterLink } from 'vue-router';
 import Image from '@/components/Image.vue';
 
 export default {
-  props: ['videos', 'scrollTo'],
+  props: ['images'],
   components: {
     Image,
   },
@@ -32,6 +21,10 @@ export default {
 .container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+img {
+  border-radius: 10px;
 }
 @media screen and (max-width: 400px) {
   .container {
