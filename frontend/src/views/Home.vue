@@ -24,6 +24,11 @@ export default {
 
 <style>
 img {
-  height: 30vh;
+  height: 45vh;
+}
+@media screen and (max-width: 400px) {
+  img {
+    height: 30vh;
+  }
 }
 </style>

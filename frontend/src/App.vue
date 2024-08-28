@@ -1,5 +1,16 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import {
+  faHouse,
+  faVideo,
+  faImage,
+  faMagnifyingGlass,
+  faUpload,
+  faScissors,
+  faArrowRightToBracket,
+  faArrowRightFromBracket,
+} from '@fortawesome/free-solid-svg-icons';
 </script>
 
 <template>
@@ -11,20 +22,35 @@ import { RouterLink, RouterView } from 'vue-router';
     </div>
     <div>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/videos">Videos</RouterLink>
-        <RouterLink to="/images">Images</RouterLink>
+        <RouterLink to="/"><FontAwesomeIcon :icon="faHouse" /></RouterLink>
+        <RouterLink to="/videos"
+          ><FontAwesomeIcon :icon="faVideo"
+        /></RouterLink>
+        <RouterLink to="/images"
+          ><FontAwesomeIcon :icon="faImage"
+        /></RouterLink>
       </nav>
     </div>
     <div class="container">
       <form v-if="user" @submit.prevent="handleSubmit">
         <Input v-model="query" />
-        <button>Search</button>
+        <button>
+          <FontAwesomeIcon :icon="faMagnifyingGlass" />
+        </button>
       </form>
-      <RouterLink v-if="user" to="/upload">Upload</RouterLink>
-      <RouterLink v-if="user" to="/edit">Edit</RouterLink>
-      <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
-      <RouterLink v-if="!user" to="/signin">Sign in</RouterLink>
+      <RouterLink v-if="user" to="/upload"
+        ><FontAwesomeIcon :icon="faUpload"
+      /></RouterLink>
+      <RouterLink v-if="user" to="/edit"
+        ><FontAwesomeIcon :icon="faScissors"
+      /></RouterLink>
+      <RouterLink v-if="user" to="/logout"
+        ><FontAwesomeIcon :icon="faArrowRightFromBracket"
+      /></RouterLink>
+      <RouterLink v-if="!user" to="/signup">Join</RouterLink>
+      <RouterLink v-if="!user" to="/signin"
+        ><FontAwesomeIcon :icon="faArrowRightToBracket"
+      /></RouterLink>
     </div>
   </header>
 
@@ -137,7 +163,7 @@ a {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   align-items: center;
 }
 </style>

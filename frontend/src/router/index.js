@@ -29,6 +29,10 @@ const router = createRouter({
       component: Signup,
     },
     {
+      path: '/logout',
+      name: 'logout',
+    },
+    {
       path: '/videos',
       name: 'videos',
       component: Video,
