@@ -1,7 +1,18 @@
+<script setup>
+import { RouterLink } from 'vue-router';
+</script>
+
 <template>
   <main>
     <div class="container">
-      <Image v-for="image in images" :key="image.id" :src="image.path" />
+      <RouterLink
+        @click="scrollTo"
+        :to="{ name: 'watch', query: { i: image.title } }"
+        v-for="image in images"
+        :key="image.id"
+      >
+        <Image :src="image.path" />
+      </RouterLink>
     </div>
   </main>
 </template>
@@ -10,7 +21,7 @@
 import Image from '@/components/Image.vue';
 
 export default {
-  props: ['images'],
+  props: ['images', 'scrollTo'],
   components: {
     Image,
   },

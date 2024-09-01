@@ -15,6 +15,8 @@ router
   .route('/')
   .post(authenticateUser, authorizePermissions('admin'), createGenre)
   .get(authenticateUser, authorizePermissions('admin'), getGenres);
-router.route('/:id').get(getGenre);
+router
+  .route('/:id')
+  .get(authenticateUser, authorizePermissions('admin'), getGenre);
 
 export default router;

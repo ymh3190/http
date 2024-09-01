@@ -15,9 +15,9 @@ import {
 
 <template>
   <header>
-    <div class="logo">
+    <div>
       <a href="/">
-        <img class="logo" src="/logo.png" alt="" />
+        <img src="/logo.png" alt="" />
       </a>
     </div>
     <div>
@@ -31,24 +31,22 @@ import {
         /></RouterLink>
       </nav>
     </div>
-    <div class="container">
-      <form v-if="user" @submit.prevent="handleSubmit">
+    <div class="container" v-if="isAuth">
+      <form @submit.prevent="handleSubmit">
         <Input v-model="query" />
         <button>
           <FontAwesomeIcon :icon="faMagnifyingGlass" />
         </button>
       </form>
-      <RouterLink v-if="user" to="/upload"
-        ><FontAwesomeIcon :icon="faUpload"
-      /></RouterLink>
-      <RouterLink v-if="user" to="/edit"
-        ><FontAwesomeIcon :icon="faScissors"
-      /></RouterLink>
-      <RouterLink v-if="user" to="/logout"
+      <RouterLink to="/upload"><FontAwesomeIcon :icon="faUpload" /></RouterLink>
+      <RouterLink to="/edit"><FontAwesomeIcon :icon="faScissors" /></RouterLink>
+      <RouterLink to="/logout"
         ><FontAwesomeIcon :icon="faArrowRightFromBracket"
       /></RouterLink>
-      <RouterLink v-if="!user" to="/signup">Join</RouterLink>
-      <RouterLink v-if="!user" to="/signin"
+    </div>
+    <div class="container" v-else>
+      <RouterLink to="/signup">Join</RouterLink>
+      <RouterLink to="/signin"
         ><FontAwesomeIcon :icon="faArrowRightToBracket"
       /></RouterLink>
     </div>
@@ -59,6 +57,7 @@ import {
     :images="images"
     :scrollTo="scrollTo"
     :previews="previews"
+    :fetchData="fetchData"
   />
 </template>
 
@@ -74,7 +73,7 @@ export default {
       videos: [],
       images: [],
       previews: { videos: [], images: [] },
-      user: null,
+      isAuth: false,
       query: '',
     };
   },
@@ -82,50 +81,52 @@ export default {
     scrollTo() {
       scrollTo(0, 0);
     },
+    async fetchData(url) {
+      const res = await fetch(`http://${location.hostname}:4000/api/v1` + url, {
+        credentials: 'include',
+      });
+      if (res.ok) {
+        return res.json();
+      }
+    },
     async handleSubmit() {
       const query = this.query;
       if (!query) return;
 
       this.previews.videos = [];
+      this.previews.images = [];
 
-      const res = await fetch(
-        `http://${location.hostname}:4000/api/v1/genres?name=${query}`,
-        {
-          credentials: 'include',
-        },
-      );
-      if (res.ok) {
-        const data = await res.json();
+      const data = await this.fetchData(`/genres?name=${query}`);
+      if (data) {
         const genres = data.genres;
-        for (const genre of genres) {
-          const res = await fetch(
-            `http://${location.hostname}:4000/api/v1/videos/${genre.videoId}`,
-            {
-              credentials: 'include',
-            },
-          );
-          if (res.ok) {
-            const data = await res.json();
-            const video = data.video;
-            this.previews.videos.push(video);
+        genres.forEach(async (genre) => {
+          if (genre.videoId) {
+            const data = await this.fetchData(`/videos/${genre.videoId}`);
+            if (data) {
+              const video = data.video;
+              this.previews.videos.push(video);
+            }
+            return;
           }
-        }
+          if (genre.imageId) {
+            const data = await this.fetchData(`/images/${genre.imageId}`);
+            if (data) {
+              const image = data.image;
+              this.previews.images.push(image);
+            }
+          }
+        });
       }
     },
   },
   async mounted() {
-    const [res, res_] = await Promise.all([
-      fetch(`http://${location.hostname}:4000/api/v1/videos`, {
-        credentials: 'include',
-      }),
-      fetch(`http://${location.hostname}:4000/api/v1/images`, {
-        credentials: 'include',
-      }),
+    const [data, data_] = await Promise.all([
+      this.fetchData('/videos'),
+      this.fetchData('/images'),
     ]);
-    if (res.ok && res_.ok) {
-      this.user = {};
+    if (data && data_) {
+      this.isAuth = true;
 
-      const [data, data_] = await Promise.all([res.json(), res_.json()]);
       this.videos = data.videos;
       this.previews.videos = data.videos;
       this.images = data_.images;
@@ -136,34 +137,30 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
 header {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  height: 100%;
+  height: 10vh;
 }
-
 nav {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   height: 100%;
 }
-
 a {
   font-size: 20px;
   color: black;
   text-decoration: none;
   text-align: center;
 }
-
-.logo {
+img {
   justify-self: center;
   height: 10vh;
-}
-
-.container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
 }
 </style>

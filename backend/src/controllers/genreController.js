@@ -7,7 +7,7 @@ export const createGenre = async (req, res) => {
 };
 
 export const getGenres = async (req, res) => {
-  const { videoId, name } = req.query;
+  const { videoId, name, imageId } = req.query;
   if (videoId) {
     const genres = await Genre.findAll({
       where: { videoId },
@@ -18,6 +18,13 @@ export const getGenres = async (req, res) => {
   if (name) {
     const genres = await Genre.findAll({
       where: { name },
+    });
+    res.status(200).json({ genres });
+    return;
+  }
+  if (imageId) {
+    const genres = await Genre.findAll({
+      where: { imageId },
     });
     res.status(200).json({ genres });
     return;

@@ -49,6 +49,7 @@ export default {
               credentials: 'include',
             },
           );
+          if (!this.genres[i]) continue;
           if (res.ok) {
             const data = await res.json();
             const image = data.image;
@@ -92,6 +93,7 @@ export default {
               credentials: 'include',
             },
           );
+          if (!this.genres[i]) continue;
           if (res.ok) {
             const data = await res.json();
             const video = data.video;

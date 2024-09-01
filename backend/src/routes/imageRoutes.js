@@ -15,6 +15,8 @@ router
   .route('/')
   .post(authenticateUser, authorizePermissions('admin'), createImage)
   .get(authenticateUser, authorizePermissions('admin'), getImages);
-router.route('/:id').get(getImage);
+router
+  .route('/:id')
+  .get(authenticateUser, authorizePermissions('admin'), getImage);
 
 export default router;
